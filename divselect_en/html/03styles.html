@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	<style>
+		.bgchange {
+			padding: 5px;
+			background: #ffffff !important;
+			font-size: 13px;
+			font-weight: bold;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+		}
+		.bgchange div {
+			float: left;
+		}
+		.bgchange .box {
+			margin-left: 5px;
+			width: 14px;
+			height: 14px;
+			border: 1px solid #000000;
+			cursor: pointer;
+		}
+		.floating {
+			float: left;
+			margin-right: 15px;
+		}
+		.nothing {
+			padding: 2px;
+			width: 187px;
+			border: 1px solid #dcdcdc;
+		}
+	</style>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<link rel="stylesheet" href="../css/divselect-smooth.css" />
+	<link rel="stylesheet" href="../css/divselect-dark.css" />
+	<link rel="stylesheet" href="../css/divselect-fb.css" />
+	<link rel="stylesheet" href="../css/divselect-google.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".bgchange .box").click(function(){
+				var $thisbox = $(this);
+				var $thatbox = $(this).siblings(".box").eq(0);
+				$("#rightcol").css("background-color", $thisbox.css("background-color"));
+				$("#rightcol h1, #rightcol h2, #rightcol p").css("color", $thatbox.css("background-color"));
+			});
+			
+			var tags = {
+				"operations" : '<i>#</i>',
+				"details"    : '<img src="../images/page.png"> <span>#</span>',
+				"activate"   : '<img src="../images/lightbulb.png"> <span>#</span>',
+				"inactivate" : '<img src="../images/lightbulb_off.png"> <span>#</span>',
+				"modify"     : '<img src="../images/page_white_edit.png"> <span>#</span>',
+				"delete"     : '<img src="../images/cross.png"> <span>#</span>'
+			};
+			$(".basic").divselect({
+				cssprefix: "divselect",
+				optiontags : tags
+			});
+			$(".smooth").divselect({
+				cssprefix: "divselect-smooth",
+				optiontags : tags
+			});
+			$(".dark").divselect({
+				cssprefix: "divselect-dark",
+				optiontags : tags
+			});
+			$(".fb").divselect({
+				cssprefix: "divselect-fb",
+				optiontags : tags
+			});
+			$(".google").divselect({
+				cssprefix: "divselect-google",
+				optiontags : tags
+			});
+		});
+	</script>
+</head>
+<body>
+	
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Documentation</a></li>
+		<li><a href="01basic.html">Basic</a></li>
+		<li><a href="02animations.html">Animations</a></li>
+		<li class="active"><a href="03styles.html">Styles</a></li>
+		<li><a href="04events.html">Events</a></li>
+		<li><a href="05attributes.html">HTML attributes</a></li>
+		<li><a href="06template.html">Template modification</a></li>
+		<li><a href="07basefunction.html">Basic function overwriting</a></li>
+		<li><a href="08ajax.html">Dinamic loading</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<div class="bgchange">
+				<div>Background color:</div>
+				<div class="box" style="background-color: #ffffff;"></div>
+				<div class="box" style="background-color: #000000;"></div>
+			</div>
+			
+			<h1>Styles</h1>
+			<p>
+				With modify the CSS file, the divselect can be customizable.
+			</p>
+			<h2>Select element without the divselect plugin</h2>
+			<select class="nothing floating">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<select class="nothing floating">
+				<option value="c">C</option>
+				<option value="cplusplus">C++</option>
+				<optgroup label="WEB - client side">
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="js" selected="selected">JavaScript</option>
+					<option value="vb" disabled="disabled">VBScript</option>
+				</optgroup>
+				<optgroup label="WEB server side">
+					<option value="php">PHP</option>
+					<option value="sql">SQL</option>
+					<option value="asp" disabled="disabled">ASP</option>
+				</optgroup>
+			</select>
+			<select class="nothing floating">
+				<option value="0">Operations</option>
+				<option value="details">Details</option>
+				<option value="activate" selected="selected">Activate</option>
+				<option value="inactivate">Inactivate</option>
+				<option value="modify">Modify</option>
+				<option value="delete">Delete</option>
+			</select>
+			<div class="clear spacer"></div>
+			<h2>Basic</h2>
+			<select class="basic floating">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<select class="basic floating">
+				<option value="c">C</option>
+				<option value="cplusplus">C++</option>
+				<optgroup label="WEB - client side">
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="js" selected="selected">JavaScript</option>
+					<option value="vb" disabled="disabled">VBScript</option>
+				</optgroup>
+				<optgroup label="WEB server side">
+					<option value="php">PHP</option>
+					<option value="sql">SQL</option>
+					<option value="asp" disabled="disabled">ASP</option>
+				</optgroup>
+			</select>
+			<select class="basic floating">
+				<option value="0">Operations</option>
+				<option value="details">Details</option>
+				<option value="activate" selected="selected">Activate</option>
+				<option value="inactivate">Inactivate</option>
+				<option value="modify">Modify</option>
+				<option value="delete">Delete</option>
+			</select>
+			<div class="clear spacer"></div>
+			<h2>Smooth</h2>
+			<select class="smooth floating">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<select class="smooth floating">
+				<option value="c">C</option>
+				<option value="cplusplus">C++</option>
+				<optgroup label="WEB - client side">
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="js" selected="selected">JavaScript</option>
+					<option value="vb" disabled="disabled">VBScript</option>
+				</optgroup>
+				<optgroup label="WEB server side">
+					<option value="php">PHP</option>
+					<option value="sql">SQL</option>
+					<option value="asp" disabled="disabled">ASP</option>
+				</optgroup>
+			</select>
+			<select class="smooth floating">
+				<option value="0">Operations</option>
+				<option value="details">Details</option>
+				<option value="activate" selected="selected">Activate</option>
+				<option value="inactivate">Inactivate</option>
+				<option value="modify">Modify</option>
+				<option value="delete">Delete</option>
+			</select>
+			<div class="clear spacer"></div>
+			<h2>Dark</h2>
+			<select class="dark floating">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<select class="dark floating">
+				<option value="c">C</option>
+				<option value="cplusplus">C++</option>
+				<optgroup label="WEB - client side">
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="js" selected="selected">JavaScript</option>
+					<option value="vb" disabled="disabled">VBScript</option>
+				</optgroup>
+				<optgroup label="WEB server side">
+					<option value="php">PHP</option>
+					<option value="sql">SQL</option>
+					<option value="asp" disabled="disabled">ASP</option>
+				</optgroup>
+			</select>
+			<select class="dark floating">
+				<option value="0">Operations</option>
+				<option value="details">Details</option>
+				<option value="activate" selected="selected">Activate</option>
+				<option value="inactivate">Inactivate</option>
+				<option value="modify">Modify</option>
+				<option value="delete">Delete</option>
+			</select>
+			<div class="clear spacer"></div>
+			<h2>FB</h2>
+			<select class="fb floating">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<select class="fb floating">
+				<option value="c">C</option>
+				<option value="cplusplus">C++</option>
+				<optgroup label="WEB - client side">
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="js" selected="selected">JavaScript</option>
+					<option value="vb" disabled="disabled">VBScript</option>
+				</optgroup>
+				<optgroup label="WEB server side">
+					<option value="php">PHP</option>
+					<option value="sql">SQL</option>
+					<option value="asp" disabled="disabled">ASP</option>
+				</optgroup>
+			</select>
+			<select class="fb floating">
+				<option value="0">Operations</option>
+				<option value="details">Details</option>
+				<option value="activate" selected="selected">Activate</option>
+				<option value="inactivate">Inactivate</option>
+				<option value="modify">Modify</option>
+				<option value="delete">Delete</option>
+			</select>
+			<div class="clear spacer"></div>
+			<h2>Google</h2>
+			<select class="google floating">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<select class="google floating">
+				<option value="c">C</option>
+				<option value="cplusplus">C++</option>
+				<optgroup label="WEB - client side">
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="js" selected="selected">JavaScript</option>
+					<option value="vb" disabled="disabled">VBScript</option>
+				</optgroup>
+				<optgroup label="WEB server side">
+					<option value="php">PHP</option>
+					<option value="sql">SQL</option>
+					<option value="asp" disabled="disabled">ASP</option>
+				</optgroup>
+			</select>
+			<select class="google floating">
+				<option value="0">Operations</option>
+				<option value="details">Details</option>
+				<option value="activate" selected="selected">Activate</option>
+				<option value="inactivate">Inactivate</option>
+				<option value="modify">Modify</option>
+				<option value="delete">Delete</option>
+			</select>
+			<div class="clear spacer"></div>
+			<div class="clear spacer"></div>
+			<p>
+				To use different style divselects in one page, we have to set the cssprefix property,
+				and use this in the CSS file.
+			</p>
+			<pre class="brush: js">
+				var tags = {
+					"operations" : '&lt;i>#&lt;/i>',
+					"details"    : '&lt;img src="../images/page.png"> &lt;span>#&lt;/span>',
+					"activate"   : '&lt;img src="../images/lightbulb.png"> &lt;span>#&lt;/span>',
+					"inactivate" : '&lt;img src="../images/lightbulb_off.png"> &lt;span>#&lt;/span>',
+					"modify"     : '&lt;img src="../images/page_white_edit.png"> &lt;span>#&lt;/span>',
+					"delete"     : '&lt;img src="../images/cross.png"> &lt;span>#&lt;/span>'
+				};
+				$(".basic").divselect({
+					cssprefix: "divselect",
+					optiontags : tags
+				});
+				$(".smooth").divselect({
+					cssprefix: "divselect-smooth",
+					optiontags : tags
+				});
+				$(".dark").divselect({
+					cssprefix: "divselect-dark",
+					optiontags : tags
+				});
+				$(".fb").divselect({
+					cssprefix: "divselect-fb",
+					optiontags : tags
+				});
+				$(".google").divselect({
+					cssprefix: "divselect-google",
+					optiontags : tags
+				});</pre>
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

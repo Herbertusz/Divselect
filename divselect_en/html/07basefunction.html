@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<style>
+		.divselect a {
+			display: block;
+			padding: 2px 2px 4px 4px;
+			color: #006cd9;
+			text-decoration: none;
+		}
+		.divselect a:hover {
+			color: #000000;
+		}
+		.divselect-background {
+			display: none !important;
+		}
+		.divselect-selector {
+			background-image: none;
+		}
+		.divselect-item {
+			padding: 0px;
+		}
+	</style>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#example1").divselect({
+				optiontags : {
+					"1" : '<a href="\\#" target="_blank">#</a>',
+					"2" : '<a href="\\#" target="_blank">#</a>',
+					"3" : '<a href="\\#" target="_blank">#</a>',
+					"4" : '<a href="\\#" target="_blank">#</a>',
+					"5" : '<a href="\\#" target="_blank">#</a>'
+				},
+				disabledropdown : true,
+				disableclose : true,
+				disableselect : true
+			});
+			$("#example1").divselect("remove", "0");
+			$("#example1").hover(function(){
+				$(this).divselect("open");
+			},function(){
+				$(this).divselect("close");
+			});
+			/*
+			$("#example1 divselect-item").click(function(){
+				var val = $("#example1").divselect("getValueByElement", this);
+				$("#example1").trigger("select.divselect", [val]);
+			});
+			*/
+		});
+	</script>
+</head>
+<body>
+	
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Documentation</a></li>
+		<li><a href="01basic.html">Basic</a></li>
+		<li><a href="02animations.html">Animations</a></li>
+		<li><a href="03styles.html">Styles</a></li>
+		<li><a href="04events.html">Events</a></li>
+		<li><a href="05attributes.html">HTML attributes</a></li>
+		<li><a href="06template.html">Template modification</a></li>
+		<li class="active"><a href="07basefunction.html">Basic function overwriting</a></li>
+		<li><a href="08ajax.html">Dinamic loading</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Basic function overwriting</h1>
+			<p>
+				The base function is the click event on the <em>{cssprefix}-selector</em>,
+				<em>{cssprefix}-item</em> and <em>{cssprefix}-background</em> elements which are
+				defined in the template run a special event handler. For example if we click on the
+				<em>{cssprefix}-selector</em>, the list opens. These event handlers can be disabled
+				with setting true the <em>disabledropdown</em>, <em>disableclose</em> and
+				<em>disableselect</em> properties. The methods that attached the predefined special
+				events are called in these event handlers (except the create), therefore if we
+				disable these functions, we also disable these predefined event handlers. But the
+				<em>open()</em>, <em>close()</em> and <em>select()</em> methods run these handlers,
+				so we can use these methods in the new event handlers, to run the attached handlers.
+				<br /><br />
+				<em><strong>Note:</strong> these examples only present the flexibility and some extra
+				functions of this plugin, generally not recommended to implement a dropdown menu with
+				a divselect, because it can be more work than the standard way.</em>
+			</p>
+			<h2>Dropdown menu</h2>
+			<p>
+				If we want to open and close the list on mouseover and mouseout events, we have to
+				disable the event handlers that control this (set true the <em>disabledropdown</em>
+				and <em>disableclose</em> properties), than attach custom event handlers to the
+				appropriate events. In these we should run the <em>open()</em> and <em>close()</em>
+				methods of the divselect. This is an example for a dropdown menu:
+			</p>
+			<div  class="spacer"></div>
+			<div id="example1-container">
+				<select id="example1">
+					<option value="0" selected="selected">Languages</option>
+					<option value="1">HTML</option>
+					<option value="2">CSS</option>
+					<option value="3">JavaScript</option>
+					<option value="4">PHP</option>
+					<option value="5">SQL</option>
+				</select>
+			</div>
+			<div  class="spacer"></div>
+			<p>
+				The HTML:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example1">
+					&lt;option value="0" selected="selected">Languages&lt;/option>
+					&lt;option value="1">HTML&lt;/option>
+					&lt;option value="2">CSS&lt;/option>
+					&lt;option value="3">JavaScript&lt;/option>
+					&lt;option value="4">PHP&lt;/option>
+					&lt;option value="5">SQL&lt;/option>
+				&lt;/select></pre>
+			<p>
+				The javascript:
+			</p>
+			<pre class="brush: js">
+				$("#example1").divselect({
+					optiontags : {
+						"1" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"2" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"3" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"4" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"5" : '&lt;a href="\\#" target="_blank">#&lt;/a>'
+					},
+					disabledropdown : true,
+					disableclose : true,
+					disableselect : true
+				});
+				$("#example1").divselect("remove", "0");
+				$("#example1").hover(function(){
+					$(this).divselect("open");
+				},function(){
+					$(this).divselect("close");
+				});</pre>
+			<p>
+				The CSS:
+			</p>
+			<pre class="brush: css">
+				.divselect a {
+					display: block;
+					padding: 2px 2px 4px 4px;
+					color: #006cd9;
+					text-decoration: none;
+				}
+				.divselect a:hover {
+					color: #000000;
+				}
+				.divselect-background {
+					display: none !important;
+				}
+				.divselect-selector {
+					background-image: none;
+				}
+				.divselect-item {
+					padding: 0px;
+				}</pre>
+			<p>
+				Usually you should create a separate CSS file, in this case the basic divselect.css
+				was included and some properties were overwritten. The divselect-background element
+				(the background overlay) is hidden because we want to attach the hover() event handler
+				to the divselect element, otherwise the element in the opened state hovers the whole
+				window.
+			</p>
+			<p>
+				The <em>disableselect</em> property was set to true, otherwise with click on a link
+				the name of the submenu would appear in the place of the main menu. The line 13 of
+				the JS code we call the <em>remove()</em> method in order that the main menu name
+				doesn't appear in the list.<br />
+				After that, the lines 14-19 the new event handler is attached. Because we set to true
+				the <em>disableselect</em> property and we didn't attach an event handler to the click
+				event on a list element, the predefined <em>select</em> and <em>change</em> handlers
+				won't be called. If we want to run the <em>select</em> handler without call the
+				<em>select()</em> method, we have to write this after the javascript code:
+			</p>
+			<pre class="brush: js">
+				$("#example1 .divselect-item").click(function(){
+					$("#example1").trigger("select.divselect");
+				});</pre>
+			<p>
+				In this case the click event on a list element will call the predefined <em>select</em>
+				event handler, without parameters. If we want to pass the correct parameters, we have
+				to call in this way:
+			</p>
+			<pre class="brush: js">
+				$("#example1 divselect-item").click(function(){
+					var val = $("#example1").divselect("getValueByElement", this);
+					$("#example1").trigger("select.divselect", [val]);
+				});</pre>
+			<p>
+				To get the value attribute, we can use the <em>getValueByElement()</em> utility method.
+				The predefined event handler of the <em>select</em> event will get the value attribute
+				(which we click on).
+			</p>
+			
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

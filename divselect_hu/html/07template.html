@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<style>
+		.check-controls {
+			padding: 4px;
+		}
+		.check-controls img {
+			padding-right: 5px;
+			cursor: pointer;
+		}
+	</style>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#example1").divselect({
+				template :
+					'<div class="{cssPrefix}">' +
+						'<input data-element="input" class="{cssPrefix}__input" type="hidden" name="{select.name}" value="{select.val}" />' +
+						'<div data-element="selector" class="{cssPrefix}__selector {select.readonly} {select.disabled}">{select.defhtml}</div>' +
+						'<div data-element="menu" class="{cssPrefix}__menu">' +
+							'<div class="check-controls">' +
+								'<img class="check-all"  alt="[+]" title="Mind kijelölése" src="../images/add.png" />' +
+								'<img class="check-none" alt="[-]" title="Kijelölés törlése" src="../images/delete.png" />' +
+								'<img class="check-rev"  alt="[/]" title="Kijelölés megfordítása" src="../images/reverse.png" />' +
+							'</div>' +
+							'{loop}' +
+								'{optgroup_start}' +
+									'<div data-element="group" class="{cssPrefix}__group">' +
+										'<div class="{cssPrefix}__group__title">{optgroup.label}</div>' +
+								'{/optgroup_start}' +
+								'{optgroup_end}' +
+									'</div>' +
+								'{/optgroup_end}' +
+								'{optionTags}' +
+									'<div data-element="item" class="{cssPrefix}__item {option.readonly} {option.disabled}">{option.html}</div>' +
+								'{/optionTags}' +
+							'{/loop}' +
+						'</div>' +
+						'<div data-element="background" class="{cssPrefix}__background"></div>' +
+					'</div>',
+				optionTags : {
+					"0" : '<i>#</i>',
+					"1" : '<input type="checkbox" name="lang[]" value="1" /> #',
+					"2" : '<input type="checkbox" name="lang[]" value="2" /> #',
+					"3" : '<input type="checkbox" name="lang[]" value="3" /> #',
+					"4" : '<input type="checkbox" name="lang[]" value="4" /> #',
+					"5" : '<input type="checkbox" name="lang[]" value="5" /> #',
+					"6" : '<input type="checkbox" name="lang[]" value="6" /> #',
+					"7" : '<input type="checkbox" name="lang[]" value="7" /> #',
+					"8" : '<input type="checkbox" name="lang[]" value="8" /> #'
+				}
+			});
+			$(".check-all").click(function(){
+				$(this).parents(".divselect__menu").find("input:checkbox").prop("checked", true);
+			});
+			$(".check-none").click(function(){
+				$(this).parents(".divselect__menu").find("input:checkbox").prop("checked", false);
+			});
+			$(".check-rev").click(function(){
+				$(this).parents(".divselect__menu").find("input:checkbox").each(function(){
+					$(this).prop("checked", !$(this).prop("checked"));
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Dokumentáció</a></li>
+		<li><a href="01basic.html">Alap</a></li>
+		<li><a href="02animations.html">Animációk</a></li>
+		<li><a href="03styles.html">Stílusok</a></li>
+		<li><a href="04events.html">Események</a></li>
+		<li><a href="05attributes.html">HTML attribútumok</a></li>
+		<li><a href="06multiselect.html">Multiselect</a></li>
+		<li class="active"><a href="07template.html">Template módosítása</a></li>
+		<li><a href="08basefunction.html">Alapműködés felülírása</a></li>
+		<li><a href="09ajax.html">Dinamikus betöltés</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>A template módosítása</h1>
+			<p>
+				Olykor szükség lehet a template módosítására, de ilyenkor <strong>mindenképpen a
+				hierarchia megtartásával</strong> tegyük, ellenkező esetben bizonyos funkciók
+				megszűnnek működni. A hierarchia megtartása azt jelenti, hogy a data-element attribútumok
+				alkotta fát nem módosíthatjuk.<br />
+				Azt megtehetjük, hogy egy elem vagy csoport köré rakunk valamilyen befoglaló elemet,
+				vagy új elemet szúrunk be tetszőleges helyre.
+			</p>
+			<h2>Új elem</h2>
+			<p>
+				Az alábbi példában a lenyíló lista tetejére szúrtunk egy új elemet, amivel a
+				checkboxokat vezérelhetjük. Az eseménykezelők csatolását a divselect létrehozása
+				után kell megtennünk.
+			</p>
+			<div  class="spacer"></div>
+			<select id="example1" name="example1">
+				<option value="0">Nyelvek</option>
+				<option value="1">HTML</option>
+				<option value="2">CSS</option>
+				<option value="3">JavaScript</option>
+				<option value="4">PHP</option>
+				<option value="5">SQL</option>
+				<option value="6">Python</option>
+				<option value="7">Ruby</option>
+				<option value="8">ASP</option>
+			</select>
+			<div  class="spacer"></div>
+			A HTML kód:
+			<pre class="brush: html">
+				&lt;select id="example1" name="example1">
+					&lt;option value="0">Nyelvek&lt;/option>
+					&lt;option value="1">HTML&lt;/option>
+					&lt;option value="2">CSS&lt;/option>
+					&lt;option value="3">JavaScript&lt;/option>
+					&lt;option value="4">PHP&lt;/option>
+					&lt;option value="5">SQL&lt;/option>
+					&lt;option value="6">Python&lt;/option>
+					&lt;option value="7">Ruby&lt;/option>
+					&lt;option value="8">ASP&lt;/option>
+				&lt;/select></pre>
+			A javascript kódban a htmltemplate tulajdonságot írtuk felül, ahova beszúrtuk a check-controls
+			div-et, minden mást változatlanul hagytunk. A hozzá csatolt eseménykezelők a 40. sortól kezdődnek.
+			<pre class="brush: js">
+				$("#example1").divselect({
+					template :
+						'&lt;div class="{cssPrefix}">' +
+							'&lt;input data-element="input" class="{cssPrefix}__input" type="hidden" name="{select.name}" value="{select.val}" />' +
+							'&lt;div data-element="selector" class="{cssPrefix}__selector {select.readonly} {select.disabled}">{select.defhtml}&lt;/div>' +
+							'&lt;div data-element="menu" class="{cssPrefix}__menu">' +
+								'&lt;div class="check-controls">' +
+									'&lt;img class="check-all"  alt="[+]" title="Mind kijelölése" src="../images/add.png" />' +
+									'&lt;img class="check-none" alt="[-]" title="Kijelölés törlése" src="../images/delete.png" />' +
+									'&lt;img class="check-rev"  alt="[/]" title="Kijelölés megfordítása" src="../images/reverse.png" />' +
+								'&lt;/div>' +
+								'{loop}' +
+									'{optgroup_start}' +
+										'&lt;div data-element="group" class="{cssPrefix}__group">' +
+											'&lt;div class="{cssPrefix}__group__title">{optgroup.label}&lt;/div>' +
+									'{/optgroup_start}' +
+									'{optgroup_end}' +
+										'&lt;/div>' +
+									'{/optgroup_end}' +
+									'{optionTags}' +
+										'&lt;div data-element="item" class="{cssPrefix}__item {option.readonly} {option.disabled}">{option.html}&lt;/div>' +
+									'{/optionTags}' +
+								'{/loop}' +
+							'&lt;/div>' +
+							'&lt;div data-element="background" class="{cssPrefix}__background">&lt;/div>' +
+						'&lt;/div>',
+					optionTags : {
+						"0" : '&lt;i>#&lt;/i>',
+						"1" : '&lt;input type="checkbox" name="lang[]" value="1" /> #',
+						"2" : '&lt;input type="checkbox" name="lang[]" value="2" /> #',
+						"3" : '&lt;input type="checkbox" name="lang[]" value="3" /> #',
+						"4" : '&lt;input type="checkbox" name="lang[]" value="4" /> #',
+						"5" : '&lt;input type="checkbox" name="lang[]" value="5" /> #',
+						"6" : '&lt;input type="checkbox" name="lang[]" value="6" /> #',
+						"7" : '&lt;input type="checkbox" name="lang[]" value="7" /> #',
+						"8" : '&lt;input type="checkbox" name="lang[]" value="8" /> #'
+					}
+				});
+				$(".check-all").click(function(){
+					$(this).parents(".divselect-menu").find("input:checkbox").prop("checked", true);
+				});
+				$(".check-none").click(function(){
+					$(this).parents(".divselect-menu").find("input:checkbox").prop("checked", false);
+				});
+				$(".check-rev").click(function(){
+					$(this).parents(".divselect-menu").find("input:checkbox").each(function(){
+						$(this).prop("checked", !$(this).prop("checked"));
+					});
+				});</pre>
+			És egy kevés CSS:
+			<pre class="brush: css">
+				.check-controls {
+					padding: 4px;
+				}
+				.check-controls img {
+					padding-right: 5px;
+					cursor: pointer;
+				}</pre>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

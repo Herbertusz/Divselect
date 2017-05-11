@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("select").divselect({
+				optiontags : {
+					"1" : '<input type="checkbox" name="lang[]" value="1" /> #',
+					"2" : '<input type="checkbox" name="lang[]" value="2" /> #',
+					"3" : '<input type="checkbox" name="lang[]" value="3" checked="checked" /> #',
+					"4" : '<input type="checkbox" name="lang[]" value="4" /> #',
+					"5" : '<input type="checkbox" name="lang[]" value="5" /> #',
+					"6" : '<input type="checkbox" name="lang[]" value="6" /> #',
+					"7" : '<input type="checkbox" name="lang[]" value="7" /> #',
+					"8" : '<input type="checkbox" name="lang[]" value="8" /> #'
+				}
+			});
+			$("#selectdisable").click(function(){
+				if ($("#example2").divselect("isdisabled")){
+					$("#example2").divselect("unsetdisabled");
+				}
+				else{
+					$("#example2").divselect("setdisabled");
+				}
+			});
+			$("#selectreadonly").click(function(){
+				if ($("#example2").divselect("isreadonly")){
+					$("#example2").divselect("unsetreadonly");
+				}
+				else{
+					$("#example2").divselect("setreadonly");
+				}
+			});
+			$("#optiondisable").click(function(){
+				if ($("#example2").divselect("isdisabled", "3")){
+					$("#example2").divselect("unsetdisabled", "3");
+				}
+				else{
+					$("#example2").divselect("setdisabled", "3");
+				}
+			});
+			$("#optionreadonly").click(function(){
+				if ($("#example2").divselect("isreadonly", "3")){
+					$("#example2").divselect("unsetreadonly", "3");
+				}
+				else{
+					$("#example2").divselect("setreadonly", "3");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Documentation</a></li>
+		<li><a href="01basic.html">Basic</a></li>
+		<li><a href="02animations.html">Animations</a></li>
+		<li><a href="03styles.html">Styles</a></li>
+		<li><a href="04events.html">Events</a></li>
+		<li class="active"><a href="05attributes.html">HTML attributes</a></li>
+		<li><a href="06template.html">Template modification</a></li>
+		<li><a href="07basefunction.html">Basic function overwriting</a></li>
+		<li><a href="08ajax.html">Dinamic loading</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>HTML attributes</h1>
+			<p>
+				These examples show the effects of the readonly and disabled attributes.
+			</p>
+			<h2>Attributes defined in the HTML code</h2>
+			<select id="example1" name="example1">
+				<option value="1">HTML</option>
+				<option value="2">CSS</option>
+				<option value="3" readonly="readonly">JavaScript</option>
+				<option value="4">PHP</option>
+				<option value="5">SQL</option>
+				<option value="6" disabled="disabled">Python</option>
+				<option value="7" disabled="disabled">Ruby</option>
+				<option value="8">ASP</option>
+			</select>
+			<pre class="brush: html">
+				&lt;select id="example1" name="example1">
+					&lt;option value="1">HTML&lt;/option>
+					&lt;option value="2">CSS&lt;/option>
+					&lt;option value="3" readonly="readonly">JavaScript&lt;/option>
+					&lt;option value="4">PHP&lt;/option>
+					&lt;option value="5">SQL&lt;/option>
+					&lt;option value="6" disabled="disabled">Python&lt;/option>
+					&lt;option value="7" disabled="disabled">Ruby&lt;/option>
+					&lt;option value="8">ASP&lt;/option>
+				&lt;/select></pre>
+			<pre class="brush: js">
+				$("select").divselect({
+					optiontags : {
+					  "1" : '&lt;input type="checkbox" name="lang[]" value="1" /> #',
+					  "2" : '&lt;input type="checkbox" name="lang[]" value="2" /> #',
+					  "3" : '&lt;input type="checkbox" name="lang[]" value="3" checked="checked" /> #',
+					  "4" : '&lt;input type="checkbox" name="lang[]" value="4" /> #',
+					  "5" : '&lt;input type="checkbox" name="lang[]" value="5" /> #',
+					  "6" : '&lt;input type="checkbox" name="lang[]" value="6" /> #',
+					  "7" : '&lt;input type="checkbox" name="lang[]" value="7" /> #',
+					  "8" : '&lt;input type="checkbox" name="lang[]" value="8" /> #'
+					}
+				});</pre>
+			<h2>Change the readonly and disabled states</h2>
+			<select id="example2" name="example2">
+				<option value="1">HTML</option>
+				<option value="2">CSS</option>
+				<option value="3">JavaScript</option>
+				<option value="4">PHP</option>
+				<option value="5">SQL</option>
+				<option value="6">Python</option>
+				<option value="7">Ruby</option>
+				<option value="8">ASP</option>
+			</select>
+			<div class="spacer"></div>
+			<p>
+				With the buttons in the first line we can change the select state, the buttons in the
+				second line change the third (javascript) option state.
+			</p>
+			<div class="spacer"></div>
+			select:
+			<input id="selectdisable" type="button" value="disabled on-off" />
+			<input id="selectreadonly" type="button" value="readonly on-off" />
+			<div class="spacer"></div>
+			option:
+			<input id="optiondisable" type="button" value="disabled on-off" />
+			<input id="optionreadonly" type="button" value="readonly on-off" />
+			<div class="spacer"></div>
+			<p>
+				The HTML and javascript codes are the same as the above example (except there are no
+				readonly and disabled attributes). The HTML code of the buttons and the event handlers:
+			</p>
+			<pre class="brush: html">
+				&lt;input id="selectdisable" type="button" value="disabled on-off" />
+				&lt;input id="selectreadonly" type="button" value="readonly on-off" />
+				&lt;input id="optiondisable" type="button" value="disabled on-off" />
+				&lt;input id="optionreadonly" type="button" value="readonly on-off" /></pre>
+			<pre class="brush: js">
+				$("#selectreadonly").click(function(){
+					if ($("#example2").divselect("isreadonly")){
+						$("#example2").divselect("unsetreadonly");
+					}
+					else{
+						$("#example2").divselect("setreadonly");
+					}
+				});
+				$("#optiondisable").click(function(){
+					if ($("#example2").divselect("isdisabled", "3")){
+						$("#example2").divselect("unsetdisabled", "3");
+					}
+					else{
+						$("#example2").divselect("setdisabled", "3");
+					}
+				});
+				$("#optionreadonly").click(function(){
+					if ($("#example2").divselect("isreadonly", "3")){
+						$("#example2").divselect("unsetreadonly", "3");
+					}
+					else{
+						$("#example2").divselect("setreadonly", "3");
+					}
+				});</pre>
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

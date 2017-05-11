@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			var $DS = $("select").divselect({
+				create : function(event){
+					$("#indicator").append('The divselect has been created.');
+				},
+				select : function(event, value){
+					var html = $(this).divselect("getselected");
+					$("#indicator").append('<br />The '+value+' value has been selected ('+html+').');
+				},
+				change : function(event, value, oldvalue){
+					var html = $(this).divselect("getselected");
+					var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+					$("#indicator").append(
+						'<br />The selected value has been changed: '+oldvalue+
+						' ('+oldhtml+')'+
+						' -&gt; '+value+
+						' ('+html+').'
+					);
+				},
+				open : function(event){
+					$("#indicator").append('<br />The list has been opened.');
+				},
+				close : function(event){
+					$("#indicator").append('<br />The list has been closed.');
+				}
+			});
+			/*
+			$DS.on("select.divselect", function(event, value){
+				var html = $(this).divselect("getselected");
+				$("#indicator").append('<br />The '+value+' value has been selected ('+html+').');
+			});
+			$DS.on("change.divselect", function(event, value, oldvalue){
+				var html = $(this).divselect("getselected");
+				var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+				$("#indicator").append(
+					'<br />The selected value has been changed: '+oldvalue+
+					' ('+oldhtml+')'+
+					' -&gt; '+value+
+					' ('+html+').'
+				);
+			});
+			$DS.on("open.divselect", function(event){
+				$("#indicator").append('<br />The list has been opened.');
+			});
+			$DS.on("close.divselect", function(event){
+				$("#indicator").append('<br />The list has been closed.');
+			});
+			*/
+		});
+	</script>
+</head>
+<body>
+	
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Documentation</a></li>
+		<li><a href="01basic.html">Basic</a></li>
+		<li><a href="02animations.html">Animations</a></li>
+		<li><a href="03styles.html">Styles</a></li>
+		<li class="active"><a href="04events.html">Events</a></li>
+		<li><a href="05attributes.html">HTML attributes</a></li>
+		<li><a href="06template.html">Template modification</a></li>
+		<li><a href="07basefunction.html">Basic function overwriting</a></li>
+		<li><a href="08ajax.html">Dinamic loading</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Events</h1>
+			<p>
+				With the 5 event handler method, we can attach any operation to the special events of
+				the divselect. <strong>Try the keyboard controlling also!</strong>
+				(Tab, cursor control keys, PageUp, PageDown, Home, End, Enter, Esc)
+			</p>
+			<select name="example1" style="margin: 20px 0px;">
+				<option value="1">HTML</option>
+				<option value="2">CSS</option>
+				<option value="3" selected="selected">JavaScript</option>
+				<option value="4">PHP</option>
+				<option value="5">SQL</option>
+				<option value="6">Python</option>
+				<option value="7">Ruby</option>
+				<option value="8">ASP</option>
+			</select>
+			<div id="indicator"></div>
+			<p>
+				The HTML code:
+			</p>
+			<pre class="brush: html">
+				&lt;select name="example1">
+					&lt;option value="1">HTML&lt;/option>
+					&lt;option value="2">CSS&lt;/option>
+					&lt;option value="3" selected="selected">JavaScript&lt;/option>
+					&lt;option value="4">PHP&lt;/option>
+					&lt;option value="5">SQL&lt;/option>
+					&lt;option value="6">Python&lt;/option>
+					&lt;option value="7">Ruby&lt;/option>
+					&lt;option value="8">ASP&lt;/option>
+				&lt;/select></pre>
+			<p>
+				The javascript code:
+			</p>
+			<pre class="brush: js">
+				$("select").divselect({
+					create : function(event){
+						$("#indicator").append('The divselect has been created.');
+					},
+					select : function(event, value){
+						var html = $(this).divselect("getselected");
+						$("#indicator").append('&lt;br />The '+value+' value has been selected ('+html+').');
+					},
+					change : function(event, value, oldvalue){
+						var html = $(this).divselect("getselected");
+						var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+						$("#indicator").append(
+							'&lt;br />The selected value has been changed: '+oldvalue+
+							' ('+oldhtml+')'+
+							' -&amp;gt; '+value+
+							' ('+html+').'
+						);
+					},
+					open : function(event){
+						$("#indicator").append('&lt;br />The list has been opened.');
+					},
+					close : function(event){
+						$("#indicator").append('&lt;br />The list has been closed.');
+					}
+				});</pre>
+			<p>
+				With the other method:
+			</p>
+			<pre class="brush: js">
+				var $DS = $("select").divselect({
+					create : function(event){
+						$("#indicator").append('The divselect has been created.');
+					}
+				});
+				$DS.on("select.divselect", function(event, value){
+					var html = $(this).divselect("getselected");
+					$("#indicator").append('&lt;br />The '+value+' value has been selected ('+html+').');
+				});
+				$DS.on("change.divselect", function(event, value, oldvalue){
+					var html = $(this).divselect("getselected");
+					var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+					$("#indicator").append(
+						'&lt;br />The selected value has been changed: '+oldvalue+
+						' ('+oldhtml+')'+
+						' -&amp;gt; '+value+
+						' ('+html+').'
+					);
+				});
+				$DS.on("open.divselect", function(event){
+					$("#indicator").append('&lt;br />The list has been opened.');
+				});
+				$DS.on("close.divselect", function(event){
+					$("#indicator").append('&lt;br />The list has been closed.');
+				});</pre>
+			<p>
+				There is need to set the <em>$DS</em> variable, because the <em>$("select")</em>
+				element won't exist after the creation of the divselect, so we can't attach an event
+				handler to that. If we use a selector that adapt to the attributes defined in the
+				<em>divattributes</em> property, we don't need such method.
+				<br />
+				If we use a previous version of jQuery 1.7 we have to change the <em>on()</em>
+				method call to <em>bind()</em> (the arguments are the same).
+			</p>
+			
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

@@ -1,0 +1,161 @@
+/*
+    Document   : divselect
+    Created on : 2011.08.26.
+    Author     : Horváth Norbert
+    Description:
+        Divselect alap stílus
+*/
+
+.divselect {
+	position: relative;
+	width: 187px;
+	outline-width: 0;
+}
+.divselect:focus {
+	outline: 1px dotted #000000;
+}
+
+.divselect__input {
+	display: none;
+}
+
+.divselect__background {
+	display: block;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+
+.divselect__selector {
+	position: relative;
+	padding: 2px 2px 2px 4px;
+	height: 15px;
+	border: 1px solid #dcdcdc;
+	overflow: hidden;
+	color: #373737;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #ffffff;
+	outline-width: 0;
+}
+.divselect__selector:before {
+	content: '';
+	position: absolute;
+	right: 6px;
+	top: 7px;
+	z-index: 1;
+	width: 0;
+	height: 0;
+	border-top: 5px solid #a6a6a6;
+	border-bottom: 5px solid transparent;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+}
+.divselect__selector:after {
+	content: '';
+	position: absolute;
+	right: 1px;
+	top: 1px;
+	width: 20px;
+	height: 15px;
+	border: 1px solid #cccccc;
+}
+.divselect__selector--readonly {
+	color: #aaaaaa;
+}
+.divselect__selector--disabled {
+	background-color: #eeeeee;
+	color: #aaaaaa;
+}
+.divselect__selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect__selector--active {
+	background-position: bottom right;
+}
+.divselect__selector--active:after {
+	background-color: #e0e0e0;
+}
+
+.divselect__menu {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	max-height: 250px;
+	overflow: auto;
+	border: 1px solid #dcdcdc;
+	background-color: #ffffff;
+	position: absolute;
+	z-index: 100;
+}
+
+.divselect__group {
+
+}
+.divselect__group__title {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.divselect__item {
+	padding: 2px 2px 4px 4px;
+	color: #373737;
+	font-size: 12px;
+	font-weight: bold;
+}
+.divselect__item--readonly {
+
+}
+.divselect__item--disabled {
+	color: #aaaaaa;
+}
+.divselect__item span {
+	position: relative;
+	top: -3px;
+}
+.divselect__group .divselect__item {
+	padding-left: 14px;
+}
+.divselect__item:hover {
+	background-color: #e8e8e8;
+}
+.divselect__item--disabled:hover {
+	background-color: #ffffff;
+}
+.divselect__item--preselected {
+	background-color: #e8e8e8;
+	outline-width: 0;
+}
+
+/* Filter plugin */
+
+.divselect__filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 16px;
+}
+.divselect__filter__input {
+	padding: 2px;
+	width: 140px;
+	height: 14px;
+	border: 1px solid #dcdcdc;
+	background-color: #ffffff;
+}
+.divselect__filter__reset {
+	color: #999999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect__filter__reset:hover {
+	color: #000000;
+}

@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" href="../css/doc.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#select-1").divselect();
+			$("#select-2").divselect();
+			$("#select-3").divselect({
+				optionTags : {
+					"0"          : '<i>#</i>',
+					"details"    : '<img src="../images/page.png"> <span>#</span>',
+					"activate"   : '<img src="../images/lightbulb.png"> <span>#</span>',
+					"inactivate" : '<img src="../images/lightbulb_off.png"> <span>#</span>',
+					"modify"     : '<img src="../images/page_white_edit.png"> <span>#</span>',
+					"delete"     : '<img src="../images/cross.png"> <span>#</span>'
+				}
+			});
+			$(".homework-toggle").click(function(){
+				$(this).next().slideToggle("normal");
+				$(this).toggleClass("active");
+			});
+		});
+	</script>
+	<title>Divselect - dokumentáció</title>
+</head>
+<body>
+
+	<div id="container">
+		<ul class="menu">
+			<li class="active"><a href="doc.html">Dokumentáció</a></li>
+			<li><a href="01basic.html">Alap</a></li>
+			<li><a href="02animations.html">Animációk</a></li>
+			<li><a href="03styles.html">Stílusok</a></li>
+			<li><a href="04events.html">Események</a></li>
+			<li><a href="05attributes.html">HTML attribútumok</a></li>
+			<li><a href="06multiselect.html">Multiselect</a></li>
+			<li><a href="07template.html">Template módosítása</a></li>
+			<li><a href="08basefunction.html">Alapműködés felülírása</a></li>
+			<li><a href="09ajax.html">Dinamikus betöltés</a></li>
+		</ul>
+		<div id="rightcol">
+			<div id="content">
+
+<h1 class="h1-title">Divselect</h1>
+<p>
+	Ez a jQuery plugin elsősorban a HTML <span class="html">&lt;select&gt;</span> elemének lecserélésére
+	használható. A plugin igen rugalmas és testreszabható, így más célokra is alkalmas, például egy
+	lenyíló menü is megvalósítható vele.<br />
+	Egy select elemre lefuttatva a plugin lecseréli az elemet (alapértelmezett esetben) egy div-ekből
+	álló, a select elemmel megegyező módon működő szerkezetre. A szerkezetbe helyez egy hidden inputot
+	(rejtett űrlapelemet), ami a select által kiválasztott adat továbbítására szolgál. A pluginhoz
+	tartozik egy CSS fájl is, amivel a kinézet tetszőlegesen testreszabható.<br />
+	A plugin rendelkezik a select minden kényelmi funkcionalitásával, mint például a kurzorbillentyűkkel
+	történő lépegetés, gyorskeresés karakterek leütésével, stb. Bővebben lásd a
+	<a href="#divselect-billentyuvezerles">billentyűvezérlés</a> részben.
+</p>
+<ul>
+	<li>Jelenlegi verzió: 1.0.0</li>
+	<li>
+		Függőségek: <a href="http://jquery.com" target="_blank">jQuery</a>,
+		<a href="http://jqueryui.com/demos/position" target="_blank">jQuery UI position</a>
+	</li>
+	<li>Szükséges: jQuery 1.7+, jQuery UI position 1.9+</li>
+	<li>Böngészők: IE7+, FF4+, Chrome, Opera11+, (IE6 alatt billentyűfunkciók kikapcsolása esetén)</li>
+	<li>
+		<strong>Letöltés:</strong>
+		<ul>
+			<li><a href="../../download/divselect_hu.zip"><strong>teljes csomag</strong></a> (zip)</li>
+			<li>
+				<a href="../js/jquery.divselect-1.0.0.js">
+					jquery.divselect-1.0.0.js
+				</a>
+				(fejlesztői változat)
+			</li>
+			<li>
+				<a href="../js/jquery.divselect-1.0.0.min.js">
+					jquery.divselect-1.0.0.min.js
+				</a>
+				(tömörített változat)
+			</li>
+			<li>
+				<a href="../css/divselect.css">
+					divselect.css
+				</a>
+				(alap CSS fájl)
+			</li>
+		</ul>
+	</li>
+</ul>
+<h2 id="divselect-demo">Demó</h2>
+<p>
+	Itt csak a legalapvetőbb funkciókat láthatjuk.
+	Egy select elemre ráengedve konfigurálás nélkül:
+</p>
+<p>
+	<select id="select-1" name="languages">
+		<option value="html">HTML</option>
+		<option value="css">CSS</option>
+		<option value="js">JavaScript</option>
+		<option value="php">PHP</option>
+		<option value="sql">SQL</option>
+		<option value="asp">ASP</option>
+		<option value="vb">VBScript</option>
+	</select>
+</p>
+<pre class="brush: js">
+	$("#select-1").divselect();
+</pre>
+<div class="homework-toggle">HTML kód</div>
+<div class="homework-solution">
+	<pre class="brush: html">
+		&lt;select id="select-1" name="languages">
+			&lt;option value="html">HTML&lt;/option>
+			&lt;option value="css">CSS&lt;/option>
+			&lt;option value="js">JavaScript&lt;/option>
+			&lt;option value="php">PHP&lt;/option>
+			&lt;option value="sql">SQL&lt;/option>
+			&lt;option value="asp">ASP&lt;/option>
+			&lt;option value="vb">VBScript&lt;/option>
+		&lt;/select></pre>
+</div>
+<p>
+	Egy select optgroup tegekkel:
+</p>
+<p>
+	<select id="select-2" name="languages">
+		<option value="c">C</option>
+		<option value="cplusplus">C++</option>
+		<optgroup label="WEB - kliens oldal">
+			<option value="html">HTML</option>
+			<option value="css">CSS</option>
+			<option value="js" selected="selected">JavaScript</option>
+			<option value="vb">VBScript</option>
+		</optgroup>
+		<optgroup label="WEB - szerver oldal">
+			<option value="php">PHP</option>
+			<option value="sql">SQL</option>
+			<option value="asp">ASP</option>
+		</optgroup>
+	</select>
+</p>
+<pre class="brush: js">
+	$("#select-2").divselect();
+</pre>
+<div class="homework-toggle">HTML kód</div>
+<div class="homework-solution">
+	<pre class="brush: html">
+		&lt;select id="select-2" name="languages">
+			&lt;option value="c">C&lt;/option>
+			&lt;option value="cplusplus">C++&lt;/option>
+			&lt;optgroup label="WEB - kliens oldal">
+				&lt;option value="html">HTML&lt;/option>
+				&lt;option value="css">CSS&lt;/option>
+				&lt;option value="js" selected="selected">JavaScript&lt;/option>
+				&lt;option value="vb">VBScript&lt;/option>
+			&lt;/optgroup>
+			&lt;optgroup label="WEB - szerver oldal">
+				&lt;option value="php">PHP&lt;/option>
+				&lt;option value="sql">SQL&lt;/option>
+				&lt;option value="asp">ASP&lt;/option>
+			&lt;/optgroup>
+		&lt;/select></pre>
+</div>
+<p>
+	A divselect plugin legjelentősebb funkciója, ami a select elem lehetőségeit felülmúlja az, hogy
+	tetszőleges HTML kód beszúrható az option tegekbe. Az egyik paraméterrel felülírhatjuk az egyes
+	option tegek belsejét tetszőleges HTML kóddal, miközben az eredeti HTML kód valid marad:
+</p>
+<p>
+	<select id="select-3" name="operations">
+		<option value="0" selected="selected">Műveletek</option>
+		<option value="details">Részletek</option>
+		<option value="activate">Aktiválás</option>
+		<option value="inactivate">Inaktiválás</option>
+		<option value="modify">Módosítás</option>
+		<option value="delete">Törlés</option>
+	</select>
+</p>
+<pre class="brush: js">
+	$("#select-3").divselect({
+		optionTags : {
+			"0"          : '&lt;i>#&lt;/i>',
+			"details"    : '&lt;img src="../images/page.png"> &lt;span>#&lt;/span>',
+			"activate"   : '&lt;img src="../images/lightbulb.png"> &lt;span>#&lt;/span>',
+			"inactivate" : '&lt;img src="../images/lightbulb_off.png"> &lt;span>#&lt;/span>',
+			"modify"     : '&lt;img src="../images/page_white_edit.png"> &lt;span>#&lt;/span>',
+			"delete"     : '&lt;img src="../images/cross.png"> &lt;span>#&lt;/span>'
+		}
+	});
+</pre>
+<div class="homework-toggle">HTML kód</div>
+<div class="homework-solution">
+	<pre class="brush: html">
+		&lt;select id="select-3" name="operations">
+			&lt;option value="0" selected="selected">Műveletek&lt;/option>
+			&lt;option value="details">Részletek&lt;/option>
+			&lt;option value="activate">Aktiválás&lt;/option>
+			&lt;option value="inactivate">Inaktiválás&lt;/option>
+			&lt;option value="modify">Módosítás&lt;/option>
+			&lt;option value="delete">Törlés&lt;/option>
+		&lt;/select></pre>
+</div>
+<h2 id="divselect-hasznalat">Használat</h2>
+<p>
+	Illesszük be az alábbi fájlokat:
+</p>
+<ul>
+	<li>jQuery 1.7+</li>
+	<li>jQuery UI position 1.9+</li>
+	<li>A plugin: jquery.divselect.js</li>
+	<li>CSS fájl: divselect.css</li>
+</ul>
+<p>
+	Például (HTML5 kódot feltételezve):
+</p>
+<pre class="brush: html">
+	&lt;link rel="stylesheet" href="css/divselect.css" />
+	&lt;script src="js/jquery.js">&lt;/script>
+	&lt;script src="js/jquery-ui.position.js">&lt;/script>
+	&lt;script src="js/jquery.divselect.js">&lt;/script>
+</pre>
+<p>
+	Készítsünk egy select elemet a HTML kódban. Itt bizonyos atribútumok befolyásolják a divselect
+	viselkedését, ld. <a href="#divselect-html-attributumok">itt</a>.<br />
+	<strong>Fontos:</strong> az option tegek value attribútumainak egyedinek kell lennie!
+</p>
+<pre class="brush: html">
+	&lt;select id="example" name="webprog">
+		&lt;option value="html">HTML&lt;/option>
+		&lt;option value="css">CSS&lt;/option>
+		&lt;option value="js">JavaScript&lt;/option>
+		&lt;option value="php">PHP&lt;/option>
+		&lt;option value="sql">SQL&lt;/option>
+	&lt;/select>
+</pre>
+<p>
+	Majd a DOM betöltődése után a select elemen lefuttatjuk a plugint
+	(itt természetesen bármilyen szelektor használható):
+</p>
+<pre class="brush: js; html-script: true">
+	&lt;script>
+		$(document).ready(function(){
+			$("#example").divselect();
+		});
+	&lt;/script>
+</pre>
+<p>
+	További használati példák a demók között találhatóak.
+</p>
+<h2 id="divselect-parameterek">Paraméterek</h2>
+<p>
+	A konfiguráláshoz használhatóak paraméterek, melyek a létrehozáskor objektumban adhatóak át a
+	divselect() függvénynek:
+</p>
+<pre class="brush: js">
+	$("#example").divselect({
+		cssPrefix : 'divselect-sort',
+		showEffect: function($elem){
+			$elem.slideDown();
+		},
+		...
+	});
+</pre>
+<p>
+	A paraméterek beállítása, lekérdezése és módosítása a jQuery UI widget-ekhez hasonló működési elvű.
+	A paraméterek futási időben is módosítható az option illetve a regenerate metódusokkal (metódusokat
+	lásd <a href="#divselect-metodusok">itt</a>). A használható paraméterek	az alábbiak:
+</p>
+<h3>Állandó paraméterek (futási időben a <em>regenerate</em> metódussal módosíthatóak):</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Paraméter</th>
+		<th>Jelentés</th>
+		<th>Típus</th>
+		<th style="width: 110px;">Alapértelmezett érték</th>
+	</tr>
+	<tr>
+		<td>template</td>
+		<td>
+			A select elemet lecserélő HTML struktúra sablonja. Ez határozza meg a select
+			helyén felépülő	HTML kód szerkezetét. Részletes leírást ld.
+			<a href="#divselect-template">itt</a>.
+		</td>
+		<td>string</td>
+		<td>ld. <a href="#divselect-template">itt</a></td>
+	</tr>
+	<tr>
+		<td>cssPrefix</td>
+		<td>
+			A felépített HTML-elemek css osztályai kapják ezt a prefixet. Segítségével egy oldalon több,
+			különböző stílusú divselect is elhelyezhető.
+		</td>
+		<td>string</td>
+		<td>"divselect"</td>
+	</tr>
+	<tr>
+		<td>optionTags</td>
+		<td>
+			A megadott value attribútumú option-ök felülírása. Az objektumban megadott value attribútumokkal
+			rendelkező option-ök belseje (innerHTML) le lesz cserélve a megadott HTML kódra. Pl.:<br />
+			<span class="js">{ "data" : '&lt;i&gt;szöveg&lt;/i&gt;' }</span><br />
+			Ekkor a "data" value-val rendelkező option tegben (pontosabban a helyére kerülő div
+			belsejében) nem az option innerHTML-je kerül, hanem a megadott HTML kód. A többi option
+			változatlan marad.<br />
+			Az option eredeti innerHTML-jét #-el helyettesíthetjük be a HTML kódba, Pl.:<br />
+			<span class="js">{ "data" : '&lt;i&gt;#&lt;/i&gt;' }</span><br />
+			Itt <span class="html">&lt;i&gt;</span> tegekkel lesz körbevéve az eredeti innerHTML. A
+			# karaktert escape-eléssel vihetjük be \\# formában.
+		</td>
+		<td>object</td>
+		<td>{}</td>
+	</tr>
+	<tr>
+		<td>divAttributes</td>
+		<td>
+			Azok az attribútumok, melyeket a legkülső div megörököl az eredeti select elemtől. A class
+			attribútum hozzáfűződik, a többi felülírja a template-ben megadott attribútumokat.
+		</td>
+		<td>array</td>
+		<td>["id", "class", "dir", "lang", "style", "tabindex", "title"]</td>
+	</tr>
+	<tr>
+		<td>characters</td>
+		<td>
+			Ékezetes karakterek és írásjelek keyCode-jai adhatóak meg itt a gyorskereséshez. A megadás
+			böngészőtípusonként lehetséges, mivel ezen karakterek kódjai általában böngészőfüggőek.<br />
+			Az objektum elemei maguk is objektumok, pl. egy elem:<br />
+			<span class="js">"é": {"general": 186, "firefox": 59, "opera": 201}</span><br />
+			ami azt jelenti, hogy az "é" karakter kódja firefox alatt 59, opera alatt 201, az összes
+			többi böngészőben pedig 186. A definiált böngészőtípusok:<br />
+			"firefox", "chrome", "ie", "safari", "opera", "general"<br />
+			ahol a "general" jelentése: az összes többi, nem megadott böngésző.
+		</td>
+		<td>object</td>
+		<td><em>magyar ékezetes karakterkészlet</em></td>
+	</tr>
+	<tr>
+		<td>notBubbling</td>
+		<td>
+			Ez egy jQuery szelektor, azokra az option-ön belüli elemekre, melyek esetén az események
+			nem futnak le az option elemre. Hasznos lehet pl, ha checkboxokat rakunk az option elemekbe,
+			ilyenkor a checkboxon kattintva a lista nyitva marad, és az adott option nem lesz kiválasztva.
+		</td>
+		<td>string</td>
+		<td>"input,select,textarea"</td>
+	</tr>
+</table>
+<h3>Dinamikus paraméterek (futási időben az <em>option</em> metódussal módosíthatóak):</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Paraméter</th>
+		<th>Jelentés</th>
+		<th>Típus</th>
+		<th style="width: 110px;">Alapértelmezett érték</th>
+	</tr>
+	<tr>
+		<td>readonly</td>
+		<td>
+			A select readonly tulajdonságának beállítása.<br />
+			<em>Ha a select readonly állapotban van, a kiválasztott értéket nem tudjuk megváltoztatni.</em>
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>disabled</td>
+		<td>
+			A select disabled tulajdonságának beállítása.<br />
+			<em>
+				Ha a select disabled állapotban van, a kiválasztott érték nem kerül továbbításra űrlapelküldés
+				esetén, és az elem nem reagál semmilyen felhasználói interakcióra.
+			</em>
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>multiple</td>
+		<td>
+			A select multiple tulajdonságának beállítása.<br />
+			<em>Ha a select multiple állapotban van, akkor több option-t is ki lehet választani.</em>
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>pageStep</td>
+		<td>
+			A PageUp és PageDown billentyűk lenyomásakor a listán történő ugrások száma.
+		</td>
+		<td>number</td>
+		<td>10</td>
+	</tr>
+	<tr>
+		<td>keyDownWait</td>
+		<td>
+			Gyorskeresés esetén ennyi milliszekundum időn belül leütött billentyű a keresést pontosítja,
+			ha ezen túl történik a leütés, új keresést indít. A gyorskeresésben az option-ön belül a
+			HTML tegek nélküli szöveg vesz részt.
+		</td>
+		<td>number</td>
+		<td>1000</td>
+	</tr>
+	<tr>
+		<td>disableKeys</td>
+		<td>
+			Billentyűk általi vezérlés kikapcsolása (IE6 esetén érdemes letiltani).
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>disableDropdown</td>
+		<td>
+			Az alapértelmezett listamegjelenítési funkció kikapcsolása. A funkció szerint a
+			<em>"selector"</em> elemen történő click esemény a lista megjelenítését eredményezi.
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>disableClose</td>
+		<td>
+			Az alapértelmezett listaeltüntetési funkció kikapcsolása. A funkció szerint a
+			<em>"background"</em> elemen történő click esemény a lista eltüntetését eredményezi.
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>disableSelect</td>
+		<td>
+			Az alapértelmezett listaelem-kiválasztási funkció kikapcsolása. A funkció szerint egy
+			<em>"item"</em> elemen történő click esemény az adott listaelem kiválasztását eredményezi.
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>position</td>
+		<td>
+			A megjelenő lista pozicionálása. A
+			<a href="http://api.jqueryui.com/position" target="_blank">jQuery UI position</a>
+			metódusának átadott objektumot határozhatjuk meg. Az "of" megadása nem kötelező, alapesetben
+			a <em>"selector"</em> elem, a többi tulajdonságot meg kell adnunk, ha felül	akarjuk írni az
+			alapértelmezett pozicionálást.<br />
+			Az "of" értékének felülírásakor a <span class="js">$divelement</span> változó a legkülső div
+			elemet tartalmazó jQuery objektum. Az "of" alapértelmezett értéke:<br />
+			<span class="js">$divelement.find('[data-element="selector"]')</span>
+		</td>
+		<td>object</td>
+		<td class="nowrap">
+			{<br />
+			my: "left top",<br />
+			at: "left bottom",<br />
+			collision: "none flip",<br />
+			within: window<br />
+			}
+		</td>
+	</tr>
+	<tr>
+		<td>showEffect</td>
+		<td>
+			A lista megjelenítéséhez használt függvény. Az $elem paramétere a listát tartalmazó jQuery
+			objektum. Használható például effekttel történő megjelenítéshez ($elem.slideDown(),
+			$elem.fadeIn(), stb.)
+		</td>
+		<td>function</td>
+		<td class="nowrap">
+			function($elem){<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;$elem.show();<br />
+			}
+		</td>
+	</tr>
+	<tr>
+		<td>hideEffect</td>
+		<td>
+			A lista eltüntetéséhez használt függvény. Az $elem paramétere a listát tartalmazó jQuery
+			objektum. Használható például effekttel történő eltüntetéshez ($elem.slideUp(),
+			$elem.fadeOut(), stb.)
+		</td>
+		<td>function</td>
+		<td class="nowrap">
+			function($elem){<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;$elem.hide();<br />
+			}
+		</td>
+	</tr>
+	<tr>
+		<td>selectAction</td>
+		<td>
+			Ebben a függvényben célszerű megadni, mi történjen a <em>"selector"</em> elemmel egy <em>"item"</em>
+			kiválasztása esetén. A művelet lefut divselect elem létrehozása és elem kiválasztása után is. Multiselect
+			esetén leválasztás (kiválasztás megszüntetése) után szintén lefut.<br />
+			A $divelement paramétere a divselect elem (legkülső div elem, mint jQuery objektum), az $item pedig a
+			legutóbb kiválasztott vagy leválasztott <em>"item"</em> elem (szintén jQuery objektum).<br />
+			Az alapértelmezett művelet a selected elem innerHTML-jének (multiselect esetén ezen HTML kódok összefűzött
+			alakjának) beszúrása a <em>"selector"</em> elembe.
+		</td>
+		<td>function</td>
+		<td class="nowrap">
+			function(<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;$divelement, $item<br />
+			){<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+			}
+		</td>
+	</tr>
+</table>
+<h2 id="divselect-esemenyek">Események</h2>
+<p>
+	A divselect néhény speciális eseményéhez megadhatóak eseménykezelő függvények az alábbi módokon:
+</p>
+<pre class="brush: js">
+	// inicializáláskor:
+	$("#example").divselect({
+		change : function(event, value, oldvalue){
+			// eseménykezelő
+		},
+		...
+	});
+
+	// futási időben:
+	$("#example").on("change.divselect", function(event, value, oldvalue){
+		// eseménykezelő
+	});
+</pre>
+<p>
+	Minden esemény a <em>divselect</em> névtérhez tartozik, így csatoláskor is ezt kell megadni.<br />
+	Az alapértelmezet eseménykezelő minden esetben egy üres függvény. Ha mindkét fenti módon megadtunk
+	eseménykezelőt, az inicializáláskor megadott fog lefutni először. Az alábbi eseményekhez definiálható
+	egyedi eseménykezelő:
+</p>
+<table cellspacing="0">
+	<tr>
+		<th>Esemény</th>
+		<th>Lefutás ideje</th>
+		<th>Paraméterek</th>
+	</tr>
+	<tr>
+		<td>create</td>
+		<td>
+			A divselect elem elkészülése után fut le. <strong>Csak inicializáláskor adható meg!</strong>
+		</td>
+		<td>event</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>
+			A legördülő listában egy érték kiválasztása esetén fut le.
+		</td>
+		<td>event, value</td>
+	</tr>
+	<tr>
+		<td>change</td>
+		<td>
+			A kiválasztott érték módosulása esetén fut le (a fenti szűkített esete).
+		</td>
+		<td>event, value, oldvalue</td>
+	</tr>
+	<tr>
+		<td>open</td>
+		<td>
+			Lista lenyitásakor fut le.
+		</td>
+		<td>event</td>
+	</tr>
+	<tr>
+		<td>close</td>
+		<td>
+			Lista becsukásakor fut le.
+		</td>
+		<td>event</td>
+	</tr>
+</table>
+<p>
+	A paraméterek:<br />
+	<strong>event</strong> (object): a <a href="http://api.jquery.com/category/events/event-object" target="_blank">jQuery Event objektum</a>,<br />
+	<strong>value</strong> (string): a kiválasztott option value attribútuma.<br />
+	<strong>oldvalue</strong> (string): change esemény esetén az előzőleg kiválasztott option value attribútuma.<br />
+	Ezenkívül az eseménykezelőben a <strong>this</strong> minden esetben az aktuális divselect elemre
+	(legkülső div, mint DOM elem) mutat.
+</p>
+<h2 id="divselect-metodusok">Metódusok</h2>
+<p>
+	A divselect metódusai segítségével információk kérdezhetőek le, illetve manipulálható az elem futási
+	időben. A metódusok hívása:
+</p>
+<pre class="brush: js">
+	$("#example").divselect("metódusnév", paraméterek);
+</pre>
+<p>
+	Azok a metódusok, melyek láncolhatóak, visszatérési értékként a divselect jQuery objektumot adják,
+	vagyis azt, amire ráengedtük a függvényt. Erre újból ráengedhetünk egy másikat, így egyszerre többet
+	is végrehajthatunk. Pl.:
+</p>
+<pre class="brush: js">
+	$("#example").divselect("select", "name").divselect("setReadonly");
+</pre>
+<h3>Felhasználói függvények</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Metódus</th>
+		<th>Leírás</th>
+		<th style="width: 40px;">Láncol-<br />ható</th>
+	</tr>
+	<tr>
+		<td>create</td>
+		<td>
+			<span class="js">jQuery create([object])</span><br />
+			<br />
+			A divselect elem elkészítését végző metódus. Ha a divselect()-et paraméter nélkül hívjuk,
+			vagy objektumot adunk át neki, alapértelmezetten ez a függvény fut le. Paraméterként egy
+			objektumot adhatunk át, amiben az állandó és dinamikus tulajdonságok alapértelmezett
+			értékeit írhatjuk felül. Visszatérési értéke a létrehozott divselect elemet (elemeket)
+			tartalmazó jQuery objektum.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("create");</span><br />
+			vagy<br />
+			<span class="js">$("#example").divselect();</span><br />
+			Tulajdonságok beállítása:<br />
+			<span class="js">$("#example").divselect("create", {"pagestep" : 5});</span><br />
+			vagy<br />
+			<span class="js">$("#example").divselect({"pagestep" : 5});</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>destroy</td>
+		<td>
+			<span class="js">jQuery destroy()</span><br />
+			<br />
+			A divselect elemet visszaalakítja az aktuális állapotának megfelelő select elemmé.
+			Ez azt jelenti, hogy a divselect-en végrehajtott módosítások megmaradnak, tehát nem
+			feltétlenül az eredeti select elemet kapjuk vissza. Visszatérési értéke a létrejött
+			select elemet (elemeket) tartalmazó jQuery objektum.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("destroy");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>regenerate</td>
+		<td>
+			<span class="js">jQuery regenerate(string, string)</span><br />
+			<span class="js">jQuery regenerate(object)</span><br />
+			<br />
+			Állandó tulajdonság módosítására szolgál futási időben. Ezek a tulajdonságok abban
+			különböznek a dinamikus tulajdonságoktól, hogy módosításukhoz a divselectet újra kell
+			építeni, ezért van szükség egy másik függvény hívására.<br />
+			Első paramétere a módosítandó tulajdonság neve, második a tulajdonság új értéke, a
+			visszatérési érték a divselect jQuery objektum lesz.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("regenerate", "cssPrefix", "divselect-smooth");</span><br />
+			Egyszerre több tulajdonság módosítását egy objektum átadásával érhetjük el, pl.:<br />
+			<span class="js">
+				$("#example").divselect("regenerate", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"template" : '...',<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"cssPrefix" : "divselect-smooth"<br />
+				});<br />
+			</span>
+			Dinamikus tulajdonság módosítására is alkalmas, de arra csak akkor érdemes használni, ha
+			az utóbbi esetben egy állandó tulajdonsággal együtt adjuk át, mivel annak a módosításához
+			szükségtelen újraépíteni a divselect elemet.
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>
+			<span class="js">mixed option(string)</span><br />
+			<span class="js">jQuery option(string, string)</span><br />
+			<span class="js">jQuery option(object)</span><br />
+			<br />
+			Dinamikus tulajdonság és eseménykezelő lekérdezése (getter) vagy módosítása (setter) futási
+			időben. Lekérdezéshez a tulajdonság nevét kell karakterláncként átadnunk, visszatérési értéke a
+			tulajdonság értéke lesz (állandó és dinamikus paraméterek lekérdezésére is használható).<br />
+			Pl.:<br />
+			<span class="js">var step = $("#example").divselect("option", "pagestep");</span><br />
+			Tulajdonság módosítása esetén második paraméterként át kell adnunk a tulajdonság értékét,
+			ekkor a visszatérési érték a divselect jQuery objektum lesz.
+			(csak dinamikus tulajdonságok módosíthatók).<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("option", "pagestep", 5);</span><br />
+			Egyszerre több tulajdonság módosítását egy objektum átadásával érhetjük el, pl.:<br />
+			<span class="js">
+				$("#example").divselect("option", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"pagestep" : 5,<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"change" : function(){...}<br />
+				});<br />
+			</span>
+		</td>
+		<td>
+			"setter" mód esetén igen
+		</td>
+	</tr>
+	<tr>
+		<td>getName</td>
+		<td>
+			<span class="js">string getName()</span><br />
+			<br />
+			Az eredeti select name attribútuma.<br />
+			Pl.:<br />
+			<span class="js">var value = $("#example").divselect("getName");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>getValue</td>
+		<td>
+			<span class="js">string|array getValue()</span><br />
+			<br />
+			A kiválasztott option value attribútuma, multiselect esetén ezek tömbje.<br />
+			Pl.:<br />
+			<span class="js">var value = $("#example").divselect("getValue");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>getSelected</td>
+		<td>
+			<span class="js">string|array getSelected()</span><br />
+			<br />
+			A kiválasztott option elemen belüli HTML kód, multiselect esetén ezekből álló tömb.<br />
+			Pl.:<br />
+			<span class="js">var html = $("#example").divselect("getSelected");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>open</td>
+		<td>
+			<span class="js">jQuery open()</span><br />
+			<br />
+			Lista kinyitása.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("open");</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>close</td>
+		<td>
+			<span class="js">jQuery close()</span><br />
+			<br />
+			Lista becsukása.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("close");</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>
+			<span class="js">jQuery select(string)</span><br />
+			<br />
+			Egy option kiválasztása value attribútum alapján. Paramétere egy karakterlánc, amiben a
+			kiválasztandó elem value értéke van.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("select", "php");</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>isSelected</td>
+		<td>
+			<span class="js">bool isSelected(string)</span><br />
+			<br />
+			Megadja, hogy az adott value attribútumú option van-e kiválasztva. Visszatérése egy logikai
+			érték, ami true, ha az van kiválasztva.<br />
+			Pl.:<br />
+			<span class="js">var answer = $("#example").divselect("isSelected", "yes");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>isReadonly</td>
+		<td>
+			<span class="js">bool isReadonly([string])</span><br />
+			<br />
+			Paraméter nélkül használva megállapítja, hogy a select readonly állapotú-e. Egy karakterláncot
+			átadva az adott value attribútumú option-ről állapítja meg hogy readonly-e. Visszatérési
+			értéke ennek megfelelően egy logikai érték.<br />
+			Pl.:<br />
+			<span class="js">var selectreadonly = $("#example").divselect("isReadonly");</span><br />
+			<span class="js">var optionreadonly = $("#example").divselect("isReadonly", "php");</span><br />
+			<em>
+				Ha a select readonly állapotban van, a kiválasztott értéket nem tudjuk megváltoztatni,
+				ha egy option readonly, akkor a benne lévő űrlapelemek nem változtathatóak.
+			</em>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>isDisabled</td>
+		<td>
+			<span class="js">bool isDisabled([string])</span><br />
+			<br />
+			Paraméter nélkül használva megállapítja, hogy a select disabled állapotú-e. Egy karakterláncot
+			átadva az adott value attribútumú option-ről állapítja meg hogy disabled-e. Visszatérési
+			értéke ennek megfelelően egy logikai érték.<br />
+			Pl.:<br />
+			<span class="js">var selectdisabled = $("#example").divselect("isDisabled");</span><br />
+			<span class="js">var optiondisabled = $("#example").divselect("isDisabled", "php");</span><br />
+			<em>
+				Ha a select disabled állapotban van, a kiválasztott érték nem kerül továbbításra űrlapelküldés
+				esetén, és az elem nem reagál semmilyen felhasználói interakcióra. Ha egy option disabled,
+				akkor az adott option-t nem tudjuk kiválasztani.
+			</em>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>isMultiple</td>
+		<td>
+			<span class="js">bool isMultiple()</span><br />
+			<br />
+			Megállapítja, hogy a select multiple állapotú-e. Visszatérési értéke ennek megfelelően egy logikai
+			érték.<br />
+			Pl.:<br />
+			<span class="js">var selectmultiple = $("#example").divselect("isMultiple");</span><br />
+			<em>
+				Ha a select multiple állapotban van, akkor több option-t is ki lehet választani.
+			</em>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>setReadonly</td>
+		<td>
+			<span class="js">jQuery setReadonly([string|array])</span><br />
+			<br />
+			Paraméter nélkül használva a select-et readonly állapotúra állítja. Egy karakterláncot átadva
+			paraméterként, az adott value attribútumú option-t állítja readonly állapotba. Ha egyszerre több
+			option-nel akarjuk ezt megtenni, tömbben is átadhatjuk a value értékeket.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("setReadonly");</span><br />
+			<span class="js">$("#example").divselect("setReadonly", "php");</span><br />
+			<span class="js">$("#example").divselect("setReadonly", ["php", "js"]);</span><br />
+			<em>
+				Ha a select readonly állapotban van, a kiválasztott értéket nem tudjuk megváltoztatni,
+				ha egy option readonly, akkor a benne lévő űrlapelemek nem változtathatóak.
+			</em>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>
+			unsetReadonly<br />
+			setWritable
+		</td>
+		<td>
+			<span class="js">jQuery unsetReadonly([string|array])</span><br />
+			<span class="js">jQuery setWritable([string|array])</span><br />
+			<br />
+			A <em>setWritable</em> az <em>unsetReadonly</em> metódus "alias"-a, vagyis mindkettő
+			ugyanazt csinálja.<br />
+			Paraméter nélkül használva a select-ről leveszi a readonly állapotot. Egy karakterláncot átadva
+			paraméterként, az adott value attribútumú option-ről veszi le. Ha egyszerre több
+			option-nel akarjuk ezt megtenni, tömbben is átadhatjuk a value értékeket.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("unsetReadonly");</span><br />
+			<span class="js">$("#example").divselect("unsetReadonly", "php");</span><br />
+			<span class="js">$("#example").divselect("unsetReadonly", ["php", "js"]);</span><br />
+			<em>
+				Ha a select readonly állapotban van, a kiválasztott értéket nem tudjuk megváltoztatni,
+				ha egy option readonly, akkor a benne lévő űrlapelemek nem változtathatóak.
+			</em>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>setDisabled</td>
+		<td>
+			<span class="js">jQuery setDisabled([string|array])</span><br />
+			<br />
+			Paraméter nélkül használva a select-et disabled állapotúra állítja. Egy karakterláncot átadva
+			paraméterként, az adott value attribútumú option-t állítja disabled állapotba. Ha egyszerre több
+			option-nel akarjuk ezt megtenni, tömbben is átadhatjuk a value értékeket.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("setDisabled");</span><br />
+			<span class="js">$("#example").divselect("setDisabled", "php");</span><br />
+			<span class="js">$("#example").divselect("setDisabled", ["php", "js"]);</span><br />
+			<em>
+				Ha a select disabled állapotban van, a kiválasztott érték nem kerül továbbításra űrlapelküldés
+				esetén, és az elem nem reagál semmilyen felhasználói interakcióra. Ha egy option disabled,
+				akkor az adott option-t nem tudjuk kiválasztani.
+			</em>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>
+			unsetDisabled<br />
+			setEnabled
+		</td>
+		<td>
+			<span class="js">jQuery unsetDisabled([string|array])</span><br />
+			<span class="js">jQuery setEnabled([string|array])</span><br />
+			<br />
+			A <em>setEnabled</em> az <em>unsetDisabled</em> metódus "alias"-a, vagyis mindkettő
+			ugyanazt csinálja.<br />
+			Paraméter nélkül használva a select-ről leveszi a disabled állapotot. Egy karakterláncot átadva
+			paraméterként, az adott value attribútumú option-ről veszi le. Ha egyszerre több
+			option-nel akarjuk ezt megtenni, tömbben is átadhatjuk a value értékeket.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("unsetDisabled");</span><br />
+			<span class="js">$("#example").divselect("unsetDisabled", "php");</span><br />
+			<span class="js">$("#example").divselect("unsetDisabled", ["php", "js"]);</span><br />
+			<em>
+				Ha a select disabled állapotban van, a kiválasztott érték nem kerül továbbításra űrlapelküldés
+				esetén, és az elem nem reagál semmilyen felhasználói interakcióra. Ha egy option disabled,
+				akkor az adott option-t nem tudjuk kiválasztani.
+			</em>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>getOptions</td>
+		<td>
+			<span class="js">array getOptions([string])</span><br />
+			<br />
+			A divselectben lévő option-ök listáját adja vissza tömb formában. A tömb elemei objektumok
+			vagy karakterláncok	aszerint, hogy paraméterként mit adunk át, ez lehet "none", "object"
+			vagy "html". Az alapértelmezett paraméter az "none".<br />
+			<br />
+			A "none" paraméter esetén a tömbbe csak az option-ök value attribútumai kerülnek be. Pl.:<br />
+			<span class="js">var options = $("#example").divselect("getOptions");</span><br />
+			Ebben az esetben a visszatérési érték ilyemi lesz:<br />
+			<span class="js">["0", "html", "css", "js"]</span><br />
+			<br />
+			A visszatérési érték a másik két lehetőség esetben olyan alakú, amilyet az <em>add()</em>
+			metódus (ld. lejjebb) vár paraméterként. Pl.:<br />
+			<span class="js">var options = $("#example").divselect("getOptions", "object");</span><br />
+			Ebben az esetben a visszatérési érték egy objektumokból álló tömb lesz, melyben egy
+			objektum ilyen alakú:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;value: "20",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> Új'<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;selected: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;disabled: false<br />
+			}<br />
+			</span>
+			Az objektumban szereplő paraméterek:<br />
+			<em>value</em> (string; a value attribútum)<br />
+			<em>html</em> (string; az option belseje)<br />
+			<em>selected</em> (boolean; az option selected tulajdonsága)<br />
+			<em>readonly</em> (boolean; az option readonly tulajdonsága)<br />
+			<em>disabled</em> (boolean; az option disabled tulajdonsága)<br />
+			<br />
+			<span class="js">var options = $("#example").divselect("getOptions", "html");</span><br />
+			Ebben az esetben a visszatérési érték egy karakterláncokból álló tömb lesz, egy karakterlánc
+			ilyen alakú:<br />
+			<span class="js">'&lt;option value="20" selected="selected">PHP&lt;/option>'</span><br />
+			vagy pl.:<br />
+			<span class="js">'&lt;option value="new">&lt;input type="checkbox" /> Új&lt;/option>'</span><br />
+			Itt a teljes option teget kapjuk, az érték nélküli attribútumok közül csak a true értékűek
+			kerülnek bele.
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>getOptgroups</td>
+		<td>
+			<span class="js">array getOptgroups([string])</span><br />
+			<br />
+			A divselectben lévő optgroup-okat adja vissza tömb formában. A tömb elemei objektumok
+			vagy karakterláncok	aszerint, hogy paraméterként mit adunk át, ez lehet "none", "options"
+			vagy "surround". Az alapértelmezett paraméter az "none".<br />
+			<br />
+			A "none" paraméter esetén a tömbbe csak az optgroup-ok label attribútumai kerülnek be. Pl.:<br />
+			<span class="js">var options = $("#example").divselect("getOptgroups");</span><br />
+			Ebben az esetben a visszatérési érték ilyemi lesz:<br />
+			<span class="js">["Kliens oldal", "Szerver oldal"]</span><br />
+			<br />
+			A visszatérési érték a másik két lehetőség esetben olyan alakú, amilyet az <em>addgroup()</em>
+			metódus (ld. lejjebb) vár paraméterként. Pl.:<br />
+			<span class="js">var optgroups = $("#example").divselect("getOptgroups", "options");</span><br />
+			Ebben az esetben a visszatérési érték egy objektumokból álló tömb lesz, melyben egy
+			objektum ilyen alakú:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Kliens oldal",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<em>option-t leíró objektum</em>},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<em>option-t leíró objektum</em>},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			}<br />
+			</span>
+			Az objektumban szereplő paraméterek:<br />
+			<em>label</em> (string; a label attribútum)<br />
+			<em>options</em> (array; a benne lévő option-öket leíró objektumok, amilyeneket a
+			<em>getoptions()</em> ad "object" paraméter esetén)<br />
+			<br />
+			<span class="js">var optgroups = $("#example").divselect("getOptgroups", "surround");</span><br />
+			Ebben az esetben a visszatérési érték szintén egy objektumokból álló tömb lesz, melyben egy
+			objektum ilyen alakú:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Kliens oldal",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;surround: ["html", "js"]<br />
+			};<br />
+			</span>
+			Az objektumban szereplő paraméterek:<br />
+			<em>label</em> (string; a label attribútum)<br />
+			<em>surround</em> (array; az optgroup által határolt option-ök közül az első és utolsó value
+			attribútuma, ha csak egyet határol, a két érték megegyezik, ha üres, mindkét érték null)<br />
+			<br />
+			<strong>Megjegyzés:</strong> Az optgroup-okon kívül eső option-öket ezzel a metódussal nem
+			kapjuk meg.
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>getSelect</td>
+		<td>
+			<span class="js">object|string getSelect(string, [bool])</span><br />
+			<br />
+			A divselect jelenlegi állapotával egyenértékű select elemet ad vissza a szerkezetét leíró
+			objektum vagy HTML kód formájában. A visszatérési érték formáját az első paraméter határozza
+			meg, ami lehet "object" vagy "html". A második paraméter egy logikai érték, ami ha true,
+			az option elemek innerHTML-jeit a függvény visszaalakítja az eredeti formára, ha false,
+			akkor az aktuális (<em>optionTags</em> tulajdonság alapján létrehozott, vagy más módon
+			módosított) értékek maradnak benne. Az alapértelmezett érték false.<br />
+			<br />
+			Az "object" paraméter esetén a visszatérési érték egy objektum. Pl.:<br />
+			<span class="js">var select = $("#example").divselect("getSelect", "object");</span><br />
+			Az objektum szerkezete:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;attributes: {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: "",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: "",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;disabled: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;structure : [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>option-ök és optgroup-ok adatai</em><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			}<br />
+			</span>
+			Az objektumban szereplő paraméterek:<br />
+			<em>attributes</em> (object; a select paraméterei, amik a divattributes tulajdonságban szerepelnek)<br />
+			<em>readonly</em> (bool; a divselect readonly tulajdonsága)<br />
+			<em>disabled</em> (bool; a divselect disabled tulajdonsága)<br />
+			<em>structure</em> (array; option-ök és optgroup-ok adatait megadó objektumok listája a megfelelő sorrendben)<br />
+			A structure paraméter egy eleme, ha az egy optgroup:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;type: "optgroup",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "szerver oldali nyelvek",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>optgroup-on belüli option-ök</em><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			}<br />
+			</span>
+			Az objektumban szereplő paraméterek:<br />
+			<em>type</em> (string; ebben az esetben "optgroup")<br />
+			<em>label</em> (string; az optgroup label attribútuma)<br />
+			<em>options</em> (array; az option elemeket leíró objektumok tömbje)<br />
+			Egy option-t leíró objektum (optgroup-on belül és kívül egyaránt) a következő szerkezetű:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;type: "option",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;value: "php",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;i>&lt;img ...>PHP&lt;/i>',<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;selected: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;disabled: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;tag: '&lt;option value="php" <em>attribútumok</em>>&lt;i>&lt;img ...>PHP&lt;/i>&lt;/option>',<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;originalTag: '&lt;option value="php" <em>attribútumok</em>>PHP&lt;/option>'<br />
+			}<br />
+			</span>
+			Az objektumban szereplő paraméterek:<br />
+			<em>type</em> (string; ebben az esetben "option")<br />
+			<em>value</em> (string; a value attribútum)<br />
+			<em>html</em> (string; az option belseje)<br />
+			<em>selected</em> (bool; az option readonly tulajdonsága)<br />
+			<em>readonly</em> (bool; az option readonly tulajdonsága)<br />
+			<em>disabled</em> (bool; az option disabled tulajdonsága)<br />
+			<em>tag</em> (string; az option teg HTML kódja)<br />
+			<em>originalTag</em> (string; az eredeti option teg HTML kódja)<br />
+			A structure paraméterben az option-ök és optgroup-ok a megfelelő sorrendben és hierarchikusan helyezkednek el.<br />
+			Ezzel a metódussal a teljes divselect szerkezetét leíró objektumot kapunk.<br />
+			<br />
+			Ha a metódus első paramétere "html", akkor a visszatérési értéke egy karakterlánc, amiben a teljes option HTML kódja szerepel.
+			Ezt használja a <em>destroy</em> metódus segédfüggvényként az alábbi formában:<br />
+			<span class="js">var select = $("#example").divselect("getSelect", "html", true);</span><br />
+			Ezt a HTML kódot átadva a jQuery konstruktornak létrehozza a select elemet.
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>addOption</td>
+		<td>
+			<span class="js">jQuery addOption(string|object|array, [string], [string])</span><br />
+			<br />
+			A listához további option-t illetve option-öket adhatunk futási időben.<br />
+			<br />
+			<strong>Paraméterek:</strong><br />
+			1. (string|object|array) az option-t illetve option-öket leíró elem<br />
+			2. (string; alapértelmezett érték: "before") értéke "before" vagy "after" aszerint, hogy
+			a harmadik paraméterként megadott elem elé vagy utána akarjuk elhelyezni az option-t<br />
+			3. (string; alapértelmezett érték: undefined) a helyet meghatározó option value-ja<br />
+			<br />
+			Első paraméterként átadhatjuk az option HTML-kódját vagy az adatait leíró objektumot.
+			Tömböt átadva egyszerre több option-t is berakhatunk.<br />
+			A második és harmadik paraméterrel szabályozhatjuk a beszúrás helyét. Ha a második paraméter
+			"before", akkor a harmadikban megadott value attribútumú option elé lesz beszúrva az új
+			option, ha "after", akkor utána. Ha a harmadik paramétert elhagyjuk, "before" esetén az
+			option a lista végéhez fűződik hozzá, "after" esetén az elejére kerül. Mindkét paraméter
+			elhagyása esetén a végéhez fűződik. Ha első paraméterként tömböt adunk át, az option-ök
+			a tömbben megadott sorrendben kerülnek be, függetlenül a többi paramétertől.<br />
+			<br />
+			<strong>Megadás objektummal:</strong><br />
+			<span class="js">
+			var element = {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;value: "20",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> Új'<br />
+			};<br />
+			</span>
+			Az objektumban megadható paraméterek:<br />
+			<em>value</em> (string; alapértelmezett érték: ""; a value attribútum)<br />
+			<em>html</em> (string; alapértelmezett érték: ""; az option bejseje)<br />
+			<em>selected</em> (boolean; alapértelmezett érték: false)<br />
+			<em>readonly</em> (boolean; alapértelmezett érték: false)<br />
+			<em>disabled</em> (boolean; alapértelmezett érték: false)<br />
+			A selected érték megadása azt eredményezi, hogy az új elem lesz a kiválasztott elem.<br />
+			<br />
+			<strong>Megadás HTML kóddal:</strong><br />
+			<span class="js">
+			var html = '&lt;option value="new" disabled="disabled">Új&lt;/option>';<br />
+			</span>
+			A HTML kódba kell beírni az esetleges belső elemeket is, mint például a fentebb lévő
+			checkboxot, mivel az <em>optiontags</em> paraméter nem változtatható futási időben.<br />
+			<br />
+			<strong>Használat:</strong><br />
+			<span class="js">$("#example").divselect("addOption", element);</span><br />
+			<span class="js">$("#example").divselect("addOption", html, "after");</span><br />
+			<span class="js">$("#example").divselect("addOption", [elem1, elem2], "before", "php");</span><br />
+			<span class="js">$("#example").divselect("addOption", [html1, html2], "after", "js");</span><br />
+			<br />
+			A példákban az <em>element</em> a lista végére kerül, a <em>html</em> a lista elejére,
+			az <em>elem1</em> és <em>elem2</em> a "php" value-jú elem elé, a <em>html1</em> és
+			<em>html2</em> a "js" value-jú elem után.
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>addOptgroup</td>
+		<td>
+			<span class="js">jQuery addOptgroup(object|array, [string], [string])</span><br />
+			<br />
+			A listához egy optgroup-ot adhatunk futási időben. Az optgroup-pal együtt a benne lévő
+			option elemeket is definiálhatjuk az <em>addOption()</em> metódusnál megismert adatszerkezetek
+			segítségével, vagy már meglévő option elemeket körbevételére is használhatjuk.<br />
+			<br />
+			<strong>Paraméterek:</strong><br />
+			1. (object|array) az optgroup-ot illetve optgroup-okat leíró elem<br />
+			2. (string; alapértelmezett érték: "before") értéke "before" vagy "after" aszerint, hogy
+			a harmadik paraméterként megadott elem elé vagy utána akarjuk elhelyezni az option-t<br />
+			3. (string; alapértelmezett érték: undefined) a helyet meghatározó option value-ja<br />
+			<br />
+			Első paraméterként kell megadnunk az optgroup-ot leíró objektumot melyben a <em>label</em>
+			és az <em>options</em> vagy <em>surround</em> elemeket adhatjuk meg (lásd lejjebb).
+			Tömböt átadva egyszerre több optgroup-ot is berakhatunk.<br />
+			A második és harmadik paraméterrel szabályozhatjuk a beszúrás helyét pontosan ugyanúgy,
+			ahogy a fenti <em>addOption()</em> függvény esetén. Ha a második paraméter "before", akkor a
+			harmadikban megadott value attribútumú option elé lesz beszúrva az optgroup, ha "after",
+			akkor utána. Ha a harmadik paramétert elhagyjuk, "before" esetén az optgroup a lista
+			végéhez fűződik hozzá, "after" esetén az elejére kerül. Mindkét paraméter elhagyása esetén
+			a végéhez fűződik. Meglévő option-ök körbevétele esetén a második és harmadik paraméter
+			figyelmen kívül lesz hagyva.<br />
+			<br />
+			<strong>Új option-csoport beszúrása:</strong><br />
+			<span class="js">
+			var element = {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Kliens oldal",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option-definíciók<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			};<br />
+			</span>
+			Az objektumban megadható paraméterek:<br />
+			<em>label</em> (string; alapértelmezett érték: ""; az optgroup felirata)<br />
+			<em>options</em> (array; alapértelmezett érték: undefined; a belsejébe bekerülő option-ök)<br />
+			Az options tömböt ugyanolyan formákban lehet megadni, mint az <em>add()</em> metódus esetén.<br />
+			<br />
+			<strong>Meglévő option-csoport körbevétele:</strong><br />
+			<span class="js">
+			var element = {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Kliens oldal",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;surround: ["html", "js"]<br />
+			};<br />
+			</span>
+			Az objektumban megadható paraméterek:<br />
+			<em>label</em> (string; alapértelmezett érték: ""; az optgroup felirata)<br />
+			<em>surround</em> (array; alapértelmezett érték: undefined; az optgroup által körbevett elemek)<br />
+			Ebben az esetben a "html" value-jú elemtől a "js"-ig bezárólag lesz körbevéve a lista
+			az optgroup elemmel (ezt a két határoló elemet is beleértve). Ha egy elemet akarunk körbevenni,
+			akkor is meg kell adni mindkét tömbelemet: <span class="js">surround: ["js", "js"]</span><br />
+			<br />
+			<strong>Használat:</strong><br />
+			<span class="js">
+				$("#example").divselect("addOptgroup", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;label: "Kliens oldali nyelvek",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;option value="html">HTML&lt;/option>',<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;option value="css">CSS&lt;/option>',<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;option value="js" selected="selected">JavaScript&lt;/option>'<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+				}, "before", "php");<br />
+			</span><br />
+			<span class="js">
+				$("#example").divselect("addOptgroup", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;label: "Szerver oldali nyelvek",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: "php",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> PHP'<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: "sql",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> SQL'<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+				}, "after", "js");<br />
+			</span><br />
+			<span class="js">
+				$("#example").divselect("addOptgroup", [<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: "Kliens oldali nyelvek",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surround: ["html", "js"]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: "Szerver oldali nyelvek",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surround: ["php", "asp"]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				]);<br />
+			</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>removeOption</td>
+		<td>
+			<span class="js">jQuery removeOption(string|array)</span><br />
+			<br />
+			Eltávolítja a listából az adott value attribútumú option-t. Tömböt átadva paraméterként
+			egyszerre több option-t is eltávolíthatunk.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("removeOption", "php");</span><br />
+			<span class="js">$("#example").divselect("removeOption", ["php", "js"]);</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>removeOptgroup</td>
+		<td>
+			<span class="js">jQuery removeOptgroup(string|array, [bool])</span><br />
+			<br />
+			Eltávolítja a listából az adott label-lel rendelkező optgroup elemet. A második paraméterrel
+			szabályozhatjuk, hogy a bene lévő option-ök maradjanak meg (false, alapértelmezett), vagy
+			azok is el legyenek távolítva (true).<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("removeOptgroup", "Kliens oldali nyelvek");</span><br />
+			<span class="js">$("#example").divselect("removeOptgroup", "Szerver oldali nyelvek", true);</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+	<tr>
+		<td>truncate</td>
+		<td>
+			<span class="js">jQuery truncate([string])</span><br />
+			<br />
+			A teljes lista ürítésére szolgál ez a függvény. Paraméterként egy karakterláncot adhatunk
+			át, amivel szabályozhatjuk hogy milyen elemektől kívánunk megszabadulni: "all", "options",
+			vagy "optgroups". Az alapértelmezett érték az "all".<br />
+			<em>all</em>: minden option-t és optgroup-ot eltávolít<br />
+			<em>options</em>: minden option-t eltávolít, ha voltak optgroup-ok, azok megmaadnak üresen<br />
+			<em>optgroups</em>: minden optgroup-ot eltávolít, az option-ök megmaradnak<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("truncate");</span><br />
+			<span class="js">$("#example").divselect("truncate", "optgroups");</span>
+		</td>
+		<td>
+			igen
+		</td>
+	</tr>
+</table>
+<h3>Segédfüggvények</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Metódus</th>
+		<th>Leírás</th>
+		<th style="width: 40px;">Láncol-<br />ható</th>
+	</tr>
+	<tr>
+		<td>getElementByValue</td>
+		<td>
+			<span class="js">jQuery getElementByValue(string)</span><br />
+			<br />
+			Visszaadja jQuery objektumként a value attribútum alapján a megfelelő listaelemet.
+			Paramétere egy karakterlánc, ami a value attribútum értéke. Ha nincs ilyen value-val
+			rendelkező elem, üres jQuery objektumot ad vissza.<br />
+			Többnyire a beépített függvények használják segédfüggvényként.<br />
+			Pl.:<br />
+			<span class="js">var $elem = $("#example").divselect("getElementByValue", "5");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>getValueByElement</td>
+		<td>
+			<span class="js">string getValueByElement(jQuery|DOM|string)</span><br />
+			<br />
+			Visszaadja a listaelem value értékét. Az elemet átadhatjuk DOM elemként, jQuery objektumként
+			vagy egy karakterláncot, ami az elem innerHTML-jének egy darabja. A legutóbbi esetben több
+			egyezés esetén csak az első value értékét adja vissza.<br />
+			Pl.:<br />
+			<span class="js">
+				var elem = $("#example").find(".divselect-item").get(3);<br />
+				var $elem = $("#example").find(".divselect-item").eq(3);<br />
+			</span><br />
+			<span class="js">var value = $("#example").divselect("getValueByElement", elem);</span><br />
+			<span class="js">var value = $("#example").divselect("getValueByElement", $elem);</span><br />
+			<span class="js">var value = $("#example").divselect("getValueByElement", "PHP");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+	<tr>
+		<td>getContainerOptgroup</td>
+		<td>
+			<span class="js">string|jQuery getContainerOptgroup(string, string)</span><br />
+			<br />
+			Egy option-t befoglaló optgroup elemet ad vissza az option value-ja alapján. Első paraméter
+			az option value attribútuma, második pedig "label" vagy "element", amitől függően a
+			visszatérési érték az optgroup label attribútuma (string), vagy maga az optgroup elem
+			(jQuery objektum). Az otpgroup elem itt a template által meghatározott elem, ami tipikusan
+			egy div elem. Ha az option nincs optgroup belsejében, a visszatérési érték null.<br />
+			Pl.:<br />
+			<span class="js">var label = $("#example").("getContainerOptgroup", "php", "label");</span><br />
+			<span class="js">var optgr = $("#example").("getContainerOptgroup", "php", "element");</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+</table>
+<h3>Bővítő függvények</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Metódus</th>
+		<th>Leírás</th>
+		<th style="width: 40px;">Láncol-<br />ható</th>
+	</tr>
+	<tr>
+		<td>getPlugin</td>
+		<td>
+			<span class="js">object getPlugin()</span><br />
+			<br />
+			Ez a függvény visszaadja a divselect plugin objektumát. A visszaadott objektum szerkezete:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;defaultOptions : <em>paraméterek alapértelmezett értékei</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;optionData : <em>belső adattároló</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;Util : <em>segédváltozók és függvények</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;Creation : <em>divselect létrehozását végző függvények</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;Interaction : <em>interakciók kezelését végző függvények</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;Methods : <em>kívülről hívható metódusok</em><br />
+			}<br />
+			</span>
+			<strong>
+				Ennek a módosításával felülírhatók és bővíthetők a divselect paraméterei és metódusai.
+			</strong><br />
+			<br />
+			Alapértelmezett érték permanens módosítása:<br />
+			<span class="js">
+				var DS = $().divselect("getPlugin");<br />
+				DS.defaultOptions.cssPrefix = "divselect-smooth";<br />
+			</span><br />
+			Egy új metódus hozzáadása:<br />
+			<span class="js">
+				var DS = $().divselect("getPlugin");<br />
+				DS.Methods.hide = function(){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;this.hide();<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;return this;<br />
+				};<br />
+				$("#example1").divselect("hide");<br />
+			</span><br />
+			Egy új billentyűkezelő hozzáadása:<br />
+			<span class="js">
+				var DS = $().divselect("getPlugin");<br />
+				DS.Interaction.keyHandlers._DELETE =<br />
+				function($menuItems, preSelected, pageStep, event){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;var val = this.divselect("getValueByElement", $menuItems.eq(preSelected));<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;this.divselect("removeOption", val);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;return (preSelected + 1) % $menuItems.length;<br />
+				};<br />
+			</span>
+		</td>
+		<td>
+			nem
+		</td>
+	</tr>
+</table>
+<h2 id="divselect-html-attributumok">HTML attribútumok</h2>
+<p>
+	A divselect a select, optgroup és option elemeknek átadott attribútumok egy részét értelmezi, és ezek
+	alapján beállít bizonyos tulajdonságokat. A select elem size attribútuma figyelmen kívül lesz hagyva.
+	A divselect a size attribútumtól függetlenül minden esetben egysoros.<br />
+	Az értelmezett attribútumok és hatásaik:
+</p>
+<table cellspacing="0">
+	<tr>
+		<th>HTML teg</th>
+		<th>Attribútum</th>
+		<th>Hatása</th>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>name</td>
+		<td>
+			Ezt a name attribútumot kapja meg a rejtett űrlapelem, ami a kiválasztott value érték
+			továbbításáért felelős.
+		</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>readonly</td>
+		<td>
+			Ha meg van adva, a select readonly állapotú lesz.*<br />
+			<em>
+				Ez az attribútum nem valid a HTML5-ben, de helyette átadhatjuk paraméterként a divselect létrehozásakor:
+			</em>
+			<br />
+			<span class="js">$("#example").divselect({readonly: true});</span>
+			<br />
+			<em>
+				Vagy hívhatjuk a megfelelő metódust is az azonos hatás elérése érdekében:
+			</em>
+			<br />
+			<span class="js">$("#example").divselect("setReadonly");</span>
+		</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>disabled</td>
+		<td>
+			Ha meg van adva, a select disabled állapotú lesz.*
+		</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>multiple</td>
+		<td>
+			Ha meg van adva, a select multiple állapotú lesz.*
+		</td>
+	</tr>
+	<tr>
+		<td>optgroup</td>
+		<td>label</td>
+		<td>
+			Ennek az attribútumnak az értéke lesz az optgroup felirata, pontosabban a template-ben az
+			{optgroup.label} helyére ez kerül. Továbbá az egyes optgroup-ok egyedi azonosítására is
+			szolgál ez az attribútum.
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>value</td>
+		<td>
+			Ha ki van kiválasztva az option, ez az érték kerül a rejtett űrlapelem value attribútumába.
+			Továbbá az egyes option-ök egyedi azonosítására is szolgál ez az attribútum.
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>selected</td>
+		<td>
+			Az az option lesz az alapértelmezetten kiválasztott elem, amelyik rendelkezik ezzel az
+			attribútummal. Ha nincs megadva egyiknél se, akkor az első option lesz kiválasztva (multiselect
+			esetén egyik se).
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>readonly</td>
+		<td>
+			Ha meg van adva, az option readonly állapotú lesz.*<br />
+			<em>
+				Ez az attribútum nem valid a HTML5-ben, de hívhatjuk helyette a megfelelő metódust
+				is az azonos hatás elérése érdekében:
+			</em>
+			<br />
+			<span class="js">$("#example").divselect("setReadonly", "php");</span>
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>disabled</td>
+		<td>
+			Ha meg van adva, az option disabled állapotú lesz.*
+		</td>
+	</tr>
+</table>
+*
+<em>
+	Ha a select readonly állapotban van, a kiválasztott értéket nem tudjuk megváltoztatni,
+	ha egy option readonly, akkor a benne lévő űrlapelemek nem változtathatóak (pontosabban
+	a notBubbling paraméterben megadott szelektorra illeszkedő elemeken kiváltott click esemény
+	alapértelmezett eseménykezelője nem fog lefutni).<br />
+	Ha a select disabled állapotban van, a kiválasztott érték nem kerül továbbításra űrlapelküldés
+	esetén, és az elem nem reagál semmilyen felhasználói interakcióra. Ha egy option disabled,
+	akkor az adott option-t nem tudjuk kiválasztani.<br />
+	Ha a select multiple állapotban van, akkor több option-t is ki lehet választani (multiselect).
+</em>
+<h2 id="divselect-template">Template</h2>
+<p>
+	A <em>template</em> paraméter határozza meg a select helyén felépülő HTML kód szerkezetét.
+	Ennek a változtathatósága azért szükséges, mert a CSS kód modosítása nem mindig elegendő a megfelelő
+	kinézet eléréséhez, néha a HTML struktúra módosítására is szükség lehet. Valamint így könnyebb
+	egyedi funkcionalitást biztosító elemek elhelyezése a HTML kódban. A template alapesetben
+	az alábbi szerkezetű:
+</p>
+<pre class="brush: html">
+	&lt;div class="{cssPrefix}">
+		&lt;input data-element="input" class="{cssPrefix}__input" type="hidden" name="{select.name}" value="{select.val}" />
+		&lt;div data-element="selector" class="{cssPrefix}__selector {select.readonly} {select.disabled}">&lt;/div>
+		&lt;div data-element="menu" class="{cssPrefix}__menu">
+			{loop}
+				{optgroup_start}
+					&lt;div data-element="group" class="{cssPrefix}__group">
+						&lt;div class="{cssPrefix}__group__title">{optgroup.label}&lt;/div>
+				{/optgroup_start}
+				{optgroup_end}
+					&lt;/div>
+				{/optgroup_end}
+				{optionTags}
+					&lt;div data-element="item" class="{cssPrefix}__item {option.readonly} {option.disabled}">{option.html}&lt;/div>
+				{/optionTags}
+			{/loop}
+		&lt;/div>
+		&lt;div data-element="background" class="{cssPrefix}__background">&lt;/div>
+	&lt;/div>
+</pre>
+<p>
+	A helyőrzők {...} alakúak, amik vagy lecserélődnek a megfelelő értékekre, vagy vezérlik a HTML
+	felépítését. Csak a fenti template-ben is szereplő helyőrzők definiáltak, más helyőrzőnek nincs
+	funkciója. <strong>Kizárólag akkor módosítsuk a template-t, ha szükséges, és akkor is a
+	hierarchia megtartásával!</strong> Bizonyos data-element attribútummal rendelkező elemeknek speciális funkciója van:
+	<br /><br />
+	input : ez az űrlapelem tárolja a kiválasztott option értékét.<br />
+	selector : erre kattintva nyílik le az option-ök listája.<br />
+	menu : a listát tároló elem.<br />
+	item : a lista egy eleme, egy option-t tárol. Erre kattintva lesz az adott option kiválasztva.<br />
+	background : erre kattintva csukódik be a lista.<br />
+	<br />
+	A legkülső, {cssPrefix} class-ú a tároló elem, ennek mindenképp körbe kell vennie az egész szerkezetet.<br />
+	A kattintásra működő funkciókat tilthatjuk le a <em>disableDropdown</em>, <em>disableSelect</em>
+	és <em>disableClose</em> paraméterek true-ra állításával. Ezután új eseménykezelők csatolásával
+	felüldefiniálhatjuk az alapértelmezett működést.
+</p>
+<h2 id="divselect-billentyuvezerles">Billentyűvezérlés</h2>
+<p>
+	A divselect billentyűkkel is vezérelhető. Az implementált funkciók:
+</p>
+<table cellspacing="0">
+	<tr>
+		<th>Billentyű</th>
+		<th>Funkció</th>
+		<th>Kiváltott esemény</th>
+	</tr>
+	<tr>
+		<td>Tab</td>
+		<td>
+			Divselect-ek közti lépegetés (fókusz divselect-re rakása vagy leszedése)
+		</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>Kurzormozgató nyilak</td>
+		<td>
+			Fel és balra felfelé lép a listán egyesével, le és jobbra lefelé. Csukott, de fókuszt
+			kapott lista esetén is működnek, ilyenkor a kiválasztott elemet változtatják.
+		</td>
+		<td class="nowrap">select, change<br />(csak csukott listánál)</td>
+	</tr>
+	<tr>
+		<td>PageUp<br />PageDown</td>
+		<td>
+			Felfelé és lefelé ugranak a listán a <em>pagestep</em> tulajdonságban megadott értékkel.
+			Csukott, de fókuszt kapott lista esetén is működnek, ilyenkor a kiválasztott elemet
+			változtatják.
+		</td>
+		<td class="nowrap">select, change<br />(csak csukott listánál)</td>
+	</tr>
+	<tr>
+		<td>Home<br />End</td>
+		<td>
+			A lista elejére illetve végére ugrás. Csukott, de fókuszt kapott lista esetén is működnek,
+			ilyenkor a kiválasztott elemet változtatják.
+		</td>
+		<td class="nowrap">select, change<br />(csak csukott listánál)</td>
+	</tr>
+	<tr>
+		<td>Enter</td>
+		<td>
+			Nyitott lista esetén a kijelölt elem kiválasztása.
+		</td>
+		<td class="nowrap">select, change, close</td>
+	</tr>
+	<tr>
+		<td>Esc</td>
+		<td>
+			Lista becsukása, a kiválasztott elem nem változik.
+		</td>
+		<td class="nowrap">close</td>
+	</tr>
+	<tr>
+		<td>Karakterek</td>
+		<td>
+			Az a-z és 0-9 tartományba eső és a <em>characters</em> tulajdonságban definiált karakterek
+			segítségével a listában gyorskeresést végezhetünk. Egy karakter leütése esetén mindig
+			a következő, az adott karakterrel kezdődő option-re ugrik (itt az option közé írt,
+			HTML tegek nélküli HTML kód van megvizsgálva). Ha a <em>keydownwait</em> tulajdonságban
+			megadott időn belül (milliszekundum) új karaktert ütünk, a keresést pontosítjuk, vagyis
+			ekkor a HTML kód következő karaktere is bekerül a vizsgált karakterláncba. A megadott
+			időn túl történő leütés új keresést indít a kijelölt elem helyétől. Csukott, de
+			fókuszt kapott lista esetén is működnek, ilyenkor a kiválasztott elemet változtatják.
+		</td>
+		<td class="nowrap">select, change<br />(csak csukott listánál)</td>
+	</tr>
+</table>
+<p>
+	A listákon lépegetést végző billentyűk közül a kurzormozgató és a karakterek ciklikusan működnek,
+	vagyis a lista végére érve az elejétől folytatják.<br />
+	A billentyűkkel történő vezérlést tilthatjuk le a <em>disableKeys</em> paraméter true-ra állításával.
+	Ezután eseménykezelők írásával felüldefiniálhatjuk az alapértelmezett működést is. A Tab billentyű
+	funkciója változatlan marad, mivel azt a böngésző valósítja meg, a plugin az elem "fókuszálhatóságát"
+	biztosítja.
+</p>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

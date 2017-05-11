@@ -1,0 +1,131 @@
+/* 
+    Document   : divselect
+    Created on : 2013.09.05.
+    Author     : Horváth Norbert
+    Description:
+        Divselect google stílus
+*/
+
+.divselect-google-input {
+	display: none;
+}
+.divselect-google {
+	width: 187px;
+	outline-width: 0;
+}
+.divselect-google:focus {
+	outline: 1px dotted #4d90fe;
+}
+.divselect-google-background {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+.divselect-google-selector {
+	padding: 2px 2px 2px 4px;
+	height: 16px;
+	border: 1px solid #dcdcdc;
+	border-radius: 2px;
+	overflow: hidden;
+	color: #373737;
+	font-size: 12px;
+	background-image: url("images/google-icon-select.png");
+	background-position: top right;
+	background-repeat: no-repeat;
+	background-color: #f2f2f2;
+	outline-width: 0;
+}
+.divselect-google-selector.divselect-google-readonly {
+	color: #aaaaaa;
+}
+.divselect-google-selector.divselect-google-disabled {
+	background-color: #eeeeee;
+	color: #aaaaaa;
+}
+.divselect-google-selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect-google-active {
+	background-image: url("images/google-icon-select.png"), -moz-linear-gradient(center top, #F5F5F5, #F1F1F1);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+}
+.divselect-google-menu {
+	display: block;
+	padding: 5px 0;
+	width: 185px;
+	max-height: 250px;
+	overflow: auto;
+	border: 1px solid #dcdcdc;
+	background-color: #ffffff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	z-index: 100;
+}
+.divselect-google-group {
+	
+}
+.divselect-google-grouptitle {
+	margin: 4px 0;
+	padding: 4px;
+	border-bottom: 1px solid #dcdcdc;
+	font-weight: bold;
+}
+.divselect-google-item {
+	padding: 4px 15px 2px 15px;
+	color: #000000;
+	font-size: 12px;
+}
+.divselect-google-item.divselect-google-disabled {
+	color: #aaaaaa;
+}
+.divselect-google-item span {
+	position: relative;
+	top: -3px;
+}
+.divselect-google-group .divselect-google-item {
+	padding-left: 14px;
+}
+.divselect-google-item:hover {
+	background-color: #f2f2f2;
+}
+.divselect-google-item.divselect-google-disabled:hover {
+	background-color: #ffffff;
+}
+.divselect-google-preselected {
+	background-color: #f2f2f2;
+	outline-width: 0;
+}
+
+/* Filter plugin */
+
+.divselect-google-filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 16px;
+}
+.divselect-google-filter-input {
+	padding: 2px;
+	width: 140px;
+	height: 14px;
+	border: 1px solid #dcdcdc;
+	background-color: #ffffff;
+}
+.divselect-google-filter-reset {
+	color: #999999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect-google-filter-reset:hover {
+	color: #000000;
+}

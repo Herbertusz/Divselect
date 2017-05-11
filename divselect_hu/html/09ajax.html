@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	<style>
+		.loader {
+			display: none;
+			position: relative;
+			left: 20px;
+			top: 5px;
+		}
+		#example1, #example2 {
+			float: left;
+			margin-bottom: 15px;
+		}
+		#example3-year, #example3-month, #example3-day {
+			float: left;
+			margin: 0px 10px 15px 0px;
+		}
+		#example3-year .divselect__menu,
+		#example3-day .divselect__menu,
+		#example3-month .divselect__menu {
+			max-height: 255px;
+		}
+		#fill1, #fill2 {
+			display: block;
+			float: left;
+			margin-left: 30px;
+		}
+	</style>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#example1, #example2").divselect();
+			$("#fill1").click(function(){
+				var $button = $(this);
+				$button.prop("disabled", true);
+				$button.next(".loader").show();
+				$.ajax({
+					url: "data/europe_countries.txt",
+					dataType: "text",
+					success: function(resp){
+						var data = decodeURIComponent(resp).split("\n");
+						var options = [];
+						options[0] = {
+							value: "0",
+							html: '<em>Válassz</em>'
+						};
+						for (var n = 1; n <= data.length; n++){
+							options[n] = {
+								value: n,
+								html: data[n - 1]
+							};
+						}
+						options[40].selected = true;
+						$("#example1").divselect("addOption", options);
+						$button.next(".loader").hide();
+					}
+				});
+			});
+			$("#fill2").click(function(){
+				var $button = $(this);
+				$button.prop("disabled", true);
+				$button.next(".loader").show();
+				$.ajax({
+					url: "data/world_countries.txt",
+					dataType: "text",
+					success: function(resp){
+						var data = decodeURIComponent(resp).split("\n");
+						var optgroups = [];
+						var g = -1;
+						for (var n = 0; n < data.length; n++){
+							data[n] = $.trim(data[n]);
+							if (data[n].substr(0, 1) == "-"){
+								optgroups[++g] = {
+									label: data[n].substr(1),
+									options: []
+								};
+							}
+							else{
+								optgroups[g].options.push({
+									value: n,
+									selected: (data[n] == "Magyarország") ? true : false,
+									html: data[n]
+								});
+							}
+						}
+						$("#example2").divselect("addOption", {
+							value: "0",
+							html: '<em>- Országok -</em>'
+						});
+						$("#example2").divselect("addOptgroup", optgroups);
+						$button.next(".loader").hide();
+					}
+				});
+			});
+
+			// segédváltozók
+			var selectorYear = "#example3-year";
+			var selectorMonth = "#example3-month";
+			var selectorDay = "#example3-day";
+			var months = [
+				"január", "február", "március", "április", "május", "június", "július",
+				"augusztus", "szeptember", "október", "november", "december"
+			];
+			// napokat feltöltő függvény
+			var generateDayOptions = function(year, month){
+				var daynum = 31;
+				switch (month){
+					case "2":
+						if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+							daynum = 29;
+						}
+						else{
+							daynum = 28;
+						}
+						break;
+					case "4": case "6": case "9": case "11":
+						daynum = 30;
+						break;
+				}
+				var options = [];
+				for (var n = 1; n <= daynum; n++){
+					options.push({
+						value: n.toString(),
+						html: n.toString()
+					});
+				}
+				return options;
+			};
+
+			// divselect elemek létrehozása
+			$(selectorYear).divselect({
+				create : function(event){
+					var options = [];
+					for (var n = 1980; n < 2012; n++){
+						options.push({
+							value: n.toString(),
+							html: n.toString()
+						});
+					}
+					$(this).divselect("removeOption", "0");
+					$(this).divselect("addOption", options);
+				}
+			});
+			$(selectorMonth).divselect();
+			$(selectorDay).divselect();
+
+			// év változtatása
+			$(selectorYear).on("change.divselect", function(event, value){
+				if ($(selectorMonth).divselect("getOptions").length == 1){
+					// hónapok feltöltése
+					var options = [];
+					for (var n = 0; n < months.length; n++){
+						options.push({
+							value: (n + 1).toString(),
+							html: months[n]
+						});
+					}
+					$(selectorMonth).divselect("truncate");
+					$(selectorMonth).divselect("addOption", options);
+				}
+				if ($(selectorDay).divselect("getOptions").length > 1){
+					// napok újratöltése
+					var selectedYear = value;
+					var selectedMonth = $(selectorMonth).divselect("getValue");
+					var selectedDay = $(selectorDay).divselect("getValue");
+					var options = generateDayOptions(selectedYear, selectedMonth);
+					$(selectorDay).divselect("truncate");
+					$(selectorDay).divselect("addOption", options);
+					if (parseInt(selectedDay) > parseInt(options[options.length - 1].value)){
+						$(selectorDay).divselect("select", options[options.length - 1].value);
+					}
+					else if (parseInt(selectedDay) > 0){
+						$(selectorDay).divselect("select", selectedDay);
+					}
+				}
+			});
+			// hónap változtatása
+			$(selectorMonth).on("change.divselect", function(event, value){
+				// napok újratöltése
+				var selectedYear = $(selectorYear).divselect("getValue");
+				var selectedMonth = value;
+				var selectedDay = $(selectorDay).divselect("getValue");
+				var options = generateDayOptions(selectedYear, selectedMonth);
+				$(selectorDay).divselect("truncate");
+				$(selectorDay).divselect("addOption", options);
+				if (parseInt(selectedDay) > parseInt(options[options.length - 1].value)){
+					$(selectorDay).divselect("select", options[options.length - 1].value);
+				}
+				else if (parseInt(selectedDay) > 0){
+					$(selectorDay).divselect("select", selectedDay);
+				}
+			});
+
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Dokumentáció</a></li>
+		<li><a href="01basic.html">Alap</a></li>
+		<li><a href="02animations.html">Animációk</a></li>
+		<li><a href="03styles.html">Stílusok</a></li>
+		<li><a href="04events.html">Események</a></li>
+		<li><a href="05attributes.html">HTML attribútumok</a></li>
+		<li><a href="06multiselect.html">Multiselect</a></li>
+		<li><a href="07template.html">Template módosítása</a></li>
+		<li><a href="08basefunction.html">Alapműködés felülírása</a></li>
+		<li class="active"><a href="09ajax.html">Dinamikus betöltés</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Dinamikus betöltés</h1>
+			<p>
+				Az <em>addOption()</em>, <em>addOptgroup()</em>, <em>removeOption()</em> és <em>removeOptgroup()</em>
+				függvények segítségével dinamikusan, futási időben változtathatjuk az option-ök listáját,
+				így akár ajax hívással kapott adatokkal is feltölthetünk egy divselect-et.
+			</p>
+			<h2>Feltöltés option elemekkel</h2>
+			<p>
+				Ebben a példában option-ökkel töltünk fel egy üres divselect elemet, az adatokat egy
+				txt fájlból nyerjük ajax hívással:
+			</p>
+			<div class="spacer"></div>
+			<select id="example1" name="europe_countries" style="width: 230px;"></select>
+			<input id="fill1" type="button" value="Feltöltés" />
+			<span class="loader">Betöltés...</span>
+			<div class="clear"></div>
+			<p>
+				A HTML kód:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example1" name="countries" style="width: 230px;">&lt;/select>
+				&lt;input id="fill1" type="button" value="Feltöltés" />
+				&lt;span class="loader">Betöltés...&lt;/span></pre>
+			<p>
+				Az országokat tartalmazó szöveges fájl, amiből ajax kéréssel nyerjük ki az adatot:
+				<a class="link" href="data/europe_countries.txt" target="_blank">data/europe_countries.txt</a>
+			</p>
+			<p>
+				Miután átalakítottuk a select elemet divselect-té, a gomb megnyomásához kötünk egy
+				eseménykezelőt, ami feltölti:
+			</p>
+			<pre class="brush: js">
+				$("#fill1").click(function(){
+					var $button = $(this);
+					$button.prop("disabled", true);
+					$button.next(".loader").show();
+					$.ajax({
+						url: "data/europe_countries.txt",
+						dataType: "text",
+						success: function(resp){
+							var data = decodeURIComponent(resp).split("\n");
+							var options = [];
+							options[0] = {
+								value: "0",
+								html: '&lt;em>Válassz&lt;/em>'
+							};
+							for (var n = 1; n &lt;= data.length; n++){
+								options[n] = {
+									value: n,
+									html: data[n - 1]
+								};
+							}
+							options[40].selected = true;
+							$("#example1").divselect("addOption", options);
+							$button.next(".loader").hide();
+						}
+					});
+				});</pre>
+			<p>
+				Az ajax kérés callback függvényében először előállítjuk az <em>addOption()</em> metódus
+				számára megfelelő adatszerkezetet (9-21. sorok), majd a 22. sorban beszúrjuk az
+				option elemeket.
+			</p>
+			<h2>Feltöltés optgroup elemekkel</h2>
+			<p>
+				A következő példában optgroup-okkal és a bennük lévő option-ökkel töltünk fel egy
+				divselect elemet az előző példához hasonló módon:
+			</p>
+			<div class="spacer"></div>
+			<select id="example2" name="world_countries" style="width: 250px;"></select>
+			<input id="fill2" type="button" value="Feltöltés" />
+			<span class="loader">Betöltés...</span>
+			<div class="clear"></div>
+			<p>
+				A HTML kód az előzőhöz hasonló:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example2" name="countries" style="width: 250px;">&lt;/select>
+				&lt;input id="fill2" type="button" value="Feltöltés" />
+				&lt;span class="loader">Betöltés...&lt;/span></pre>
+			<p>
+				A szöveges fájl:
+				<a class="link" href="data/world_countries.txt" target="_blank">data/world_countries.txt</a>
+			</p>
+			<p>
+				A javascript kód:
+			</p>
+			<pre class="brush: js">
+				$("#fill2").click(function(){
+					var $button = $(this);
+					$button.prop("disabled", true);
+					$button.next(".loader").show();
+					$.ajax({
+						url: "data/world_countries.txt",
+						dataType: "text",
+						success: function(resp){
+							var data = decodeURIComponent(resp).split("\n");
+							var optgroups = [];
+							var g = -1;
+							for (var n = 0; n &lt; data.length; n++){
+								data[n] = $.trim(data[n]);
+								if (data[n].substr(0, 1) == "-"){
+									optgroups[++g] = {
+										label: data[n].substr(1),
+										options: []
+									};
+								}
+								else{
+									optgroups[g].options.push({
+										value: n,
+										selected: (data[n] == "Magyarország") ? true : false,
+										html: data[n]
+									});
+								}
+							}
+							$("#example2").divselect("addOption", {
+								value: "0",
+								html: '&lt;em>- Országok -&lt;/em>'
+							});
+							$("#example2").divselect("addOptgroup", optgroups);
+							$button.next(".loader").hide();
+						}
+					});
+				});</pre>
+			<p>
+				Itt tulajdonképpen ugyanaz történik, mint a fenti esetben, a 9-27. sorokban
+				előállítjuk az <em>addOptgroup()</em> metódusnak átadandó adatszerkezetet, majd a 32.
+				sorban meghívjuk. Az adatszerkezet felépítése közben selected-re állítjuk a
+				"Magyarország" innerHTML-ű elemet. A korábbi példában az elem value értékét használtuk
+				ugyanerre.
+			</p>
+			<h2>Dátumválasztó</h2>
+			<p>
+				Ebben a példában 3 divselect elem van összekötve, a <em>change</em> esemény hatására
+				újratöltődnek úgy, hogy csak valós dátumot lehessen kiválasztani (nem lehet pl. február 30).
+			</p>
+			<div class="spacer"></div>
+			<select id="example3-year" name="year" style="width: 80px;">
+				<option value="0" selected="selected">Év</option>
+			</select>
+			<select id="example3-month" name="month" style="width: 130px;">
+				<option value="0" selected="selected">Hónap</option>
+			</select>
+			<select id="example3-day" name="day" style="width: 80px;">
+				<option value="0" selected="selected">Nap</option>
+			</select>
+			<div class="clear"></div>
+			<p>
+				A HTML kód:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example3-year" name="year" style="width: 80px;">
+					&lt;option value="0" selected="selected">Év&lt;/option>
+				&lt;/select>
+				&lt;select id="example3-month" name="month" style="width: 130px;">
+					&lt;option value="0" selected="selected">Hónap&lt;/option>
+				&lt;/select>
+				&lt;select id="example3-day" name="day" style="width: 80px;">
+					&lt;option value="0" selected="selected">Nap&lt;/option>
+				&lt;/select></pre>
+			<p>
+				A javascript kód (elég hosszú, de egyszerű select elemek esetén se lenne sokkal rövidebb):
+			</p>
+			<pre class="brush: js">
+				// segédváltozók
+				var selectorYear = "#example3-year";
+				var selectorMonth = "#example3-month";
+				var selectorDay = "#example3-day";
+				var months = [
+					"január", "február", "március", "április", "május", "június", "július",
+					"augusztus", "szeptember", "október", "november", "december"
+				];
+				// napokat feltöltő függvény
+				var generateDayOptions = function(year, month){
+					var daynum = 31;
+					switch (month){
+						case "2":
+							if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+								daynum = 29;
+							}
+							else{
+								daynum = 28;
+							}
+							break;
+						case "4": case "6": case "9": case "11":
+							daynum = 30;
+							break;
+					}
+					var options = [];
+					for (var n = 1; n &lt;= daynum; n++){
+						options.push({
+							value: n.toString(),
+							html: n.toString()
+						});
+					}
+					return options;
+				};
+
+				// divselect elemek létrehozása
+				$(selectorYear).divselect({
+					create : function(event){
+						var options = [];
+						for (var n = 1980; n &lt; 2012; n++){
+							options.push({
+								value: n.toString(),
+								html: n.toString()
+							});
+						}
+						$(this).divselect("removeOption", "0");
+						$(this).divselect("addOption", options);
+					}
+				});
+				$(selectorMonth).divselect();
+				$(selectorDay).divselect();
+
+				// év változtatása
+				$(selectorYear).on("change.divselect", function(event, value){
+					if ($(selectorMonth).divselect("getOptions").length == 1){
+						// hónapok feltöltése
+						var options = [];
+						for (var n = 0; n &lt; months.length; n++){
+							options.push({
+								value: (n + 1).toString(),
+								html: months[n]
+							});
+						}
+						$(selectorMonth).divselect("truncate");
+						$(selectorMonth).divselect("addOption", options);
+					}
+					if ($(selectorDay).divselect("getoptions").length > 1){
+						// napok újratöltése
+						var selectedYear = value;
+						var selectedMonth = $(selectorMonth).divselect("getValue");
+						var selectedDay = $(selectorDay).divselect("getValue");
+						var options = generateDayOptions(selectedYear, selectedMonth);
+						$(selectorDay).divselect("truncate");
+						$(selectorDay).divselect("addOption", options);
+						if (parseInt(selectedDay) > parseInt(options[options.length - 1].value)){
+							$(selectorDay).divselect("select", options[options.length - 1].value);
+						}
+						else if (parseInt(selectedDay) > 0){
+							$(selectorDay).divselect("select", selectedDay);
+						}
+					}
+				});
+				// hónap változtatása
+				$(selectorMonth).on("change.divselect", function(event, value){
+					// napok újratöltése
+					var selectedYear = $(selectorYear).divselect("getValue");
+					var selectedMonth = value;
+					var selectedDay = $(selectorDay).divselect("getValue");
+					var options = generateDayOptions(selectedYear, selectedMonth);
+					$(selectorDay).divselect("truncate");
+					$(selectorDay).divselect("addOption", options);
+					if (parseInt(selectedDay) > parseInt(options[options.length - 1].value)){
+						$(selectorDay).divselect("select", options[options.length - 1].value);
+					}
+					else if (parseInt(selectedDay) > 0){
+						$(selectorDay).divselect("select", selectedDay);
+					}
+				});</pre>
+			<p>
+				És CSS néhány méret beállításához:
+			</p>
+			<pre class="brush: css">
+				#example3-year, #example3-month, #example3-day {
+					float: left;
+					margin: 0px 10px 15px 0px;
+				}
+				#example3-year .divselect__menu,
+				#example3-day .divselect__menu,
+				#example3-month .divselect__menu {
+					max-height: 255px;
+				}</pre>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

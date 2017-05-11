@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<style>
+		.check-controls {
+			padding: 4px;
+		}
+		.check-controls img {
+			padding-right: 5px;
+			cursor: pointer;
+		}
+	</style>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#example1").divselect({
+				htmltemplate : '\
+					<div class="{cssprefix}">\
+						<input class="{cssprefix}-input" type="hidden" name="{select.name}" value="{select.val}" />\
+						<div class="{cssprefix}-selector {select.readonly} {select.disabled}">{select.defhtml}</div>\
+						<div class="{cssprefix}-menu">\
+							<div class="check-controls">\
+								<img class="check-all"  alt="[+]" title="Check all" src="../images/add.png" />\
+								<img class="check-none" alt="[-]" title="Uncheck all" src="../images/delete.png" />\
+								<img class="check-rev"  alt="[/]" title="Invert check" src="../images/reverse.png" />\
+							</div>\
+							{block}\
+								{optgroup_start}\
+									<div class="{cssprefix}-group">\
+										<div class="{cssprefix}-grouptitle">{optgroup.label}</div>\
+								{/optgroup_start}\
+								{optgroup_end}\
+									</div>\
+								{/optgroup_end}\
+								{optiontags}\
+									<div class="{cssprefix}-item {option.readonly} {option.disabled}">{option.html}</div>\
+								{/optiontags}\
+							{/block}\
+						</div>\
+						<div class="{cssprefix}-background"></div>\
+					</div>\
+				',
+				optiontags : {
+					"0" : '<i>#</i>',
+					"1" : '<input type="checkbox" name="lang[]" value="1" /> #',
+					"2" : '<input type="checkbox" name="lang[]" value="2" /> #',
+					"3" : '<input type="checkbox" name="lang[]" value="3" /> #',
+					"4" : '<input type="checkbox" name="lang[]" value="4" /> #',
+					"5" : '<input type="checkbox" name="lang[]" value="5" /> #',
+					"6" : '<input type="checkbox" name="lang[]" value="6" /> #',
+					"7" : '<input type="checkbox" name="lang[]" value="7" /> #',
+					"8" : '<input type="checkbox" name="lang[]" value="8" /> #'
+				}
+			});
+			$(".check-all").click(function(){
+				$(this).parents(".divselect-menu").find("input:checkbox").prop("checked", true);
+			});
+			$(".check-none").click(function(){
+				$(this).parents(".divselect-menu").find("input:checkbox").prop("checked", false);
+			});
+			$(".check-rev").click(function(){
+				$(this).parents(".divselect-menu").find("input:checkbox").each(function(){
+					$(this).prop("checked", !$(this).prop("checked"));
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Documentation</a></li>
+		<li><a href="01basic.html">Basic</a></li>
+		<li><a href="02animations.html">Animations</a></li>
+		<li><a href="03styles.html">Styles</a></li>
+		<li><a href="04events.html">Events</a></li>
+		<li><a href="05attributes.html">HTML attributes</a></li>
+		<li class="active"><a href="06template.html">Template modification</a></li>
+		<li><a href="07basefunction.html">Basic function overwriting</a></li>
+		<li><a href="08ajax.html">Dinamic loading</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Template modification</h1>
+			<p>
+				Sometimes the HTML structure need to be modified. To do this we have to overwrite the
+				htmltemplate property, but with <strong>maintain the hierarchy</strong>, otherwise
+				some functions may not work any more. The hierarchy maintaining means that the tree
+				of the CSS classes and other {...} format placeholders must be preserved.<br />
+				But we can do that to wrap an element or a group with a container element, or insert
+				new element(s) to any place.
+			</p>
+			<h2>New element</h2>
+			<p>
+				In this example a new element has been inserted to the top of the list to control the
+				checkboxes. The event handler attachment in this case should be done with delegating,
+				because the divselect replace the HTML code of the original select.
+			</p>
+			<div  class="spacer"></div>
+			<div id="example1-container">
+				<select id="example1" name="example1">
+					<option value="0">Languages</option>
+					<option value="1">HTML</option>
+					<option value="2">CSS</option>
+					<option value="3">JavaScript</option>
+					<option value="4">PHP</option>
+					<option value="5">SQL</option>
+					<option value="6">Python</option>
+					<option value="7">Ruby</option>
+					<option value="8">ASP</option>
+				</select>
+			</div>
+			<div  class="spacer"></div>
+			The #example1-container div is the element where the event handlers will be delegated.
+			<pre class="brush: html">
+				&lt;div id="example1-container">
+					&lt;select id="example1" name="example1">
+						&lt;option value="0">Languages&lt;/option>
+						&lt;option value="1">HTML&lt;/option>
+						&lt;option value="2">CSS&lt;/option>
+						&lt;option value="3">JavaScript&lt;/option>
+						&lt;option value="4">PHP&lt;/option>
+						&lt;option value="5">SQL&lt;/option>
+						&lt;option value="6">Python&lt;/option>
+						&lt;option value="7">Ruby&lt;/option>
+						&lt;option value="8">ASP&lt;/option>
+					&lt;/select>
+				&lt;/div></pre>
+			In the javascript code we will overwrite the htmltemplate property, we insert the
+			chack-controls class div, any other will be unmodified. The attached event handlers are
+			from line 40.
+			<pre class="brush: js">
+				$("#example1").divselect({
+					htmltemplate : '\
+						&lt;div class="{cssprefix}">\
+							&lt;input class="{cssprefix}-input" type="hidden" name="{select.name}" value="{select.val}" />\
+							&lt;div class="{cssprefix}-selector {select.readonly} {select.disabled}">{select.defhtml}&lt;/div>\
+							&lt;div class="{cssprefix}-menu">\
+								&lt;div class="check-controls">\
+									&lt;img class="check-all"  alt="[+]" title="Check all" src="../images/add.png" />\
+									&lt;img class="check-none" alt="[-]" title="Uncheck all" src="../images/delete.png" />\
+									&lt;img class="check-rev"  alt="[/]" title="Invert check" src="../images/reverse.png" />\
+								&lt;/div>\
+								{block}\
+									{optgroup_start}\
+										&lt;div class="{cssprefix}-group">\
+											&lt;div class="{cssprefix}-grouptitle">{optgroup.label}&lt;/div>\
+									{/optgroup_start}\
+									{optgroup_end}\
+										&lt;/div>\
+									{/optgroup_end}\
+									{optiontags}\
+										&lt;div class="{cssprefix}-item {option.readonly} {option.disabled}">{option.html}&lt;/div>\
+									{/optiontags}\
+								{/block}\
+							&lt;/div>\
+							&lt;div class="{cssprefix}-background">&lt;/div>\
+						&lt;/div>\
+					',
+					optiontags : {
+						"0" : '&lt;i>#&lt;/i>',
+						"1" : '&lt;input type="checkbox" name="lang[]" value="1" /> #',
+						"2" : '&lt;input type="checkbox" name="lang[]" value="2" /> #',
+						"3" : '&lt;input type="checkbox" name="lang[]" value="3" /> #',
+						"4" : '&lt;input type="checkbox" name="lang[]" value="4" /> #',
+						"5" : '&lt;input type="checkbox" name="lang[]" value="5" /> #',
+						"6" : '&lt;input type="checkbox" name="lang[]" value="6" /> #',
+						"7" : '&lt;input type="checkbox" name="lang[]" value="7" /> #',
+						"8" : '&lt;input type="checkbox" name="lang[]" value="8" /> #'
+					}
+				});
+				$(".check-all").click(function(){
+					$(this).parents(".divselect-menu").find("input:checkbox").prop("checked", true);
+				});
+				$(".check-none").click(function(){
+					$(this).parents(".divselect-menu").find("input:checkbox").prop("checked", false);
+				});
+				$(".check-rev").click(function(){
+					$(this).parents(".divselect-menu").find("input:checkbox").each(function(){
+						$(this).prop("checked", !$(this).prop("checked"));
+					});
+				});</pre>
+			And a little CSS:
+			<pre class="brush: css">
+				.check-controls {
+					padding: 4px;
+				}
+				.check-controls img {
+					padding-right: 5px;
+					cursor: pointer;
+				}</pre>
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

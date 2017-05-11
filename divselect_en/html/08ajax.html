@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	<style>
+		.loader {
+			display: none;
+			position: relative;
+			left: 20px;
+			top: 5px;
+		}
+		#example1, #example2 {
+			float: left;
+			margin-bottom: 15px;
+		}
+		#example3-year, #example3-month, #example3-day {
+			float: left;
+			margin: 0px 10px 15px 0px;
+		}
+		#example3-year,
+		#example3-day {
+			width: 80px;
+		}
+		#example3-year .divselect-menu,
+		#example3-day .divselect-menu {
+			width: 78px;
+			max-height: 255px;
+		}
+		#example3-month {
+			width: 130px;
+		}
+		#example3-month .divselect-menu {
+			width: 128px;
+			max-height: 255px;
+		}
+		#fill1, #fill2 {
+			display: block;
+			float: left;
+			margin-left: 30px;
+		}
+	</style>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#example1, #example2").divselect();
+			$("#fill1").click(function(){
+				var $button = $(this);
+				$button.prop("disabled", true);
+				$button.next(".loader").show();
+				$.ajax({
+					url: "data/europe_countries.txt",
+					dataType: "text",
+					success: function(resp){
+						var data = decodeURIComponent(resp).split("\n");
+						var options = [];
+						options[0] = {
+							value: "0",
+							html: '<em>Choose</em>'
+						};
+						for (var n = 1; n <= data.length; n++){
+							options[n] = {
+								value: n,
+								html: data[n-1]
+							};
+						}
+						options[60].selected = true;
+						$("#example1").divselect("add", options);
+						$button.next(".loader").hide();
+					}
+				});
+			});
+			$("#fill2").click(function(){
+				var $button = $(this);
+				$button.prop("disabled", true);
+				$button.next(".loader").show();
+				$.ajax({
+					url: "data/world_countries.txt",
+					dataType: "text",
+					success: function(resp){
+						var data = decodeURIComponent(resp).split("\n");
+						var optgroups = [];
+						var g = -1;
+						for (var n = 0; n < data.length; n++){
+							data[n] = $.trim(data[n]);
+							if (data[n].substr(0, 1) == "-"){
+								optgroups[++g] = {
+									label: data[n].substr(1),
+									options: []
+								};
+							}
+							else{
+								optgroups[g].options.push({
+									value: n,
+									selected: (data[n] == "United Kingdom") ? true : false,
+									html: data[n]
+								});
+							}
+						}
+						$("#example2").divselect("add", {
+							value: "0",
+							html: '<em>- Countries -</em>'
+						});
+						$("#example2").divselect("addgroup", optgroups);
+						$button.next(".loader").hide();
+					}
+				});
+			});
+			
+			// auxiliary variables
+			var selectorYear = "#example3-year";
+			var selectorMonth = "#example3-month";
+			var selectorDay = "#example3-day";
+			var months = [
+				"january", "february", "march", "april", "may", "june", "july",
+				"august", "september", "october", "november", "december"
+			];
+			// days filling function
+			var generateDayOptions = function(year, month){
+				var daynum = 31;
+				switch (month){
+					case "2":
+						if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+							daynum = 29;
+						}
+						else{
+							daynum = 28;
+						}
+						break;
+					case "4": case "6": case "9": case "11":
+						daynum = 30;
+						break;
+				}
+				var options = [];
+				for (var n = 1; n <= daynum; n++){
+					options.push({
+						value: n.toString(),
+						html: n.toString()
+					});
+				}
+				return options;
+			};
+			
+			// create divselect elements
+			$(selectorYear).divselect({
+				create : function(event){
+					var options = [];
+					for (var n = 1980; n <= 2012; n++){
+						options.push({
+							value: n.toString(),
+							html: n.toString()
+						});
+					}
+					$(this).divselect("remove", "0");
+					$(this).divselect("add", options);
+				}
+			});
+			$(selectorMonth).divselect();
+			$(selectorDay).divselect();
+			
+			// change the year
+			$(selectorYear).divselect("option", "change", function(event, value){
+				if ($(selectorMonth).divselect("getoptions").length == 1){
+					// fill months
+					var options = [];
+					for (var n = 0; n < months.length; n++){
+						options.push({
+							value: (n + 1).toString(),
+							html: months[n]
+						});
+					}
+					$(selectorMonth).divselect("truncate");
+					$(selectorMonth).divselect("add", options);
+				}
+				if ($(selectorDay).divselect("getoptions").length > 1){
+					// refill days
+					var selectedYear = value;
+					var selectedMonth = $(selectorMonth).divselect("getval");
+					var selectedDay = $(selectorDay).divselect("getval");
+					var options = generateDayOptions(selectedYear, selectedMonth);
+					$(selectorDay).divselect("truncate");
+					$(selectorDay).divselect("add", options);
+					if (selectedDay > options[options.length - 1].value){
+						$(selectorDay).divselect("select", options[options.length - 1].value);
+					}
+					else if (selectedDay > 0){
+						$(selectorDay).divselect("select", selectedDay);
+					}
+				}
+			});
+			// change the month
+			$(selectorMonth).divselect("option", "change", function(event, value){
+				// refill days
+				var selectedYear = $(selectorYear).divselect("getval");
+				var selectedMonth = value;
+				var selectedDay = $(selectorDay).divselect("getval");
+				var options = generateDayOptions(selectedYear, selectedMonth);
+				$(selectorDay).divselect("truncate");
+				$(selectorDay).divselect("add", options);
+				if (selectedDay > options[options.length - 1].value){
+					$(selectorDay).divselect("select", options[options.length - 1].value);
+				}
+				else if (selectedDay > 0){
+					$(selectorDay).divselect("select", selectedDay);
+				}
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Documentation</a></li>
+		<li><a href="01basic.html">Basic</a></li>
+		<li><a href="02animations.html">Animations</a></li>
+		<li><a href="03styles.html">Styles</a></li>
+		<li><a href="04events.html">Events</a></li>
+		<li><a href="05attributes.html">HTML attributes</a></li>
+		<li><a href="06template.html">Template modification</a></li>
+		<li><a href="07basefunction.html">Basic function overwriting</a></li>
+		<li class="active"><a href="08ajax.html">Dinamic loading</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Dinamic loading</h1>
+			<p>
+				We can manipulate dinamically (in runtime) the option list with the  <em>add()</em>,
+				<em>addgroup()</em>, <em>remove()</em> and <em>removegroup()</em> methods, than we
+				can even load the divselect with datas having got with ajax request.
+			</p>
+			<h2>Load the option elements</h2>
+			<p>
+				In this example we fill an empty divselect with option elements, the datas come from
+				a txt file with ajax request:
+			</p>
+			<div class="spacer"></div>
+			<select id="example1" name="europe_countries"></select>
+			<input id="fill1" type="button" value="Fill" />
+			<span class="loader">Loading...</span>
+			<div class="clear"></div>
+			<p>
+				The HTML code:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example1" name="countries">&lt;/select>
+				&lt;input id="fill1" type="button" value="Fill" />
+				&lt;span class="loader">Loading...&lt;/span></pre>
+			<p>
+				The text file with countries, that we get the datas from:
+				<a class="link" href="data/europe_countries.txt" target="_blank">data/europe_countries.txt</a>
+			</p>
+			<p>
+				After we transform the select element to divselect, we attach an event handler to the
+				button click that fill the divselect:
+			</p>
+			<pre class="brush: js">
+				$("#fill1").click(function(){
+					var $button = $(this);
+					$button.prop("disabled", true);
+					$button.next(".loader").show();
+					$.ajax({
+						url: "data/europe_countries.txt",
+						dataType: "text",
+						success: function(resp){
+							var data = decodeURIComponent(resp).split("\n");
+							var options = [];
+							options[0] = {
+								value: "0",
+								html: '&lt;em>Choose&lt;/em>'
+							};
+							for (var n = 1; n &lt;= data.length; n++){
+								options[n] = {
+									value: n,
+									html: data[n-1]
+								};
+							}
+							options[60].selected = true;
+							$("#example1").divselect("add", options);
+							$button.next(".loader").hide();
+						}
+					});
+				});</pre>
+			<p>
+				First, in the callback function of the ajax request we create the data structure that
+				acceptable for the <em>add()</em> method (lines 9-21), than insert the option elements
+				in line 22.
+			</p>
+			<h2>Load the optgroup elements</h2>
+			<p>
+				In the next example we fill a divselect with optgroups, and the options insite these
+				in a similar way to the previous example:
+			</p>
+			<div class="spacer"></div>
+			<select id="example2" name="world_countries"></select>
+			<input id="fill2" type="button" value="Fill" />
+			<span class="loader">Loading...</span>
+			<div class="clear"></div>
+			<p>
+				The HTML code is similar to the previous one:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example2" name="countries">&lt;/select>
+				&lt;input id="fill2" type="button" value="Fill" />
+				&lt;span class="loader">Loading...&lt;/span></pre>
+			<p>
+				The text file:
+				<a class="link" href="data/world_countries.txt" target="_blank">data/world_countries.txt</a>
+			</p>
+			<p>
+				The javascript code:
+			</p>
+			<pre class="brush: js">
+				$("#fill2").click(function(){
+					var $button = $(this);
+					$button.prop("disabled", true);
+					$button.next(".loader").show();
+					$.ajax({
+						url: "data/world_countries.txt",
+						dataType: "text",
+						success: function(resp){
+							var data = decodeURIComponent(resp).split("\n");
+							var optgroups = [];
+							var g = -1;
+							for (var n = 0; n &lt; data.length; n++){
+								data[n] = $.trim(data[n]);
+								if (data[n].substr(0, 1) == "-"){
+									optgroups[++g] = {
+										label: data[n].substr(1),
+										options: []
+									};
+								}
+								else{
+									optgroups[g].options.push({
+										value: n,
+										selected: (data[n] == "United Kingdom") ? true : false,
+										html: data[n]
+									});
+								}
+							}
+							$("#example2").divselect("add", {
+								value: "0",
+								html: '&lt;em>- Countries -&lt;/em>'
+							});
+							$("#example2").divselect("addgroup", optgroups);
+							$button.next(".loader").hide();
+						}
+					});
+				});</pre>
+			<p>
+				Here happens the same as the previous example, we create the data structute that
+				acceptable to the <em>addgroup()</em> method at lines 9-27, then we call it at line
+				32. In the meantime, we set selected the element with "United Kingdom" innerHTML.
+				In the example before, we used the value attribute for the same.
+			</p>
+			<h2>Datepicker</h2>
+			<p>
+				In this example 3 divselect are connected, these reload by the <em>change</em> event,
+				so that we can choose only valid dates (e.g. isn't possible 30th of ferbruary).
+			</p>
+			<div class="spacer"></div>
+			<select id="example3-year" name="year">
+				<option value="0" selected="selected">Year</option>
+			</select>
+			<select id="example3-month" name="month">
+				<option value="0" selected="selected">Month</option>
+			</select>
+			<select id="example3-day" name="day">
+				<option value="0" selected="selected">Day</option>
+			</select>
+			<div class="clear"></div>
+			<p>
+				The HTML code:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example3-year" name="year">
+					&lt;option value="0" selected="selected">Year&lt;/option>
+				&lt;/select>
+				&lt;select id="example3-month" name="month">
+					&lt;option value="0" selected="selected">Month&lt;/option>
+				&lt;/select>
+				&lt;select id="example3-day" name="day">
+					&lt;option value="0" selected="selected">Day&lt;/option>
+				&lt;/select></pre>
+			<p>
+				The javascript code (it's quite long, but even with simple select elements it wouldn't
+				be much shorter):
+			</p>
+			<pre class="brush: js">
+				// auxiliary variables
+				var selectorYear = "#example3-year";
+				var selectorMonth = "#example3-month";
+				var selectorDay = "#example3-day";
+				var months = [
+					"january", "february", "march", "april", "may", "june", "july",
+					"august", "september", "october", "november", "december"
+				];
+				// days filling function
+				var generateDayOptions = function(year, month){
+					var daynum = 31;
+					switch (month){
+						case "2":
+							if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+								daynum = 29;
+							}
+							else{
+								daynum = 28;
+							}
+							break;
+						case "4": case "6": case "9": case "11":
+							daynum = 30;
+							break;
+					}
+					var options = [];
+					for (var n = 1; n &lt;= daynum; n++){
+						options.push({
+							value: n.toString(),
+							html: n.toString()
+						});
+					}
+					return options;
+				};
+
+				// create divselect elements
+				$(selectorYear).divselect({
+					create : function(event){
+						var options = [];
+						for (var n = 1980; n &lt;= 2012; n++){
+							options.push({
+								value: n.toString(),
+								html: n.toString()
+							});
+						}
+						$(this).divselect("remove", "0");
+						$(this).divselect("add", options);
+					}
+				});
+				$(selectorMonth).divselect();
+				$(selectorDay).divselect();
+
+				// change the year
+				$(selectorYear).divselect("option", "change", function(event, value){
+					if ($(selectorMonth).divselect("getoptions").length == 1){
+						// fill months
+						var options = [];
+						for (var n = 0; n &lt; months.length; n++){
+							options.push({
+								value: (n + 1).toString(),
+								html: months[n]
+							});
+						}
+						$(selectorMonth).divselect("truncate");
+						$(selectorMonth).divselect("add", options);
+					}
+					if ($(selectorDay).divselect("getoptions").length > 1){
+						// refill days
+						var selectedYear = value;
+						var selectedMonth = $(selectorMonth).divselect("getval");
+						var selectedDay = $(selectorDay).divselect("getval");
+						var options = generateDayOptions(selectedYear, selectedMonth);
+						$(selectorDay).divselect("truncate");
+						$(selectorDay).divselect("add", options);
+						if (selectedDay > options[options.length - 1].value){
+							$(selectorDay).divselect("select", options[options.length - 1].value);
+						}
+						else if (selectedDay > 0){
+							$(selectorDay).divselect("select", selectedDay);
+						}
+					}
+				});
+				// change the month
+				$(selectorMonth).divselect("option", "change", function(event, value){
+					// refill days
+					var selectedYear = $(selectorYear).divselect("getval");
+					var selectedMonth = value;
+					var selectedDay = $(selectorDay).divselect("getval");
+					var options = generateDayOptions(selectedYear, selectedMonth);
+					$(selectorDay).divselect("truncate");
+					$(selectorDay).divselect("add", options);
+					if (selectedDay > options[options.length - 1].value){
+						$(selectorDay).divselect("select", options[options.length - 1].value);
+					}
+					else if (selectedDay > 0){
+						$(selectorDay).divselect("select", selectedDay);
+					}
+				});</pre>
+			<p>
+				And the CSS to modify the width properties:
+			</p>
+			<pre class="brush: css">
+				#example3-year,
+				#example3-day {
+					width: 80px;
+				}
+				#example3-year .divselect-menu,
+				#example3-day .divselect-menu {
+					width: 78px;
+					max-height: 255px;
+				}
+				#example3-month {
+					width: 130px;
+				}
+				#example3-month .divselect-menu {
+					width: 128px;
+					max-height: 255px;
+				}</pre>
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

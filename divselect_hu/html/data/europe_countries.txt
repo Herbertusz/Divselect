@@ -1,0 +1,62 @@
+<img alt="" src="../images/lang/1.png"  /> Abh%c3%a1zia
+<img alt="" src="../images/lang/2.png"  /> Akrotiri %c3%a9s Dek%c3%a9lia
+<img alt="" src="../images/lang/3.png"  /> Alb%c3%a1nia
+<img alt="" src="../images/lang/4.png"  /> Andorra
+<img alt="" src="../images/lang/5.png"  /> Ausztria
+<img alt="" src="../images/lang/6.png"  /> Azerbajdzs%c3%a1n
+<img alt="" src="../images/lang/7.png"  /> Belgium
+<img alt="" src="../images/lang/8.png"  /> Bosznia-Hercegovina
+<img alt="" src="../images/lang/9.png"  /> Bulg%c3%a1ria
+<img alt="" src="../images/lang/10.png" /> Ciprus
+<img alt="" src="../images/lang/11.png" /> Csehorsz%c3%a1g
+<img alt="" src="../images/lang/12.png" /> D%c3%a1nia
+<img alt="" src="../images/lang/13.png" /> D%c3%a9l-Osz%c3%a9tia
+<img alt="" src="../images/lang/14.png" /> Dnyeszter Menti K%c3%b6zt%c3%a1rsas%c3%a1g
+<img alt="" src="../images/lang/15.png" /> Egyes%c3%bclt Kir%c3%a1lys%c3%a1g
+<img alt="" src="../images/lang/16.png" /> %c3%89szak-Ciprus
+<img alt="" src="../images/lang/17.png" /> %c3%89sztorsz%c3%a1g
+<img alt="" src="../images/lang/18.png" /> Feh%c3%a9roroszorsz%c3%a1g
+<img alt="" src="../images/lang/19.png" /> Fer%c3%b6er
+<img alt="" src="../images/lang/20.png" /> Finnorsz%c3%a1g
+<img alt="" src="../images/lang/21.png" /> Franciaorsz%c3%a1g
+<img alt="" src="../images/lang/22.png" /> Gibralt%c3%a1r
+<img alt="" src="../images/lang/23.png" /> G%c3%b6r%c3%b6gorsz%c3%a1g
+<img alt="" src="../images/lang/24.png" /> Gr%c3%bazia
+<img alt="" src="../images/lang/25.png" /> Guernsey
+<img alt="" src="../images/lang/26.png" /> Hegyi-Karabah
+<img alt="" src="../images/lang/27.png" /> Hollandia
+<img alt="" src="../images/lang/28.png" /> Horv%c3%a1torsz%c3%a1g
+<img alt="" src="../images/lang/29.png" /> %c3%8drorsz%c3%a1g
+<img alt="" src="../images/lang/30.png" /> Izland
+<img alt="" src="../images/lang/31.png" /> Jersey
+<img alt="" src="../images/lang/32.png" /> Kazahszt%c3%a1n
+<img alt="" src="../images/lang/33.png" /> Koszov%c3%b3
+<img alt="" src="../images/lang/34.png" /> Lengyelorsz%c3%a1g
+<img alt="" src="../images/lang/35.png" /> Lettorsz%c3%a1g
+<img alt="" src="../images/lang/36.png" /> Liechtenstein
+<img alt="" src="../images/lang/37.png" /> Litv%c3%a1nia
+<img alt="" src="../images/lang/38.png" /> Luxemburg
+<img alt="" src="../images/lang/39.png" /> Maced%c3%b3nia
+<img alt="" src="../images/lang/40.png" /> Magyarorsz%c3%a1g
+<img alt="" src="../images/lang/41.png" /> M%c3%a1lta
+<img alt="" src="../images/lang/42.png" /> M%c3%a1ltai lovagrend
+<img alt="" src="../images/lang/43.png" /> Moldova
+<img alt="" src="../images/lang/44.png" /> Monaco
+<img alt="" src="../images/lang/45.png" /> Montenegr%c3%b3
+<img alt="" src="../images/lang/46.png" /> N%c3%a9metorsz%c3%a1g
+<img alt="" src="../images/lang/47.png" /> Norv%c3%a9gia
+<img alt="" src="../images/lang/48.png" /> Olaszorsz%c3%a1g
+<img alt="" src="../images/lang/49.png" /> %c3%96rm%c3%a9nyorsz%c3%a1g
+<img alt="" src="../images/lang/50.png" /> Oroszorsz%c3%a1g
+<img alt="" src="../images/lang/51.png" /> Portug%c3%a1lia
+<img alt="" src="../images/lang/52.png" /> Rom%c3%a1nia
+<img alt="" src="../images/lang/53.png" /> San Marino
+<img alt="" src="../images/lang/54.png" /> Spanyolorsz%c3%a1g
+<img alt="" src="../images/lang/55.png" /> Sv%c3%a1jc
+<img alt="" src="../images/lang/56.png" /> Sv%c3%a9dorsz%c3%a1g
+<img alt="" src="../images/lang/57.png" /> Szerbia
+<img alt="" src="../images/lang/58.png" /> Szlov%c3%a1kia
+<img alt="" src="../images/lang/59.png" /> Szlov%c3%a9nia
+<img alt="" src="../images/lang/60.png" /> T%c3%b6r%c3%b6korsz%c3%a1g
+<img alt="" src="../images/lang/61.png" /> Ukrajna
+<img alt="" src="../images/lang/62.png" /> Vatik%c3%a1n

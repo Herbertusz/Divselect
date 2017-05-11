@@ -1,0 +1,262 @@
+/* 
+    Document   : base
+    Created on : 2010.08.23.
+    Author     : Horváth Norbert
+    Description:
+        globális stílusok
+*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.clear  {clear: both;}
+.spacer {height: 5px;}
+.left   {float: left;}
+.right  {float: right;}
+.hidden {display: none;}
+.inline {display: inline;}
+.block  {display: block;}
+
+.hr {
+	height: 0px;
+	width: 100%;
+	border-bottom: 1px solid #888888;
+	margin-bottom: 10px;
+}
+
+h1 {
+	color: #505050;
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 0px 0px 12px 0px;
+}
+
+h2 {
+	color: #505050;
+	font-size: 1.1em;
+	font-weight: bold;
+	margin: 25px 0px 15px 0px;
+	border-bottom: 1px solid #888888;
+}
+
+h3 {
+	color: #303030;
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 7px;
+	padding-bottom: 3px;
+}
+
+h3.underlined {
+	border-bottom: 1px dotted #00609F;
+}
+
+a {
+	text-decoration: none;
+	color: #006CD9;
+}
+a:hover {
+	text-decoration: none;
+	color: #000000;
+}
+
+img {
+	border-width: 0px;
+}
+img.inlineicon {
+	position: relative;
+	top: 3px;
+}
+p {
+	line-height: 1.3em;
+	margin: 0px 0px 15px 0px;
+	text-align: justify;
+}
+.p-left    {text-align: left;}
+.p-right   {text-align: right;}
+.p-center  {text-align: center;}
+.p-justify {text-align: justify;}
+
+.color-black {color: #000000;}
+.color-darkred {color: #bb0000;}
+.color-red {color: #ff0000;}
+
+.bold {font-weight: bold;}
+.italic {font-style: italic;}
+
+#content table.types {
+	border: 1px outset #bbbbbb;
+	margin: 0px auto 20px auto;
+}
+#content table.types td, #content table.types th {
+	border: 1px inset #bbbbbb;
+	padding: 3px;
+}
+#content table.types th.col1 {width: 160px;}
+#content table.types th.col2 {width:  80px;}
+#content table.types th.col3 {width: 340px;}
+#content table.types th.col4 {width:  50px;}
+
+#content table.demo-form {
+	margin-bottom: 10px;
+}
+#content table.demo-form td {
+	padding: 4px;
+}
+
+#content .homework-toggle {
+	margin-bottom: 15px;
+	width: 90px;
+	font-weight: bold;
+	font-style: italic;
+	color: #950000;
+	background-image: url("../images/arrow_hm.png");
+	background-position: 100% 100%;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+#content .homework-toggle:hover {
+	color: #ee0000;
+}
+#content .homework-solution {
+	width: 720px;
+	margin-bottom: 20px;
+	border: 1px solid #e8e8e8;
+	background: #f8f8f8;
+	display: none;
+}
+#content .homework-solution p {
+	margin: 2px 5px 5px 5px;
+}
+
+#content pre.php {
+	margin-bottom: 15px;
+	font-family: "Courier new", Courier, monospace;
+	font-size: 1em;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	color: #bb0000;
+}
+
+#content span.php {
+	font-family: "Courier new", Courier, monospace;
+	font-size: 1em;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	white-space: nowrap;
+	color: #bb0000;
+}
+
+#content span.js {
+	font-family: "Courier new", Courier, monospace;
+	font-size: 1em;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	white-space: nowrap;
+	color: #974b00;
+}
+
+#content span.html {
+	font-family: "Courier new", Courier, monospace;
+	font-size: 1em;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	white-space: nowrap;
+	color: #005500;
+}
+
+#content span.screen {
+	font-family: "Courier new", Courier, monospace;
+	font-size: 1em;
+	font-weight: bold;
+	font-style: normal;
+	letter-spacing: 1px;
+}
+
+#content span.subtext {
+	font-size: 0.83em;
+	font-style: italic;
+	line-height: 1.2em;
+}
+
+#content span.prereplace {
+	font-family: "Courier new", Courier, monospace;
+	font-size: 1em;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	white-space: pre;
+	color: #000000;
+}
+
+#content div.demo-formelement {
+	position: relative;
+	top: -5px;
+}
+#content div.demo-formelement .radio {
+	margin: 0px 5px;
+}
+
+#content a.download {
+	display: inline-block;
+	margin: 0px 0px 15px 0px;
+	padding: 10px 10px 5px 10px;
+	border: 1px solid #aaaaaa;
+	background-color: #eeeeee;
+}
+#content a.download span {
+	padding: 0px 0px 0px 10px;
+	position: relative;
+	top: -6px;
+}
+
+#content div.info {
+	margin: 15px 0px;
+	padding: 5px;
+	border: 1px solid #aaaaaa;
+	background-color: #eeeeee;
+}
+#content div.info img {
+	padding-right: 5px;
+}
+#content div.info p {
+	margin: 0px;
+	padding: 0px;
+	width: 650px;
+}
+
+#content ul {
+	margin: 5px 0px 15px 20px;
+}
+#content ul li {
+	margin: 5px 0px;
+}
+
+#content table {
+	margin: 5px 0px 15px 0px;
+	width: 100%;
+	border: 1px solid #dddddd;
+}
+#content table tr {
+	
+}
+#content table tr th {
+	padding: 8px;
+	border: 1px solid #dddddd;
+	background-color: #dddddd;
+}
+#content table tr td {
+	padding: 5px;
+	border: 1px solid #dddddd;
+	font-size: 1em;
+}
+
+#content .nowrap {
+	white-space: nowrap;
+}

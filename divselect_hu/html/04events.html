@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			var $DS = $("select").divselect({
+				create : function(event){
+					$("#indicator").append('A divselect létrejött.');
+				},
+				select : function(event, value){
+					var html = $(this).divselect("getSelected");
+					$("#indicator").append(
+						'<br />A ' + value + ' értékű elem kiválasztva (' + html + ').'
+					);
+				},
+				change : function(event, value, oldvalue){
+					var html = $(this).divselect("getSelected");
+					var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+					$("#indicator").append(
+						'<br />A kiválasztott érték megváltozott: ' + oldvalue +
+						' (' + oldhtml + ')' +
+						' -&gt; ' + value +
+						' (' + html + ').'
+					);
+				},
+				open : function(event){
+					$("#indicator").append('<br />A lista kinyílt.');
+				},
+				close : function(event){
+					$("#indicator").append('<br />A lista becsukódott.');
+				}
+			});
+			/*
+			$DS.on("select.divselect", function(event, value){
+				var html = $(this).divselect("getselected");
+				$("#indicator").append('<br />A '+value+' értékű elem kiválasztva ('+html+').');
+			});
+			$DS.on("change.divselect", function(event, value, oldvalue){
+				var html = $(this).divselect("getselected");
+				var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+				$("#indicator").append(
+					'<br />A kiválasztott érték megváltozott: '+oldvalue+
+					' ('+oldhtml+')'+
+					' -&gt; '+value+
+					' ('+html+').'
+				);
+			});
+			$DS.on("open.divselect", function(event){
+				$("#indicator").append('<br />A lista kinyílt.');
+			});
+			$DS.on("close.divselect", function(event){
+				$("#indicator").append('<br />A lista becsukódott.');
+			});
+			*/
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Dokumentáció</a></li>
+		<li><a href="01basic.html">Alap</a></li>
+		<li><a href="02animations.html">Animációk</a></li>
+		<li><a href="03styles.html">Stílusok</a></li>
+		<li class="active"><a href="04events.html">Események</a></li>
+		<li><a href="05attributes.html">HTML attribútumok</a></li>
+		<li><a href="06multiselect.html">Multiselect</a></li>
+		<li><a href="07template.html">Template módosítása</a></li>
+		<li><a href="08basefunction.html">Alapműködés felülírása</a></li>
+		<li><a href="09ajax.html">Dinamikus betöltés</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Események</h1>
+			<p>
+				Az 5 eseménykezelő fügvénnyel a divselect egyes speciális eseményeinél tetszőleges
+				műveletet futtathatunk le. <strong>Próbáljuk ki a billentyűkkel történő vezérlést is!</strong>
+				(Tab, kurzormozgaró nyilak, PageUp, PageDown, Home, End, Enter, Esc)
+			</p>
+			<select name="example1" style="margin: 20px 0px;">
+				<option value="1">HTML</option>
+				<option value="2">CSS</option>
+				<option value="3" selected="selected">JavaScript</option>
+				<option value="4">PHP</option>
+				<option value="5">SQL</option>
+				<option value="6">Python</option>
+				<option value="7">Ruby</option>
+				<option value="8">ASP</option>
+			</select>
+			<div id="indicator"></div>
+			<p>
+				A HTML kód:
+			</p>
+			<pre class="brush: html">
+				&lt;select name="example1">
+					&lt;option value="1">HTML&lt;/option>
+					&lt;option value="2">CSS&lt;/option>
+					&lt;option value="3" selected="selected">JavaScript&lt;/option>
+					&lt;option value="4">PHP&lt;/option>
+					&lt;option value="5">SQL&lt;/option>
+					&lt;option value="6">Python&lt;/option>
+					&lt;option value="7">Ruby&lt;/option>
+					&lt;option value="8">ASP&lt;/option>
+				&lt;/select></pre>
+			<p>
+				A divselect-et létrehozó kód:
+			</p>
+			<pre class="brush: js">
+				$("select").divselect({
+					create : function(event){
+						$("#indicator").append('A divselect létrejött.');
+					},
+					select : function(event, value){
+						var html = $(this).divselect("getSelected");
+						$("#indicator").append(
+							'&lt;br />A ' + value + ' értékű elem kiválasztva (' + html + ').'
+						);
+					},
+					change : function(event, value, oldvalue){
+						var html = $(this).divselect("getSelected");
+						var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+						$("#indicator").append(
+							'&lt;br />A kiválasztott érték megváltozott: ' + oldvalue +
+							' (' + oldhtml + ')' +
+							' -&amp;gt; ' + value +
+							' (' + html + ').'
+						);
+					},
+					open : function(event){
+						$("#indicator").append('&lt;br />A lista kinyílt.');
+					},
+					close : function(event){
+						$("#indicator").append('&lt;br />A lista becsukódott.');
+					}
+				});</pre>
+			<p>
+				Egy másik lehetőség:
+			</p>
+			<pre class="brush: js">
+				var $DS = $("select").divselect({
+					create : function(event){
+						$("#indicator").append('A divselect létrejött.');
+					}
+				});
+				$DS.on("select.divselect", function(event, value){
+					var html = $(this).divselect("getSelected");
+					$("#indicator").append(
+						'&lt;br />A ' + value + ' értékű elem kiválasztva (' + html + ').'
+					);
+				});
+				$DS.on("change.divselect", function(event, value, oldvalue){
+					var html = $(this).divselect("getSelected");
+					var oldhtml = $(this).divselect("getElementByValue", oldvalue).html();
+					$("#indicator").append(
+						'&lt;br />A kiválasztott érték megváltozott: ' + oldvalue +
+						' (' + oldhtml + ')' +
+						' -&amp;gt; ' + value +
+						' (' + html + ').'
+					);
+				});
+				$DS.on("open.divselect", function(event){
+					$("#indicator").append('&lt;br />A lista kinyílt.');
+				});
+				$DS.on("close.divselect", function(event){
+					$("#indicator").append('&lt;br />A lista becsukódott.');
+				});</pre>
+			<p>
+				Itt azért van szükség a <em>$DS</em> változó létrehozására, mert a <em>$("select")</em>
+				elem már nem fog létezni a divselect létrejötte után, így ahhoz már nem tudunk
+				eseménykezelőt csatolni. Ha a <em>divAttributes</em> tulajdonságban megadott attribútumokra
+				illeszkedő szelektort használunk, akkor nincs szükség erre.
+			</p>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

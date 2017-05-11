@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" href="../css/doc.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#select-1").divselect();
+			$("#select-2").divselect();
+			$("#select-3").divselect({
+				optiontags : {
+					"0"          : '<i>#</i>',
+					"details"    : '<img src="../images/page.png"> <span>#</span>',
+					"activate"   : '<img src="../images/lightbulb.png"> <span>#</span>',
+					"inactivate" : '<img src="../images/lightbulb_off.png"> <span>#</span>',
+					"modify"     : '<img src="../images/page_white_edit.png"> <span>#</span>',
+					"delete"     : '<img src="../images/cross.png"> <span>#</span>'
+				}
+			});
+			$(".homework-toggle").click(function(){
+				$(this).next().slideToggle("normal");
+				if ($(this).css("background-position") == "100% 100%"){
+					$(this).css("background-position", "100% 0%");
+				}
+				else{
+					$(this).css("background-position", "100% 100%");
+				}
+			});
+		});
+	</script>
+	<title>Divselect - documentation</title>
+</head>
+<body>
+	
+	<div id="container">
+		<ul class="menu">
+			<li class="active"><a href="doc.html">Documentation</a></li>
+			<li><a href="01basic.html">Basic</a></li>
+			<li><a href="02animations.html">Animations</a></li>
+			<li><a href="03styles.html">Styles</a></li>
+			<li><a href="04events.html">Events</a></li>
+			<li><a href="05attributes.html">HTML attributes</a></li>
+			<li><a href="06template.html">Template modification</a></li>
+			<li><a href="07basefunction.html">Basic function overwriting</a></li>
+			<li><a href="08ajax.html">Dinamic loading</a></li>
+		</ul>
+		<div id="rightcol">
+			<div id="content">
+				
+<h1 class="h1-title">Divselect</h1>
+<p>
+	This plugin is primarily a HTML <span class="html">&lt;select&gt;</span> replacement. The plugin
+	is flexible and customizable, so it can be used for other purposes, for example a dropdown menu
+	also can be implemented with this.<br />
+	Engaging on a select element, it replaces this (by default) to a structure built with div elements,
+	that operation just like the original select. It places a hidden input inside the structure for
+	post the selected value. There is a CSS file for the plugin that used for customize the display
+	of the element.<br />
+	The plugin possess all the comfort functions that the original select has, such as the stepping
+	with cursor keys, inline search with character key presses, etc. See also in the
+	<a href="#divselect-keyboard-controlling">keyboard controlling</a> part.
+</p>
+<ul>
+	<li>Current version: 1.0.0</li>
+	<li>
+		Dependencies <a href="http://jquery.com" target="_blank">jQuery</a>,
+		<a href="http://jqueryui.com/demos/position" target="_blank">jQuery UI position</a>
+	</li>
+	<li>Required: jQuery 1.6+, jQuery UI position 1.8+</li>
+	<li>Browsers: IE7+, FF4+, Chrome, Opera11+, (IE6 if disable the keyboard control)</li>
+	<li>
+		<strong>Download:</strong>
+		<ul>
+			<li><a href="http://js.sikerweb.hu/download/divselect_en.zip"><strong>full package</strong></a> (zip)</li>
+			<li>
+				<a href="../js/jquery.divselect-1.0.0.js">
+					jquery.divselect-1.0.0.js
+				</a>
+				(development version)
+			</li>
+			<li>
+				<a href="../js/jquery.divselect-1.0.0.min.js">
+					jquery.divselect-1.0.0.min.js
+				</a>
+				(compressed version)
+			</li>
+			<li>
+				<a href="../css/divselect.css">
+					divselect.css
+				</a>
+				(basic CSS file)
+			</li>
+		</ul>
+	</li>
+</ul>
+<p>
+	<em>
+		With a jquery version below <strong>jQuery 1.6</strong> some functions won't be operate appropriate.
+	</em>
+</p>
+<h2 id="divselect-demo">Demo</h2>
+<p>
+	Here you can only see the basic functions.
+	Engage on a select element without configuration:
+</p>
+<p>
+	<select id="select-1" name="languages">
+		<option value="html">HTML</option>
+		<option value="css">CSS</option>
+		<option value="js">JavaScript</option>
+		<option value="php">PHP</option>
+		<option value="sql">SQL</option>
+		<option value="asp">ASP</option>
+		<option value="vb">VBScript</option>
+	</select>
+</p>
+<pre class="brush: js">
+	$("#select-1").divselect();
+</pre>
+<div class="homework-toggle">HTML code</div>
+<div class="homework-solution">
+	<pre class="brush: html">
+		&lt;select id="select-1" name="languages">
+			&lt;option value="html">HTML&lt;/option>
+			&lt;option value="css">CSS&lt;/option>
+			&lt;option value="js">JavaScript&lt;/option>
+			&lt;option value="php">PHP&lt;/option>
+			&lt;option value="sql">SQL&lt;/option>
+			&lt;option value="asp">ASP&lt;/option>
+			&lt;option value="vb">VBScript&lt;/option>
+		&lt;/select></pre>
+</div>
+<p>
+	A select with optgroup tags:
+</p>
+<p>
+	<select id="select-2" name="languages">
+		<option value="c">C</option>
+		<option value="cplusplus">C++</option>
+		<optgroup label="WEB - client side">
+			<option value="html">HTML</option>
+			<option value="css">CSS</option>
+			<option value="js" selected="selected">JavaScript</option>
+			<option value="vb">VBScript</option>
+		</optgroup>
+		<optgroup label="WEB - server side">
+			<option value="php">PHP</option>
+			<option value="sql">SQL</option>
+			<option value="asp">ASP</option>
+		</optgroup>
+	</select>
+</p>
+<pre class="brush: js">
+	$("#select-2").divselect();
+</pre>
+<div class="homework-toggle">HTML code</div>
+<div class="homework-solution">
+	<pre class="brush: html">
+		&lt;select id="select-2" name="languages">
+			&lt;option value="c">C&lt;/option>
+			&lt;option value="cplusplus">C++&lt;/option>
+			&lt;optgroup label="WEB - client side">
+				&lt;option value="html">HTML&lt;/option>
+				&lt;option value="css">CSS&lt;/option>
+				&lt;option value="js" selected="selected">JavaScript&lt;/option>
+				&lt;option value="vb">VBScript&lt;/option>
+			&lt;/optgroup>
+			&lt;optgroup label="WEB - server side">
+				&lt;option value="php">PHP&lt;/option>
+				&lt;option value="sql">SQL&lt;/option>
+				&lt;option value="asp">ASP&lt;/option>
+			&lt;/optgroup>
+		&lt;/select></pre>
+</div>
+<p>
+	The most beneficial function of the divselect that exceed the select element functionality is
+	you can insert any HTML elements inside the option tags. With one of the properties the inside
+	of the options can be overwritable, while the original HTML code remain valid:
+</p>
+<p>
+	<select id="select-3" name="operations">
+		<option value="0" selected="selected">Operations</option>
+		<option value="details">Details</option>
+		<option value="activate">Activate</option>
+		<option value="inactivate">Inactivate</option>
+		<option value="modify">Modify</option>
+		<option value="delete">Delete</option>
+	</select>
+</p>
+<pre class="brush: js">
+	$("#select-3").divselect({
+		optiontags : {
+			"0"          : '&lt;i>#&lt;/i>',
+			"details"    : '&lt;img src="../images/page.png"> &lt;span>#&lt;/span>',
+			"activate"   : '&lt;img src="../images/lightbulb.png"> &lt;span>#&lt;/span>',
+			"inactivate" : '&lt;img src="../images/lightbulb_off.png"> &lt;span>#&lt;/span>',
+			"modify"     : '&lt;img src="../images/page_white_edit.png"> &lt;span>#&lt;/span>',
+			"delete"     : '&lt;img src="../images/cross.png"> &lt;span>#&lt;/span>'
+		}
+	});
+</pre>
+<div class="homework-toggle">HTML code</div>
+<div class="homework-solution">
+	<pre class="brush: html">
+		&lt;select id="select-3" name="operations">
+			&lt;option value="0" selected="selected">Operations&lt;/option>
+			&lt;option value="details">Details&lt;/option>
+			&lt;option value="activate">Activate&lt;/option>
+			&lt;option value="inactivate">Inactivate&lt;/option>
+			&lt;option value="modify">Modify&lt;/option>
+			&lt;option value="delete">Delete&lt;/option>
+		&lt;/select></pre>
+</div>
+<h2 id="divselect-usage">Usage</h2>
+<p>
+	Insert the following files:
+</p>
+<ul>
+	<li>jQuery 1.6+</li>
+	<li>jQuery UI position 1.8+</li>
+	<li>The plugin: jquery.divselect.js</li>
+	<li>CSS file: divselect.css</li>
+</ul>
+<p>
+	Example (supposed to be a HTML5 code):
+</p>
+<pre class="brush: html">
+	&lt;link rel="stylesheet" href="css/divselect.css" />
+	&lt;script src="js/jquery.js">&lt;/script>
+	&lt;script src="js/jquery-ui.position.js">&lt;/script>
+	&lt;script src="js/jquery.divselect.js">&lt;/script>
+</pre>
+<p>
+	Create a select element in the HTML code. Here some attributes affect the divselect behavior, see
+	<a href="#divselect-html-attributes">here</a>.<br />
+	<strong>Important:</strong> the value attributes of the option tags have to be unique.
+</p>
+<pre class="brush: html">
+	&lt;select id="example" name="webprog">
+		&lt;option value="html">HTML&lt;/option>
+		&lt;option value="css">CSS&lt;/option>
+		&lt;option value="js">JavaScript&lt;/option>
+		&lt;option value="php">PHP&lt;/option>
+		&lt;option value="sql">SQL&lt;/option>
+	&lt;/select>
+</pre>
+<p>
+	And after the DOM loaded, we run the plugin on the select element
+	(of course you can use any selector):
+</p>
+<pre class="brush: js; html-script: true">
+	&lt;script>
+		$(document).ready(function(){
+			$("#example").divselect();
+		});
+	&lt;/script>
+</pre>
+<p>
+	More usage examples are in the demo pages.
+</p>
+<h2 id="divselect-properties">Properties</h2>
+<p>
+	You can use properties to configure the divselect, which can be passed to the divselect() method
+	in an object at the initialization:
+</p>
+<pre class="brush: js">
+	$("#example").divselect({
+		cssprefix : 'divselect-sort',
+		showeffect: function($elem){
+			$elem.slideDown();
+		},
+		...
+	});
+</pre>
+<p>
+	The setting, getting and modifying of the parameters is similar to the jQuery UI widgets same
+	functionality. The properties can be modified in runtime with the option or the regenerate method
+	(methods are in <a href="#divselect-methods">here</a>). The defined properties are the following
+	ones:
+</p>
+<h3>Static properties (can be modified in runtime with the <em>regenerate</em> method):</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Property</th>
+		<th>Function</th>
+		<th>Type</th>
+		<th>Default value</th>
+	</tr>
+	<tr>
+		<td>htmltemplate</td>
+		<td>
+			The template of the select replacement HTML structure. This describe the structure of the
+			HTML code that built in the place of the original select element. The detailed description
+			is <a href="#divselect-template">here</a>.
+		</td>
+		<td>string</td>
+		<td>see <a href="#divselect-template">here</a></td>
+	</tr>
+	<tr>
+		<td>cssprefix</td>
+		<td>
+			The css classes of the built structure get this prefix with a hyphen. This is useful when
+			you want to place several divselects at the same page with different styles.
+		</td>
+		<td>string</td>
+		<td>"divselect"</td>
+	</tr>
+	<tr>
+		<td>optiontags</td>
+		<td>
+			Overwrite the option tags of the given value. The object property name must be the value
+			attribute of the option, and the innerHTML of the options will be replaced with the object
+			property values. E.g:<br />
+			<span class="js">{ "data" : '&lt;i&gt;szöveg&lt;/i&gt;' }</span><br />
+			In this case, the innerHTML of the option tag (exactly the replacer tag) with the value
+			"data" won't be the original innerHTML, but the given HTML code. Other options won't
+			change.<br />
+			The original innerHTML of the option can be inserted by the # character, e.g:<br />
+			<span class="js">{ "data" : '&lt;i&gt;#&lt;/i&gt;' }</span><br />
+			Here the original innerHTML will be wrapped with <span class="html">&lt;i&gt;</span> tags.
+			The # character can be written with \\# escape form.
+		</td>
+		<td>object</td>
+		<td>{}</td>
+	</tr>
+	<tr>
+		<td>divattributes</td>
+		<td>
+			The atributes that the main div (most outer div) inherits from the original select element.
+			The class attribute value will be appended, the others will overwrite the attributes
+			defined in the template.
+		</td>
+		<td>array</td>
+		<td>["id", "class", "dir", "lang", "style", "title"]</td>
+	</tr>
+	<tr>
+		<td>characters</td>
+		<td>
+			You can add keyCodes of accent letters and marks for the inline search. These can be defined
+			by browser types, because these keyCodes usually have browser-specific values.<br />
+			The object properties are also objects, like:<br />
+			<span class="js">"é": {"general": 186, "firefox": 59, "opera": 201}</span><br />
+			which means the keyCode of the "é" character is 59 in firefox, 201 in opera, and 186 in
+			the other browsers. The defined browser types:<br />
+			"firefox", "chrome", "ie", "safari", "opera", "general"<br />
+			where "general" means: the other aren't given browsers.
+		</td>
+		<td>object</td>
+		<td><em>Hungarian accent character set</em></td>
+	</tr>
+	<tr>
+		<td>unbubble</td>
+		<td>
+			This is a jQuery selector for the elements inside the options, that events won't be
+			propagated to the option element. It is useful for example if we place checkboxes inside
+			the option elements, in this case if we click on a checkbox, the list will remain open,
+			and the option won't be selected.
+		</td>
+		<td>string</td>
+		<td>"input,select,textarea"</td>
+	</tr>
+</table>
+<h3>Dinamic properties (can be modified in runtime with the <em>option</em> method):</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Property</th>
+		<th>Function</th>
+		<th>Type</th>
+		<th>Default value</th>
+	</tr>
+	<tr>
+		<td>pagestep</td>
+		<td>
+			The numer of steps on the list when PageUp and PageDown press.
+		</td>
+		<td>number</td>
+		<td>10</td>
+	</tr>
+	<tr>
+		<td>keydownwait</td>
+		<td>
+			When the inline search pressing a key in this time of milliseconds will accurate the
+			search, a pressing beyond this time will start new search. Only the text without HTML
+			tags participate in the inline search.
+		</td>
+		<td>number</td>
+		<td>1000</td>
+	</tr>
+	<tr>
+		<td>disablekeys</td>
+		<td>
+			Disable keyboard controlling (it should be disabled under IE6).
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>disabledropdown</td>
+		<td>
+			Disable the default list opening functionality. This functionality is that the click event
+			on the ".{cssprefix}-selector" element triggers the list opening.
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>disableclose</td>
+		<td>
+			Disable the default list closing functionality. This functionality is that the click event
+			on the ".{cssprefix}-background" element triggers the list closing.
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>disableselect</td>
+		<td>
+			Disable the default listitem selecting functionality. This functionality is that the click
+			event on a ".{cssprefix}-item" element triggers the listitem selecting.
+		</td>
+		<td>boolean</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>position</td>
+		<td>
+			The positioning of the displayed list. With this property we can set the object parameter
+			of the <a href="http://jqueryui.com/demos/position" target="_blank">jQuery UI position</a>
+			method. Setting the "of" property is optional, by default it is the ".{cssprefix}-selector"
+			element, other properties are required if we want to overwrite the default positioning.<br />
+			In the "of" property overwriting, the <span class="js">$divelement</span> variable is a
+			jQuery object of the most outer div element, the <span class="js">cssprefix</span> is the
+			value of the <em>cssprefix</em> divselect property. The default "of" value is:<br />
+			<span class="js">$divelement.find("."+cssprefix+"-selector")</span>
+		</td>
+		<td>object</td>
+		<td class="nowrap">
+			{<br />
+			my: "left top",<br />
+			at: "left bottom",<br />
+			offset: "0 0",<br />
+			collision: "none flip"<br />
+			}
+		</td>
+	</tr>
+	<tr>
+		<td>showeffect</td>
+		<td>
+			The function that do the list opening. The $elem parameter is a jQuery object contains
+			the list. It is useful for animated opening ($elem.slideDown(), $elem.fadeIn(), etc).
+		</td>
+		<td>function</td>
+		<td class="nowrap">
+			function($elem){<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;$elem.show();<br />
+			}
+		</td>
+	</tr>
+	<tr>
+		<td>hideeffect</td>
+		<td>
+			The function that do the list closing. The $elem parameter is a jQuery object contains
+			the list. It is useful for animated closing ($elem.slideUp(), $elem.fadeOut(), etc).
+		</td>
+		<td>function</td>
+		<td class="nowrap">
+			function($elem){<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;$elem.hide();<br />
+			}
+		</td>
+	</tr>
+</table>
+<h2 id="divselect-events">Events</h2>
+<p>
+	Some special events of the divselect event handler functions can be attached in this way:
+</p>
+<pre class="brush: js">
+	// initializing:
+	$("#example").divselect({
+		change : function(event, value, oldvalue){
+			// event handler
+		},
+		...
+	});
+	
+	// in runtime:
+	$("#example").on("change.divselect", function(event, value, oldvalue){
+		// event handler
+	});
+</pre>
+<p>
+	Every event belongs to the <em>divselect</em> namespace, we have to use this in the attachment.<br />
+	The default event handler is az empty function for all of the special events. If we set event handlers
+	with both of the above methods, the initializing form will run first. Event handler can be
+	attached for these events:
+</p>
+<table cellspacing="0">
+	<tr>
+		<th>Event</th>
+		<th>Trigger</th>
+		<th>Parameters</th>
+	</tr>
+	<tr>
+		<td>create</td>
+		<td>
+			It is triggered after the select element replaced by the divselect structure.<br />
+			<strong>It can be set only in the initialization!</strong>
+		</td>
+		<td>event</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>
+			It is triggered when a value selected in the list.
+		</td>
+		<td>event, value</td>
+	</tr>
+	<tr>
+		<td>change</td>
+		<td>
+			It is triggered when the selected value changed (a special case of the above).
+		</td>
+		<td>event, value, oldvalue</td>
+	</tr>
+	<tr>
+		<td>open</td>
+		<td>
+			It is triggered when the list opened.
+		</td>
+		<td>event</td>
+	</tr>
+	<tr>
+		<td>close</td>
+		<td>
+			It is triggered when the list closed.
+		</td>
+		<td>event</td>
+	</tr>
+</table>
+The parameters:<br />
+<strong>event</strong> (object): the <a href="http://api.jquery.com/category/events/event-object" target="_blank">jQuery Event object</a>,<br />
+<strong>value</strong> (string): the value attribute of the selected option.<br />
+<strong>oldvalue</strong> (string): in the change event it is the value attribute of the previously selected option.<br />
+Furthermore, in the event handler the <strong>this</strong> by default refers to the actually divselect
+element (most outer div as a DOM object).
+<h2 id="divselect-methods">Methods</h2>
+<p>
+	With the divselect methods informations can be queried and the element can be manipulated in runtime.
+	The call of the methods:
+</p>
+<pre class="brush: js">
+	$("#example").divselect("methodname", parameters);
+</pre>
+<p>
+	The methods that are chainable, return the jQuery object which we have engaged the method. On this,
+	we can call the method again, so several methods can be call in one sequence. E.g:
+</p>
+<pre class="brush: js">
+	$("#example").divselect("select", "name").divselect("setreadonly");
+</pre>
+<h3>User methods</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Method</th>
+		<th>Description</th>
+		<th>Chain- able</th>
+	</tr>
+	<tr>
+		<td>create</td>
+		<td>
+			<span class="js">jQuery create([object])</span><br />
+			<br />
+			This method creates the divselect. If the divselect() called without parameter, or an
+			object passed to it, this method runs by default. It has an optional object parameter,
+			that can be used to overwrite the default static and dinamic properties. The method
+			returns with the created divselect element. The method returns with the created divselect
+			element(s) in a jQuery object.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("create");</span><br />
+			or<br />
+			<span class="js">$("#example").divselect();</span><br />
+			Setting properties:<br />
+			<span class="js">$("#example").divselect("create", {"pagestep" : 5});</span><br />
+			or<br />
+			<span class="js">$("#example").divselect({"pagestep" : 5});</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>destroy</td>
+		<td>
+			Reduce the divselect to a select element which is equivalent with the current state.
+			This means the modifications on the divselect remain, therefore we may not get back
+			the original select element. The method returns with the created select element(s) in
+			a jQuery object.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("destroy");</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>regenerate</td>
+		<td>
+			With this function we can set static properties in runtime. The difference between these
+			and the dinamic properties is we have to rebuild the divselect to modify these, for this
+			we have to call an other method.<br />
+			The first parameter is the property name, the second is the new value, the returning
+			value will be the divselect jQuery object.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("regenerate", "cssprefix", "divselect-smooth");</span><br />
+			We can set multiple properties with one call if we pass an object, pl.:<br />
+			<span class="js">
+				$("#example").divselect("regenerate", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"htmltemplate" : '...',<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"cssprefix" : "divselect-smooth"<br />
+				});<br />
+			</span>
+			This method can modify dinamic properties also, but we should use for this only if in the
+			above case we want to modify this dinamic property with an other static property, because
+			to modify a dinamic property there isn't necessary to rebuild the divselect element.
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>
+			With this function we can get or set properties in runtime. To get a property, we have to
+			pass the property name as a string, the returning value will be the property value. The
+			get mode can be used to get static and dinamic parameters too.<br />
+			E.g.:<br />
+			<span class="js">var step = $("#example").divselect("option", "pagestep");</span><br />
+			To modify a property we have to pass the new value in the second parameter, in this case
+			the returning value will be the divselect jQuery object. Only dinamic properties can be
+			modified with this method.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("option", "pagestep", 5);</span><br />
+			We can set multiple properties with one call if we pass an object, e.g.:<br />
+			<span class="js">
+				$("#example").divselect("option", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"pagestep" : 5,<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;"create" : function(){...}<br />
+				});<br />
+			</span>
+		</td>
+		<td>
+			only in "setter" mode
+		</td>
+	</tr>
+	<tr>
+		<td>getval</td>
+		<td>
+			The value attribute of the selected option.<br />
+			E.g.:<br />
+			<span class="js">var value = $("#example").divselect("getval");</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>getselected</td>
+		<td>
+			The inner HTML code of the selected option.<br />
+			E.g.:<br />
+			<span class="js">var html = $("#example").divselect("getselected");</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>open</td>
+		<td>
+			Open the list.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("open");</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>close</td>
+		<td>
+			Close the list.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("close");</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>
+			Select an option by the value attribute. Its parameter is a string with the value of the
+			selecting element.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("select", "php");</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>isselected</td>
+		<td>
+			It has a sing parameter which is a value attribute of an option. The return value is true,
+			if that option is selected.<br />
+			E.g.:<br />
+			<span class="js">var answer = $("#example").divselect("isselected", "yes");</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>isreadonly</td>
+		<td>
+			Without parameter it returns true, if the select state is readonly. If we pass a string
+			parameter, it returns true, if the option with the given value is readonly.<br />
+			E.g.:<br />
+			<span class="js">var selectreadonly = $("#example").divselect("isreadonly");</span><br />
+			<span class="js">var optionreadonly = $("#example").divselect("isreadonly", "php");</span><br />
+			<em>
+				If the select is in readonly state, the selected option cannot be changed, if an
+				option is readonly, the form elements inside this cannot be changed.
+			</em>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>isdisabled</td>
+		<td>
+			Without parameter it returns true, if the select state is disabled. If we pass a string
+			parameter, it returns true, if the option with the given value is disabled.<br />
+			E.g.:<br />
+			<span class="js">var selectdisabled = $("#example").divselect("isdisabled");</span><br />
+			<span class="js">var optiondisabled = $("#example").divselect("isdisabled", "php");</span><br />
+			<em>
+				If the select is in disabled state, the selected value won't be passed when the form
+				posted, and the element doesn't respond to any user interaction. If an option is
+				disabled, the option cannot be selected.
+			</em>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>setreadonly</td>
+		<td>
+			Without parameter it turns the select state to readonly. If we pass a string parameter,
+			it turns the option with the given value to readonly. If we want to do it with several
+			options, we can pass the values in an array.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("setreadonly");</span><br />
+			<span class="js">$("#example").divselect("setreadonly", "php");</span><br />
+			<span class="js">$("#example").divselect("setreadonly", ["php", "js"]);</span><br />
+			<em>
+				If the select is in readonly state, the selected option cannot be changed, if an
+				option is readonly, the form elements inside this cannot be changed.
+			</em>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>
+			unsetreadonly<br />
+			setwritable
+		</td>
+		<td>
+			The <em>setwritable</em> is an alias for the <em>unsetreadonly</em> method, both of them
+			do the same.<br />
+			Without parameter it removes the select readonly state. If we pass a string parameter,
+			it removes the readonly state from an option with the given value. If we want to do it
+			with several options, we can pass the values in an array.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("unsetreadonly");</span><br />
+			<span class="js">$("#example").divselect("unsetreadonly", "php");</span><br />
+			<span class="js">$("#example").divselect("unsetreadonly", ["php", "js"]);</span><br />
+			<em>
+				If the select is in readonly state, the selected option cannot be changed, if an
+				option is readonly, the form elements inside this cannot be changed.
+			</em>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>setdisabled</td>
+		<td>
+			Without parameter it turns the select state to disabled. If we pass a string parameter,
+			it turns the option with the given value to disabled. If we want to do it with several
+			options, we can pass the values in an array.<br />
+			Pl.:<br />
+			<span class="js">$("#example").divselect("setdisabled");</span><br />
+			<span class="js">$("#example").divselect("setdisabled", "php");</span><br />
+			<span class="js">$("#example").divselect("setdisabled", ["php", "js"]);</span><br />
+			<em>
+				If the select is in disabled state, the selected value won't be passed when the form
+				posted, and the element doesn't respond to any user interaction. If an option is
+				disabled, the option cannot be selected.
+			</em>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>
+			unsetdisabled<br />
+			setenabled
+		</td>
+		<td>
+			The <em>setenabled</em> is an alias for the <em>unsetdisabled</em> method, both of them
+			do the same.<br />
+			Without parameter it removes the select disabled state. If we pass a string parameter,
+			it removes the disabled state from an option with the given value. If we want to do it
+			with several options, we can pass the values in an array.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("unsetdisabled");</span><br />
+			<span class="js">$("#example").divselect("unsetdisabled", "php");</span><br />
+			<span class="js">$("#example").divselect("unsetdisabled", ["php", "js"]);</span><br />
+			<em>
+				If the select is in disabled state, the selected value won't be passed when the form
+				posted, and the element doesn't respond to any user interaction. If an option is
+				disabled, the option cannot be selected.
+			</em>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>getoptions</td>
+		<td>
+			It returns with the option list in an array. The array elements are objects or strings
+			depends on the parameter, that has to be "none", "object" or "html". The default is
+			"none".<br />
+			<br />
+			If the parameter is "none", the array elements are the value attributes of the options.
+			E.g.:<br />
+			<span class="js">var options = $("#example").divselect("getoptions");</span><br />
+			In this case the return value will be something like this:<br />
+			<span class="js">["0", "html", "css", "js"]</span><br />
+			<br />
+			The return value in the other two cases is a compatible form with the <em>add()</em>
+			method (see below) parameter. E.g.:<br />
+			<span class="js">var options = $("#example").divselect("getoptions", "object");</span><br />
+			In this case the return value will be a array contains objects, and an object in this has
+			this form:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;value: "20",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> New'<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;selected: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;disabled: false<br />
+			}<br />
+			</span>
+			The object properties:<br />
+			<em>value</em> (string; the value attribute)<br />
+			<em>html</em> (string; the option innerHTML)<br />
+			<em>selected</em> (boolean; the selected state of the option)<br />
+			<em>readonly</em> (boolean; the readonly state of the option)<br />
+			<em>disabled</em> (boolean; the disabled state of the option)<br />
+			<br />
+			<span class="js">var options = $("#example").divselect("getoptions", "html");</span><br />
+			In this case the return value will be an array contains strings, and a string in this has
+			this form:<br />
+			<span class="js">'&lt;option value="20" selected="selected">PHP&lt;/option>'</span><br />
+			or e.g.:<br />
+			<span class="js">'&lt;option value="new">&lt;input type="checkbox" /> New&lt;/option>'</span><br />
+			Here we get the whole option tag, the properties (valueless attributes) are in this only
+			if its value is true.
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>getoptgroups</td>
+		<td>
+			It returns with the optgroups in an array. The array elements are objects or strings
+			depends on the parameter, that has to be "none", "options" or "surround". The default is
+			"none".<br />
+			<br />
+			If the parameter is "none", the array elements are the label attributes of the optgroups.
+			E.g.:<br />
+			<span class="js">var optgroupions = $("#example").divselect("getoptgroups");</span><br />
+			In this case the return value will be something like this:<br />
+			<span class="js">["Client side", "Server side"]</span><br />
+			<br />
+			The return value in the other two cases is a compatible form with the <em>addgroup()</em>
+			method (see below) parameter. E.g.:<br />
+			<span class="js">var optgroups = $("#example").divselect("getoptgroups", "options");</span><br />
+			In this case the return value will be a array contains objects, and an object in this has
+			this form:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Client side",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<em>option describer object</em>},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<em>option describer object</em>},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			}<br />
+			</span>
+			The object properties:<br />
+			<em>label</em> (string; the label attribute)<br />
+			<em>options</em> (array; the options describer objects inside the optgroup, in the same
+			form that the <em>getoptions()</em> method return if the parameter is "object")<br />
+			<br />
+			<span class="js">var options = $("#example").divselect("getoptions", "surround");</span><br />
+			In this case the return value will be a array contains objects, and an object in this has
+			this form:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Client side",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;surround: ["html", "js"]<br />
+			};<br />
+			</span>
+			The object properties:<br />
+			<em>label</em> (string; the label attribute)<br />
+			<em>surround</em> (array; the value attribute of the first and the last option which are
+			bordered by the optgroup, if there is only one option in the optgroup, the two value are
+			equal, if the optgroup is empty, both values are null)<br />
+			<br />
+			<strong>Note:</strong> we don't get the options that are outside of optgroups with this
+			method.
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>getselect</td>
+		<td>
+			It returns with a select element that equivalent with the divselect current state as an
+			object describes the structure or a HTML code. The format is determined by the first
+			parameter, which can be "object" or "html". The second parameter is a boolean value, if
+			it's true, the innerHTML-s of the option elements will be reconstructed to the original
+			form, if it's false, the actual innerHTML (generated by the optiontags or by other way)
+			will be remained. The default value is false.<br />
+			<br />
+			If the parameter is "object", the returned value is an object. E.g.:<br />
+			<span class="js">var select = $("#example").divselect("getselect", "object");</span><br />
+			The structure of the object:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;attributes: {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: "",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: "",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;disabled: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;structure : [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>data of options and optgroups</em><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			}<br />
+			</span>
+			The object properties:<br />
+			<em>attributes</em> (object; the attributes of the select, that are in the divattributes property)<br />
+			<em>readonly</em> (bool; the readonly state of the divselect)<br />
+			<em>disabled</em> (bool; the disabled state of the divselect)<br />
+			<em>structure</em> (array; objects that contain the data of the options and optgroups in the right order)<br />
+			An element of the structure property if that is an optgroup:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;type: "optgroup",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Server side",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>options in the optgroup</em><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			}<br />
+			</span>
+			The object properties:<br />
+			<em>type</em> (string; in this case it is "optgroup")<br />
+			<em>label</em> (string; the label attribute)<br />
+			<em>options</em> (array; array of the objects describe the option elements)<br />
+			The structure of an option describer object (even inside or outside an optgroup) is the following:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;type: "option",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;value: "php",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;i>&lt;img ...>PHP&lt;/i>',<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;selected: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;disabled: false,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;tag: '&lt;option value="php" <em>attributes</em>>&lt;i>&lt;img ...>PHP&lt;/i>&lt;/option>',<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;originalTag: '&lt;option value="php" <em>attributes</em>>PHP&lt;/option>'<br />
+			}<br />
+			</span>
+			The object properties:<br />
+			<em>type</em> (string; in this case it is "option")<br />
+			<em>value</em> (string; the value attribute)<br />
+			<em>html</em> (string; the inside of the option)<br />
+			<em>selected</em> (bool; the selected state of the option)<br />
+			<em>readonly</em> (bool; the readonly state of the option)<br />
+			<em>disabled</em> (bool; the disabled state of the option)<br />
+			<em>tag</em> (string; the HTML code of the option tag)<br />
+			<em>originalTag</em> (string; the HTML code of the original option tag)<br />
+			In the structure property, the options and the optgroups are in the right order and hierarchy.<br />
+			With this method we get an object describes the entire divselect structure.<br />
+			<br />
+			If the first parameter of the method is "html", the returned value is a string, that is
+			the whone option's HTML code. This is used by the <em>destroy</em> method for an utility
+			function in this way:<br />
+			<span class="js">var select = $("#example").divselect("getselect", "html", true);</span><br />
+			This HTML code passed to the jQuery constructor, create the select element.
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>add</td>
+		<td>
+			With this method we can add an option or more options to the list in runtime.<br />
+			<br />
+			<strong>Parameters:</strong><br />
+			1. (string|object|array) the describer element of the option(s)<br />
+			2. (string; default value: "before") this is "before" or "after" depends on we want to
+			insert the option(s) before or after the element determined by the third parameter<br />
+			3. (string; default value: undefined) the value of the option which determine the inserting
+			location<br />
+			<br />
+			In the first parameter we can pass the HTML code of the option or the option describer
+			object. If we pass an array, we can add several options.<br />
+			With the second and third parameter we can determine the location of the insertion. If the
+			second parameter is "before"/"after", the new option will be inserted before/after the
+			option that value is given by the third parameter. If we don't pass the third parameter,
+			in the "before" case the new option will be inserted at the end of the list, in the case
+			of "after", it will be inserted to the beginning of the list. If we leave both of the two
+			parameters, the insertion location will be the end of the list. If the first parameter is
+			an array, the order of the new options will be the same order is given by the array,
+			independent of the other parameters.<br />
+			<br />
+			<strong>Give the option with an object:</strong><br />
+			<span class="js">
+			var element = {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;value: "20",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;readonly: true,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> New'<br />
+			};<br />
+			</span>
+			The object properties:<br />
+			<em>value</em> (string; default value: ""; the value attribute)<br />
+			<em>html</em> (string; default value: ""; the option innerHTML)<br />
+			<em>selected</em> (boolean; default value: false)<br />
+			<em>readonly</em> (boolean; default value: false)<br />
+			<em>disabled</em> (boolean; default value: false)<br />
+			If the selected is true, that results the new value will be the selected element.<br />
+			<br />
+			<strong>Give the option with HTML code:</strong><br />
+			<span class="js">
+			var html = '&lt;option value="new" disabled="disabled">New&lt;/option>';<br />
+			</span>
+			We have to write into the HTML code the occurrent inner elements, like the checkbox in the
+			above example, because we cannot change the <em>optiontags</em> parameter in runtime.<br />
+			<br />
+			<strong>Usage</strong><br />
+			<span class="js">$("#example").divselect("add", element);</span><br />
+			<span class="js">$("#example").divselect("add", html, "after");</span><br />
+			<span class="js">$("#example").divselect("add", [element1, element2], "before", "php");</span><br />
+			<span class="js">$("#example").divselect("add", [html1, html2], "after", "js");</span><br />
+			<br />
+			In the examples the <em>element</em> will be inserted to the end of the list, the
+			<em>html</em> will be at the beginning,	the <em>element1</em> and the <em>element2</em>
+			will be before the "php" value element, the <em>html1</em> and the <em>html2</em> will
+			be after the "js" value element.
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>addgroup</td>
+		<td>
+			With this method we can add an optgroup or more optgroups to the list in runtime. With the
+			optgroup we can define the inner option elements also with the data structures we have
+			seen at the <em>add()</em> method above. We can use it to surround options which are already
+			in the list too.<br />
+			<br />
+			<strong>Parameters:</strong><br />
+			1. (string|array) the describer element of the optgroup(s)<br />
+			2. (string; default value: "before") this is "before" or "after" depends on we want to
+			insert the option(s) before or after the element determined by the third parameter<br />
+			3. (string; default value: undefined) the value of the option which determine the inserting
+			location<br />
+			<br />
+			In the first parameter we have to pass the describer object of the optgroup, in this we can
+			use the <em>label</em> and the <em>options</em> or <em>surround</em> elements.If we pass
+			an array, we can add several options.<br />
+			With the second and third parameter we can determine the location of the insertion just
+			like in the case of the <em>add()</em> method. If the
+			second parameter is "before"/"after", the new optgroup will be inserted before/after the
+			option that value is given by the third parameter. If we don't pass the third parameter,
+			in the "before" case the new optgroup will be inserted at the end of the list, in the case
+			of "after", it will be inserted to the beginning of the list. If we leave both of the two
+			parameters, the insertion location will be the end of the list. In the case of surrounding
+			already exist options, the second and third parameters will be ignored.<br />
+			<br />
+			<strong>Insert new optgroup with new options:</strong><br />
+			<span class="js">
+			var element = {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Client side",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option-definitions<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+			};<br />
+			</span>
+			The object properties:<br />
+			<em>label</em> (string; default value: ""; the label of the optgroup)<br />
+			<em>options</em> (array; default value: undefined; the inner options)<br />
+			The options array is the same format as the <em>add()</em> method parameter.<br />
+			<br />
+			<strong>Surround options:</strong><br />
+			<span class="js">
+			var element = {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;label: "Client side",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;surround: ["html", "js"]<br />
+			};<br />
+			</span>
+			The object properties:<br />
+			<em>label</em> (string; default value: ""; the label of the optgroup)<br />
+			<em>surround</em> (array; default value: undefined; the elements surrounded by the optgroup)<br />
+			In this case the list will be surrounded from the "html" value option to the "js" option
+			(including the boundary elements). If we want to surround one element, we have to give
+			both of the two array elements: <span class="js">surround: ["js", "js"]</span><br />
+			<br />
+			<strong>Usage:</strong><br />
+			<span class="js">
+				$("#example").divselect("addgroup", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;label: "Client side languages",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;option value="html">HTML&lt;/option>',<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;option value="css">CSS&lt;/option>',<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;option value="js" selected="selected">JavaScript&lt;/option>'<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+				}, "before", "php");<br />
+			</span><br />
+			<span class="js">
+				$("#example").divselect("addgroup", {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;label: "Server side languages",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;options: [<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: "php",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> PHP'<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: "sql",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html: '&lt;input type="checkbox" /> SQL'<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+				}, "after", "js");<br />
+			</span><br />
+			<span class="js">
+				$("#example").divselect("addgroup", [<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: "Client side languages",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surround: ["html", "js"]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: "Server side languages",<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surround: ["php", "asp"]<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+				]);<br />
+			</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>remove</td>
+		<td>
+			It removes an option from the list with the given value. If we pass an array, we can
+			remove several options.<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("remove", "php");</span><br />
+			<span class="js">$("#example").divselect("remove", ["php", "js"]);</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>removegroup</td>
+		<td>
+			It removes an optgroup from the list with the given label attribute. With the second
+			parameter we can control that the inner options will remain (false, this is default), or
+			removed also (true).<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("removegroup", "Client side languages");</span><br />
+			<span class="js">$("#example").divselect("removegroup", "Server side languages", true);</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+	<tr>
+		<td>truncate</td>
+		<td>
+			This method can be used to empty the list. The parameter determine which elements we want
+			to remove: "all", "options", or "optgroups". The default value is "all".<br />
+			<em>all</em>: remove all the options and optgroups<br />
+			<em>options</em>: remove all the options, if there were optgroups, those will remain empty<br />
+			<em>optgroups</em>: remove all the optgroups, the options will remain<br />
+			E.g.:<br />
+			<span class="js">$("#example").divselect("truncate");</span><br />
+			<span class="js">$("#example").divselect("truncate", "optgroups");</span>
+		</td>
+		<td>
+			yes
+		</td>
+	</tr>
+</table>
+<h3>Utility methods</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Method</th>
+		<th>Description</th>
+		<th>Chain- able</th>
+	</tr>
+	<tr>
+		<td>getElementByValue</td>
+		<td>
+			This method returns an option element as a jQuery object by the value attribute. Its
+			parameter is a string with the value attribute. If there doesn't exist an option with
+			this value, it returns an empty jQuery object.<br />
+			Mostly the other methods use this for utility.<br />
+			E.g.:<br />
+			<span class="js">var $elem = $("#example").divselect("getElementByValue", "5");</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>getValueByElement</td>
+		<td>
+			This method returns the value of an option element. We can pass the element as a DOM object,
+			a jQuery object or a string that contains a segment of the option's innerHTML. In the last
+			case if there are several matches, only the first value will be returned.<br />
+			E.g.:<br />
+			<span class="js">
+				var elem = $("#example").find(".divselect-item").get(3);<br />
+				var $elem = $("#example").find(".divselect-item").eq(3);<br />
+			</span><br />
+			<span class="js">var value = $("#example").divselect("getValueByElement", elem);</span><br />
+			<span class="js">var value = $("#example").divselect("getValueByElement", $elem);</span><br />
+			<span class="js">var value = $("#example").divselect("getValueByElement", "PHP");</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+	<tr>
+		<td>getContainerOptgroup</td>
+		<td>
+			This method returns the container optgroup element from an option value. The first
+			argument is the value of the option element, the second is "label" or "element", that
+			determines the returning value is the label attribute of the optgroup (string), or the
+			optgroup element (jQuery object). The optgroup element is the {cssprefix}-group element
+			in the template, which is tipically a div element. If the option isn't inside an optgroup,
+			the returning value is null.<br />
+			E.g.:<br />
+			<span class="js">var label = $("#example").("getContainerOptgroup", "php", "label");</span><br />
+			<span class="js">var optgr = $("#example").("getContainerOptgroup", "php", "element");</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+</table>
+<h3>Extension methods</h3>
+<table cellspacing="0">
+	<tr>
+		<th>Method</th>
+		<th>Description</th>
+		<th>Chain- able</th>
+	</tr>
+	<tr>
+		<td>getplugin</td>
+		<td>
+			This function returns a reference to the divselect plugin object. The structure of the
+			returning object:<br />
+			<span class="js">
+			{<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;defaultoptions : <em>default property values</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;optionData : <em>inner data storage</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;Util : <em>utility variables and functions</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;Creation : <em>divselect creation functions</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;Interaction : <em>divselect interaction functions</em>,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;methods : <em>public methods</em><br />
+			}<br />
+			</span>
+			<strong>
+				With modify this object, we can overwrite and extend the divselect properties and
+				methods.
+			</strong><br />
+			The returning value is this object, but we can optional set a variable name to the first
+			parameter (as a string), which will get the same object reference. The second parameter
+			is the context of the variable, default the window object, so if it's not set, the variable
+			will be created in the "global namespace".<br />
+			<br />
+			Modify permanently a default property value:<br />
+			<span class="js">
+				$().divselect("getplugin", "Divselect", window);<br />
+				Divselect.defaultoptions.cssprefix = "divselect-smooth";<br />
+			</span><br />
+			Add a new method to the divselect:<br />
+			<span class="js">
+				var DS = $().divselect("getplugin");<br />
+				DS.methods.hide = function(){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;this.hide();<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;return this;<br />
+				};<br />
+				$("#example1").divselect("hide");<br />
+			</span><br />
+			Add a new key event handler to the divselect (this functionality is only in experimental state):<br />
+			<span class="js">
+				var DS = $().divselect("getplugin");<br />
+				DS.Interaction.keyHandlers._DELETE =<br />
+				function(preselected, itemnum, pagestep, event, $menuitems){<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;var val = this.divselect("getValueByElement", $menuitems.eq(preselected));<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;this.divselect("remove", val);<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;return (preselected + 1) % itemnum;<br />
+				}<br />
+			</span>
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
+</table>
+<h2 id="divselect-html-attributes">HTML attributes</h2>
+<p>
+	The divselect parse some attributes of the select, optgroup and option element, and automatically
+	set a property by them. The size and multiple attributes of the select element will be ignored.
+	The divselect always one-line independent of the size attribute, and it only allow one element
+	selection by default. We can find examples for selecting more than option in the demos.<br />
+	The parsed attributes and their effects:
+</p>
+<table cellspacing="0">
+	<tr>
+		<th>HTML tag</th>
+		<th>Attribute</th>
+		<th>Effect</th>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>name</td>
+		<td>
+			This name attribute will be given to the hidden input element, that is to be passing the
+			selected value.
+		</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>readonly</td>
+		<td>
+			If this has been set, the select state will be readonly.*<br />
+			<em>
+				This attribute isn't valid in HTML5, but we can use the appropriate method for the
+				same effect:
+			</em>
+			<span class="js">$("#example").divselect("setreadonly");</span>
+		</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>disabled</td>
+		<td>
+			If this has been set, the select state will be disabled.*
+		</td>
+	</tr>
+	<tr>
+		<td>optgroup</td>
+		<td>label</td>
+		<td>
+			The value of this attribute will be the optgroup label, more exactly this will replace
+			the {optgroup.label} placeholder in the template. Furthermore, this is a unique id for
+			the optgroups.
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>value</td>
+		<td>
+			If the option is selected, this value will be in the hidden input value attribute.
+			Furthermore, this is a unique id for the options.
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>selected</td>
+		<td>
+			The option which has this attribute, will be the selected element by default. If it isn't
+			set on any option, the first will be the selected.
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>readonly</td>
+		<td>
+			If this has been set, the option state will be readonly.*<br />
+			<em>
+				This attribute isn't valid in HTML5, but we can use the appropriate method for the
+				same effect:
+			</em>
+			<span class="js">$("#example").divselect("setreadonly", "php");</span>
+		</td>
+	</tr>
+	<tr>
+		<td>option</td>
+		<td>disabled</td>
+		<td>
+			If this has been set, the option state will be disabled.*
+		</td>
+	</tr>
+</table>
+*
+<em>
+	If the select is in readonly state, the selected option cannot be changed, if an option is
+	readonly, the form elements inside this cannot be changed (more exactly the click event on the
+	elements that match to the unbubble selector won't fire the default event handler).<br />
+	If the select is in disabled state, the selected value won't be passed when the form posted, and
+	the element doesn't respond to any user interaction. If an option is disabled, the option cannot
+	be selected.
+</em>
+<h2 id="divselect-template">Template</h2>
+<p>
+	The <em>htmltemplate</em> property describe the HTML structure of the divselect element. This is
+	changable because the CSS code modification doesn't always enough for the purposed design, sometimes
+	we have to change the HTML structure. Additionally, in this way is easy to add custom elements
+	into the divselect. The template looks like this by default:
+</p>
+<pre class="brush: html">
+	&lt;div class="{cssprefix}">
+		&lt;input class="{cssprefix}-input" type="hidden" name="{select.name}" value="{select.val}" />
+		&lt;div class="{cssprefix}-selector {select.readonly} {select.disabled}">{select.defhtml}&lt;/div>
+		&lt;div class="{cssprefix}-menu">
+			{block}
+				{optgroup_start}
+					&lt;div class="{cssprefix}-group">
+						&lt;div class="{cssprefix}-grouptitle">{optgroup.label}&lt;/div>
+				{/optgroup_start}
+				{optgroup_end}
+					&lt;/div>
+				{/optgroup_end}
+				{optiontags}
+					&lt;div class="{cssprefix}-item {option.readonly} {option.disabled}">{option.html}&lt;/div>
+				{/optiontags}
+			{/block}
+		&lt;/div>
+		&lt;div class="{cssprefix}-background">&lt;/div>
+	&lt;/div>
+</pre>
+<p>
+	The placeholders format is {...}, these are replaced to the appropriate value, or control the
+	HTML structure building. Only the placeholders there are in the above template are defined, other
+	placeholders have no effect. <strong>You should modify the template only if this is necessary,
+	and only with maintain the hierarchy!</strong> Some elements of a special CSS class have special
+	functions:<br />
+	<br />
+	{cssprefix} : this is the conatiner element, this has to wrap the whole structure.<br />
+	{cssprefix}-input : this form element contain the selected value.<br />
+	{cssprefix}-selector : by clicking this element, the option list will open.<br />
+	{cssprefix}-menu : the option list container.<br />
+	{cssprefix}-item : an element of the list (one option), by clicking this the option will be selected.<br />
+	{cssprefix}-background : by clicking this element, the option list will close.<br />
+	<br />
+	The default functions that has been binded to the click event can be disable with set true the
+	<em>disabledropdown</em>, <em>disableselect</em> and <em>disableclose</em> properties. After this
+	we can overwrite the base functionality by binding new event handlers to this elements.
+</p>
+<h2 id="divselect-billentyuvezerles">Keyboard controlling</h2>
+<p>
+	The divselect can be control by the keyboard. The implemented functions:
+</p>
+<table cellspacing="0">
+	<tr>
+		<th>Key</th>
+		<th>Function</th>
+		<th>Triggered event</th>
+	</tr>
+	<tr>
+		<td>Tab</td>
+		<td>
+			Tabbing between divselects (put focus on divselect or remove)
+		</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>Cursor control keys</td>
+		<td>
+			Up and Left step one on the list upward, Down and Right downward. It has effect on closed
+			but focused list, in this case they change the selected element.
+		</td>
+		<td class="nowrap">select, change<br />(only closed list)</td>
+	</tr>
+	<tr>
+		<td>PageUp<br />PageDown</td>
+		<td>
+			Jump upward or downward on the list, the jump size is defined by the <em>pagestep</em>
+			property. It has effect on closed but focused list, in this case they change the selected
+			element.
+		</td>
+		<td class="nowrap">select, change<br />(only closed list)</td>
+	</tr>
+	<tr>
+		<td>Home<br />End</td>
+		<td>
+			Jump to the beginning or the end of the list. It has effect on closed but focused list,
+			in this case they change the selected element.
+		</td>
+		<td class="nowrap">select, change<br />(only closed list)</td>
+	</tr>
+	<tr>
+		<td>Enter</td>
+		<td>
+			It selects the highlighted element on an opened list.
+		</td>
+		<td class="nowrap">select, change, close</td>
+	</tr>
+	<tr>
+		<td>Esc</td>
+		<td>
+			It closes the list, the selected elment won't change.
+		</td>
+		<td class="nowrap">close</td>
+	</tr>
+	<tr>
+		<td>Letter keys</td>
+		<td>
+			We can do inline search with te keys in the a-z and 0-9 character sets, and the additionally
+			defined keys in the <em>characters</em> property. With press a character, the highlighting
+			will jump to the element that first character is match the pressed character (here the
+			option innerHTML is checked without HTML tags). If we press a character again in the time
+			given by the <em>keydownwait</em> property (in milliseconds) we accurate the search, the
+			second character of the innerHTML will be in the checked string. A press beyond the
+			<em>keydownwait</em> time will start a new search. The inline search works on closed but
+			focused list, in this case it changes the selected element.
+		</td>
+		<td class="nowrap">select, change<br />(only closed list)</td>
+	</tr>
+</table>
+<p>
+	The cursor control and letter keys of the list stepping keys are cyclic, so if they get to end of
+	the list, they continue from the beginning.<br />
+	The keyboard controlling can be disable with set true the <em>disablekeys</em> property. After
+	this we can overwrite the base functionality by binding new event handlers to this elements. The
+	Tab key functionality will remain, because it is implemented by the browser, the plugin only
+	provide the divselect element to be focusable.
+</p>
+				
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

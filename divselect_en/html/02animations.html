@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+	
+	<!-- divselect operator part -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#example1").divselect({
+				showeffect : function($elem){
+					$elem.fadeIn(800);
+				},
+				hideeffect : function($elem){
+					$elem.fadeOut(800);
+				}
+			});
+			$("#example2").divselect({
+				showeffect : function($elem){
+					$elem.show("scale", {duration: 2000, easing: "easeOutElastic"});
+				},
+				hideeffect : function($elem){
+					$elem.delay(300).hide("explode");
+				}
+			});
+			var leftpos = 0;
+			$("#example3").divselect({
+				showeffect : function($elem){
+					$elem.css("width", "0");
+					$elem.css("height", "0");
+					$elem.css("opacity", "0");
+					$elem.css("display", "block");
+					$elem.position({
+						my : "center top",
+						at : "center bottom",
+						of : $elem.siblings(".divselect-selector"),
+						using : function(pos){
+							leftpos = pos.left;
+						}
+					});
+					$elem.css("left", leftpos+"px");
+					$elem.animate({
+						width: "185px",
+						height: "175px",
+						left: "0px",
+						opacity: 1
+					});
+				},
+				hideeffect : function($elem){
+					$elem.animate({
+						width: 0,
+						height: 0,
+						left: leftpos+"px",
+						opacity: 0
+					});
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Documentation</a></li>
+		<li><a href="01basic.html">Basic</a></li>
+		<li class="active"><a href="02animations.html">Animations</a></li>
+		<li><a href="03styles.html">Styles</a></li>
+		<li><a href="04events.html">Events</a></li>
+		<li><a href="05attributes.html">HTML attributes</a></li>
+		<li><a href="06template.html">Template modification</a></li>
+		<li><a href="07basefunction.html">Basic function overwriting</a></li>
+		<li><a href="08ajax.html">Dinamic loading</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Animations</h1>
+			<p>
+				We can set custom effect for show and hide the list with setting the showeffect and
+				hideeffect methods.
+			</p>
+			<h2>Using internal jQuery effects</h2>
+			<p>
+				The following jQuery methods can be usable: show(), hide(), fadeIn(), fadeOut(),
+				slideDown(), slideUp()
+			</p>
+			<pre class="brush: js">
+				$("#example1").divselect({
+					showeffect : function($elem){
+						$elem.fadeIn(800);
+					},
+					hideeffect : function($elem){
+						$elem.fadeOut(800);
+					}
+				});</pre>
+			<select id="example1" name="example1">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<h2>Using jQuery UI effects</h2>
+			<p>
+				The jQuery UI implements many effects, if it's added, these ar also can be used.
+			</p>
+			<pre class="brush: js">
+				$("#example2").divselect({
+					showeffect : function($elem){
+						$elem.show("scale", {duration: 2000, easing: "easeOutElastic"});
+					},
+					hideeffect : function($elem){
+						$elem.delay(300).hide("explode");
+					}
+				});</pre>
+			<select id="example2" name="example2">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<h2>Using custom effects</h2>
+			<p>
+				In this case we can use (for example) the jQuery animate() method. We have to set
+				some CSS properties starting value and pass the end values to the animate() method.
+				To calculate certain start properties there may be usable the jQuery UI position
+				utility.
+			</p>
+			<pre class="brush: js">
+				var leftpos = 0;
+				$("#example2").divselect({
+					showeffect : function($elem){
+						$elem.css("width", "0");
+						$elem.css("height", "0");
+						$elem.css("opacity", "0");
+						$elem.css("display", "block");
+						$elem.position({
+							my : "center top",
+							at : "center bottom",
+							of : $elem.siblings(".divselect-selector"),
+							using : function(pos){
+								leftpos = pos.left;
+							}
+						});
+						$elem.css("left", leftpos+"px");
+						$elem.animate({
+							width: "185px",
+							height: "175px",
+							left: "0px",
+							opacity: 1
+						});
+					},
+					hideeffect : function($elem){
+						$elem.animate({
+							width: 0,
+							height: 0,
+							left: leftpos+"px",
+							opacity: 0
+						});
+					}
+				});</pre>
+			<select id="example3" name="example3">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<div style="height: 200px;"></div>
+			
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

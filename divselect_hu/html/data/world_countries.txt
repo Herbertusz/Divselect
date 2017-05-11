@@ -1,0 +1,218 @@
+-A
+Alg%c3%a9ria
+Amerikai Egyes%c3%bclt %c3%81llamok
+Andorra
+Angola
+Antigua %c3%a9s Barbuda
+Argent%c3%adna
+Ausztr%c3%a1lia
+Ausztria
+Azerbajdzs%c3%a1n
+-B
+Bahama-szigetek
+Bahrein
+Banglades
+Barbados
+Belgium
+Belize
+Benin
+Bhut%c3%a1n
+Bissau-Guinea
+Bol%c3%advia
+Bosznia %c3%a9s Hercegovina
+Botswana
+Braz%c3%adlia
+Brunei
+Bulg%c3%a1ria
+Burkina Faso
+Burundi
+-C
+Chile
+Ciprus
+Comore-szigetek
+Costa Rica
+Cs%c3%a1d
+Csehorsz%c3%a1g
+-D
+D%c3%a1nia
+D%c3%a9l-afrikai K%c3%b6zt%c3%a1rsas%c3%a1g
+D%c3%a9l-Korea
+Dominikai K%c3%b6z%c3%b6ss%c3%a9g
+Dominikai K%c3%b6zt%c3%a1rsas%c3%a1g
+Dzsibuti
+-E%2c%c3%89
+Ecuador
+Egyenl%c3%adt%c5%91i-Guinea
+Egyes%c3%bclt Arab Em%c3%adrs%c3%a9gek
+Egyiptom
+Elef%c3%a1ntcsontpart
+Eritrea
+%c3%89szak-Ciprus
+%c3%89szak-Korea
+%c3%89sztorsz%c3%a1g
+Eti%c3%b3pia
+-F
+Feh%c3%a9roroszorsz%c3%a1g
+Fidzsi-szigetek
+Finnorsz%c3%a1g
+Franciaorsz%c3%a1g
+F%c3%bcl%c3%b6p-szigetek
+-G
+Gabon
+Gambia
+Gh%c3%a1na
+G%c3%b6r%c3%b6gorsz%c3%a1g
+Grenada
+Gr%c3%bazia
+Guatemala
+Guinea
+Guyana
+-H
+Haiti
+Hollandia
+Honduras
+Horv%c3%a1torsz%c3%a1g
+-I%2c%c3%8d
+India
+Indon%c3%a9zia
+Irak
+Ir%c3%a1n
+%c3%8drorsz%c3%a1g
+Izland
+Izrael
+-J
+Jamaica
+Jap%c3%a1n
+Jemen
+Jord%c3%a1nia
+-K
+Kambodzsa
+Kamerun
+Kanada
+Katar
+Kazahszt%c3%a1n
+Kelet-Timor
+Kenya
+K%c3%adna
+Kirgiziszt%c3%a1n
+Kiribati
+Kolumbia
+Kong%c3%b3
+Kong%c3%b3i Demokratikus K%c3%b6zt%c3%a1rsas%c3%a1g
+K%c3%b6z%c3%a9p-afrikai K%c3%b6zt%c3%a1rsas%c3%a1g
+Kuba
+Kuvait
+-L
+Laosz
+Lengyelorsz%c3%a1g
+Lesotho
+Lettorsz%c3%a1g
+Libanon
+Lib%c3%a9ria
+L%c3%adbia
+Liechtenstein
+Litv%c3%a1nia
+Luxemburg
+-M
+Maced%c3%b3nia
+Madagaszk%c3%a1r
+Magyarorsz%c3%a1g
+Malajzia
+Malawi
+Mald%c3%adv-szigetek
+Mali
+Marokk%c3%b3
+Marshall-szigetek
+Maurit%c3%a1nia
+Mauritius
+M%c3%a1lta
+Mexik%c3%b3
+Mianmar
+Mikron%c3%a9ziai Sz%c3%b6vets%c3%a9gi %c3%81llamok
+Moldova
+Monaco
+Mong%c3%b3lia
+Montenegr%c3%b3
+Mozambik
+-N
+Nagy-Britannia
+Nam%c3%adbia
+Nauru
+N%c3%a9metorsz%c3%a1g
+Nep%c3%a1l
+Nicaragua
+Niger
+Nig%c3%a9ria
+Norv%c3%a9gia
+Nyugat-Szahara
+-O%2c%c3%93%2c%c3%96%2c%c5%90
+Olaszorsz%c3%a1g
+Om%c3%a1n
+%c3%96rm%c3%a9nyorsz%c3%a1g
+Oroszorsz%c3%a1g
+-P
+Pakiszt%c3%a1n
+Palau
+Palesztin Nemzeti Hat%c3%b3s%c3%a1g
+Panama
+Paraguay
+P%c3%a1pua %c3%9aj-Guinea
+Peru
+Portug%c3%a1lia
+-R
+Rom%c3%a1nia
+Ruanda
+-S
+Saint Kitts %c3%a9s Nevis
+Saint Lucia
+Saint Vincent
+Salamon-szigetek
+Salvador
+San Marino
+Sao Tom%c3%a9 %c3%a9s Pr%c3%adncipe
+Seychelle-szigetek
+Sierra Leone
+Spanyolorsz%c3%a1g
+Sr%c3%ad Lanka
+Suriname
+Sv%c3%a1jc
+Sv%c3%a9dorsz%c3%a1g
+Szamoa
+Sza%c3%bad-Ar%c3%a1bia
+Szeneg%c3%a1l
+Szerbia
+Szingap%c3%bar
+Sz%c3%adria
+Szlov%c3%a1kia
+Szlov%c3%a9nia
+Szom%c3%a1lia
+Szom%c3%a1lif%c3%b6ld
+Szud%c3%a1n
+Szv%c3%a1zif%c3%b6ld
+-T
+Tajvan
+Tanz%c3%a1nia
+T%c3%a1dzsikiszt%c3%a1n
+Thaif%c3%b6ld
+Togo
+Tonga
+T%c3%b6r%c3%b6korsz%c3%a1g
+Trinidad %c3%a9s Tobago
+Tun%c3%a9zia
+T%c3%bcrkmeniszt%c3%a1n
+Tuvalu
+-U%2c%c3%9a%2c%c3%9c%2c%c5%b0
+Uganda
+%c3%9aj-Z%c3%a9land
+Ukrajna
+Uruguay
+%c3%9czbegiszt%c3%a1n
+-V
+Vanuatu
+Vatik%c3%a1n
+Venezuela
+Vietnam
+-Z
+Zambia
+Zimbabwe
+Z%c3%b6ld-foki K%c3%b6zt%c3%a1rsas%c3%a1g

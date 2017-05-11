@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#example1').divselect();
+			$('#example2').divselect({
+				selectAction : function($divelement, $item){
+					var $selector = $divelement.find('[data-element="selector"]');
+					if (!$divelement.data("multiple")){
+						// sima select
+						$selector.html($item.html());
+					}
+					else{
+						// multiselect
+						$selector.html($divelement.divselect("getValue").length + " elem kiválasztva");
+					}
+				}
+			});
+			$('#example3').divselect({
+				optionTags : {
+					"jquery"       : '<img src="../images/jquery.png"> <span>#</span>',
+					"jquery-ui"    : '<img src="../images/jquery-ui.png"> <span>#</span>',
+					"jquery-tools" : '<img src="../images/jquery-tools.png"> <span>#</span>',
+					"backbone"     : '<img src="../images/backbone.png"> <span>#</span>',
+					"angular"      : '<img src="../images/angular.png"> <span>#</span>',
+					"knockout"     : '<img src="../images/knockout.png"> <span>#</span>',
+					"ember"        : '<img src="../images/ember.png"> <span>#</span>'
+				},
+				selectAction : function($divelement, $item){
+					var $selector = $divelement.find('[data-element="selector"]');
+					var itemHtml = $divelement.divselect("getSelected");
+					if (!$divelement.data("multiple")){
+						// sima select
+						$selector.html(itemHtml);
+					}
+					else{
+						// multiselect
+						var fullHtml = '';
+						$.each(itemHtml, function(i, html){
+							fullHtml += $('<div>' + html + '</div>').find('img')[0].outerHTML + '&nbsp;';
+						});
+						$selector.html(fullHtml);
+					}
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Dokumentáció</a></li>
+		<li><a href="01basic.html">Alap</a></li>
+		<li><a href="02animations.html">Animációk</a></li>
+		<li><a href="03styles.html">Stílusok</a></li>
+		<li><a href="04events.html">Események</a></li>
+		<li><a href="05attributes.html">HTML attribútumok</a></li>
+		<li class="active"><a href="06multiselect.html">Multiselect</a></li>
+		<li><a href="07template.html">Template módosítása</a></li>
+		<li><a href="08basefunction.html">Alapműködés felülírása</a></li>
+		<li><a href="09ajax.html">Dinamikus betöltés</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Multiselect</h1>
+			<p>
+				xxxxx
+			</p>
+			<div class="spacer"></div>
+			<select id="example1" name="example1" multiple="multiple">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6" selected="selected">option 6</option>
+				<option value="7" selected="selected">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<div class="spacer"></div>
+			<p>
+				A HTML kód:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example1" name="example1" multiple="multiple">
+					&lt;option value="1">option 1&lt;/option>
+					&lt;option value="2">option 2&lt;/option>
+					&lt;option value="3" selected="selected">option 3&lt;/option>
+					&lt;option value="4">option 4&lt;/option>
+					&lt;option value="5">option 5&lt;/option>
+					&lt;option value="6" selected="selected">option 6&lt;/option>
+					&lt;option value="7" selected="selected">option 7&lt;/option>
+					&lt;option value="8">option 8&lt;/option>
+				&lt;/select></pre>
+			<h2>A selectAction metódus</h2>
+			<p>
+				xxxxx
+			</p>
+			<p>
+				Alapértelmezetten így néz ki ez a metódus:
+			</p>
+			<pre class="brush: js">
+				selectAction : function($divelement, $item){
+					var $selector = $divelement.find('[data-element="selector"]');
+					var itemHtml = $divelement.divselect("getSelected");
+					if (!$.isArray(itemHtml)){
+						// sima select
+						$selector.html(itemHtml);
+					}
+					else{
+						// multiselect
+						$selector.html(itemHtml.join(' '));
+					}
+				}</pre>
+			<p>
+				xxxxx
+			</p>
+			<div class="spacer"></div>
+			<select id="example2" name="example2" multiple="multiple">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6" selected="selected">option 6</option>
+				<option value="7" selected="selected">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<div class="spacer"></div>
+			<p>
+				A javascript kód:
+			</p>
+			<pre class="brush: js">
+				$('#example2').divselect({
+					selectAction : function($divelement, $item){
+						var $selector = $divelement.find('[data-element="selector"]');
+						if (!$divelement.data("multiple")){
+							// sima select
+							$selector.html($item.html());
+						}
+						else{
+							// multiselect
+							$selector.html($divelement.divselect("getValue").length + " elem kiválasztva");
+						}
+					}
+				});</pre>
+			<p>
+				xxxxx
+			</p>
+			<div class="spacer"></div>
+			<select id="example3" name="example3" multiple="multiple">
+				<option value="jquery" selected="selected">jQuery</option>
+				<option value="jquery-ui" selected="selected">jQuery UI</option>
+				<option value="jquery-tools">jQuery Tools</option>
+				<option value="backbone" selected="selected">Backbone</option>
+				<option value="angular">Angular</option>
+				<option value="knockout">Knockout</option>
+				<option value="ember">Ember</option>
+			</select>
+			<div class="spacer"></div>
+			<p>
+				A javascript kód:
+			</p>
+			<pre class="brush: js">
+				$('#example2').divselect({
+					selectAction : function($divelement, $item){
+						var $selector = $divelement.find('[data-element="selector"]');
+						var itemHtml = $divelement.divselect("getSelected");
+						if (!$divelement.data("multiple")){
+							// sima select
+							$selector.html(itemHtml);
+						}
+						else{
+							// multiselect
+							var fullHtml = '';
+							$.each(itemHtml, function(i, html){
+								fullHtml += $('&lt;div>' + html + '&lt;/div>').find('img')[0].outerHTML + '&nbsp;';
+							});
+							$selector.html(fullHtml);
+						}
+					}
+				});</pre>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

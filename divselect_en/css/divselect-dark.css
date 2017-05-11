@@ -1,0 +1,143 @@
+/* 
+    Document   : divselect
+    Created on : 2012.03.31.
+    Author     : Horváth Norbert
+    Description:
+        Divselect dark stílus
+*/
+
+.divselect-dark-input {
+	display: none;
+}
+.divselect-dark {
+	width: 187px;
+	outline-width: 0;
+}
+.divselect-dark:focus {
+	outline: 1px dotted #aaaaaa;
+}
+.divselect-dark-background {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+.divselect-dark-selector {
+	padding: 4px 2px 2px 4px;
+	height: 18px;
+	border: 1px solid #555555;
+	border-radius: 4px;
+	overflow: hidden;
+	color: #ffffff;
+	font-size: 12px;
+	background-image: url("images/dark-icon-select.png");
+	background-position: 98% -10%;
+	background-repeat: no-repeat;
+	background-color: #888888;
+	outline-width: 0;
+}
+.divselect-dark-selector.divselect-dark-readonly {
+	color: #dddddd;
+}
+.divselect-dark-selector.divselect-dark-disabled {
+	color: #dddddd;
+}
+.divselect-dark-selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect-dark-active {
+	background-position: 98% 110%;
+}
+.divselect-dark-menu {
+	display: block;
+	width: 185px;
+	max-height: 300px;
+	overflow: auto;
+	border: 1px solid #555555;
+	border-radius: 4px;
+	background-color: #000000;
+	position: absolute;
+	z-index: 100;
+}
+.divselect-dark-group {
+	
+}
+.divselect-dark-grouptitle {
+	padding: 4px;
+	border-top: 1px solid #888888;
+	border-bottom: 1px solid #888888;
+	background-color: #555555;
+	color: #dddddd;
+	font-weight: bold;
+}
+.divselect-dark-item {
+	margin: 1px;
+	padding: 4px 2px 4px 4px;
+	height: 15px;
+	border: 1px solid transparent;
+	color: #ffffff;
+	font-size: 12px;
+	cursor: pointer;
+}
+.divselect-dark-item.divselect-dark-disabled {
+	color: #888888;
+	cursor: default;
+}
+.divselect-dark-item span {
+	position: relative;
+	top: -3px;
+}
+.divselect-dark-group .divselect-dark-item {
+	padding-left: 14px;
+}
+.divselect-dark-item:hover {
+	border: 1px solid #555555;
+	border-radius: 4px;
+	background-color: #666666;
+}
+.divselect-dark-item.divselect-dark-disabled:hover {
+	border-color: transparent;
+	background-color: transparent;
+}
+.divselect-dark-preselected {
+	border: 1px solid #555555;
+	border-radius: 4px;
+	outline-width: 0;
+	background-color: #aaaaaa;
+	background-image: url("images/dark-bg-selected.jpg");
+	background-repeat: repeat-x;
+}
+
+/* Filter plugin */
+
+.divselect-dark-filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 20px;
+}
+.divselect-dark-filter-input {
+	padding: 2px;
+	width: 140px;
+	height: 16px;
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+	background-color: #dddddd;
+}
+.divselect-dark-filter-reset {
+	color: #bbbbbb;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect-dark-filter-reset:hover {
+	color: #ffffff;
+}

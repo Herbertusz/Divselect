@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('select').divselect();
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Dokumentáció</a></li>
+		<li class="active"><a href="01basic.html">Alap</a></li>
+		<li><a href="02animations.html">Animációk</a></li>
+		<li><a href="03styles.html">Stílusok</a></li>
+		<li><a href="04events.html">Események</a></li>
+		<li><a href="05attributes.html">HTML attribútumok</a></li>
+		<li><a href="06multiselect.html">Multiselect</a></li>
+		<li><a href="07template.html">Template módosítása</a></li>
+		<li><a href="08basefunction.html">Alapműködés felülírása</a></li>
+		<li><a href="09ajax.html">Dinamikus betöltés</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Alapszintű demók</h1>
+			<p>
+				Mindhárom demó az alábbi javascript kóddal lett létrehozva:
+			</p>
+			<pre class="brush: js">
+				$(document).ready(function(){
+					$("select").divselect();
+				});</pre>
+			<h2>Alap</h2>
+			<select name="example1">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+			<h2>Optgroup tegekkel</h2>
+			<select name="example2">
+				<optgroup label="csoport 1">
+					<option value="1">option 1</option>
+					<option value="2">option 2</option>
+					<option value="3" selected="selected">option 3</option>
+					<option value="4">option 4</option>
+					<option value="5">option 5</option>
+				</optgroup>
+				<optgroup label="csoport 2">
+					<option value="6">option 6</option>
+					<option value="7">option 7</option>
+					<option value="8">option 8</option>
+				</optgroup>
+			</select>
+			<h2>Hosszabb select</h2>
+			<select name="example3">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6">option 6</option>
+				<option value="7">option 7</option>
+				<option value="8">option 8</option>
+				<option value="9">option 9</option>
+				<option value="10">option 10</option>
+				<option value="11">option 11</option>
+				<option value="12">option 12</option>
+				<option value="13">option 13</option>
+				<option value="14">option 14</option>
+				<option value="15">option 15</option>
+				<option value="16">option 16</option>
+				<option value="17">option 17</option>
+				<option value="18">option 18</option>
+				<option value="19">option 19</option>
+				<option value="20">option 20</option>
+			</select>
+			<h2>Multiselect</h2>
+			<select name="example4" multiple="multiple">
+				<option value="1">option 1</option>
+				<option value="2">option 2</option>
+				<option value="3" selected="selected">option 3</option>
+				<option value="4">option 4</option>
+				<option value="5">option 5</option>
+				<option value="6" selected="selected">option 6</option>
+				<option value="7" selected="selected">option 7</option>
+				<option value="8">option 8</option>
+			</select>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

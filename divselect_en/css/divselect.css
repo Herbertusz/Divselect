@@ -1,0 +1,127 @@
+/* 
+    Document   : divselect
+    Created on : 2011.08.26.
+    Author     : Horváth Norbert
+    Description:
+        Divselect alap stílus
+*/
+
+.divselect-input {
+	display: none;
+}
+.divselect {
+	width: 187px;
+	outline-width: 0;
+}
+.divselect:focus {
+	outline: 1px dotted #000000;
+}
+.divselect-background {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+.divselect-selector {
+	padding: 2px 2px 2px 4px;
+	height: 15px;
+	border: 1px solid #dcdcdc;
+	overflow: hidden;
+	color: #373737;
+	font-size: 12px;
+	font-weight: bold;
+	background-image: url("images/basic-icon-select.png");
+	background-position: top right;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	outline-width: 0;
+}
+.divselect-selector.divselect-readonly {
+	color: #aaaaaa;
+}
+.divselect-selector.divselect-disabled {
+	background-color: #eeeeee;
+	color: #aaaaaa;
+}
+.divselect-selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect-active {
+	background-position: bottom right;
+}
+.divselect-menu {
+	display: block;
+	width: 185px;
+	max-height: 250px;
+	overflow: auto;
+	border: 1px solid #dcdcdc;
+	background-color: #ffffff;
+	position: absolute;
+	z-index: 100;
+}
+.divselect-group {
+	
+}
+.divselect-grouptitle {
+	font-weight: bold;
+	font-style: italic;
+}
+.divselect-item {
+	padding: 2px 2px 4px 4px;
+	color: #373737;
+	font-size: 12px;
+	font-weight: bold;
+}
+.divselect-item.divselect-disabled {
+	color: #aaaaaa;
+}
+.divselect-item span {
+	position: relative;
+	top: -3px;
+}
+.divselect-group .divselect-item {
+	padding-left: 14px;
+}
+.divselect-item:hover {
+	background-color: #e8e8e8;
+}
+.divselect-item.divselect-disabled:hover {
+	background-color: #ffffff;
+}
+.divselect-preselected {
+	background-color: #e8e8e8;
+	outline-width: 0;
+}
+
+/* Filter plugin */
+
+.divselect-filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 16px;
+}
+.divselect-filter-input {
+	padding: 2px;
+	width: 140px;
+	height: 14px;
+	border: 1px solid #dcdcdc;
+	background-color: #ffffff;
+}
+.divselect-filter-reset {
+	color: #999999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect-filter-reset:hover {
+	color: #000000;
+}

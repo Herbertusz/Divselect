@@ -1,0 +1,144 @@
+/* 
+    Document   : divselect
+    Created on : 2013.09.05.
+    Author     : Horváth Norbert
+    Description:
+        Divselect facebook stílus
+*/
+
+.divselect-fb-input {
+	display: none;
+}
+.divselect-fb {
+	width: 187px;
+	outline-width: 0;
+}
+.divselect-fb:focus {
+	outline: 1px dotted #000000;
+}
+.divselect-fb-background {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+.divselect-fb-selector {
+	padding: 2px 2px 2px 4px;
+	height: 16px;
+	border: 1px solid transparent;
+	overflow: hidden;
+	color: #888888;
+	font-size: 12px;
+	background-image: url("images/fb-icon-select.png");
+	background-position: top right;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	outline-width: 0;
+}
+.divselect-fb-selector:hover {
+	border-color: #888888;
+	color: #000000;
+	background-color: #f2f2f2;
+}
+.divselect-fb-selector.divselect-fb-readonly {
+	color: #777777;
+}
+.divselect-fb-selector.divselect-fb-disabled {
+	border-color: transparent;
+	background-color: #eeeeee;
+	color: #777777;
+}
+.divselect-fb-selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect-fb-active {
+	color: #ffffff;
+	background-position: bottom right;
+	background-color: #6d84b4;
+	border-color: #3b5998;
+}
+.divselect-fb-menu {
+	display: block;
+	padding: 4px 0;
+	width: 185px;
+	max-height: 250px;
+	overflow: auto;
+	border: 1px solid #777777;
+	background-color: #ffffff;
+	position: absolute;
+	z-index: 100;
+}
+.divselect-fb-group {
+	
+}
+.divselect-fb-grouptitle {
+	margin: 4px;
+	border-bottom: 1px solid #dddddd;
+	color: #777777;
+	font-weight: bold;
+}
+.divselect-fb-item {
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	padding: 2px 2px 0 4px;
+	color: #000000;
+	font-size: 12px;
+}
+.divselect-fb-item.divselect-fb-disabled {
+	color: #777777;
+}
+.divselect-fb-item span {
+	position: relative;
+	top: -3px;
+}
+.divselect-fb-group .divselect-fb-item {
+	padding-left: 14px;
+}
+.divselect-fb-item:hover {
+	color: #ffffff;
+	background-color: #6d84b4;
+}
+.divselect-fb-item.divselect-fb-disabled:hover {
+	color: #777777;
+	background-color: #ffffff;
+}
+.divselect-fb-preselected {
+	border-top-color: #3b5998;
+	border-bottom-color: #3b5998;
+	color: #ffffff;
+	background-color: #6d84b4;
+	outline-width: 0;
+}
+
+/* Filter plugin */
+
+.divselect-fb-filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 16px;
+}
+.divselect-fb-filter-input {
+	padding: 2px;
+	width: 140px;
+	height: 14px;
+	border: 1px solid #777777;
+	background-color: #ffffff;
+}
+.divselect-fb-filter-reset {
+	color: #999999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect-fb-filter-reset:hover {
+	color: #000000;
+}

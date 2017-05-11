@@ -1,0 +1,141 @@
+/* 
+    Document   : divselect
+    Created on : 2012.03.27.
+    Author     : Horváth Norbert
+    Description:
+        Divselect smooth stílus
+*/
+
+.divselect-smooth-input {
+	display: none;
+}
+.divselect-smooth {
+	width: 187px;
+	outline-width: 0;
+}
+.divselect-smooth:focus {
+	outline: 1px dotted #000000;
+}
+.divselect-smooth-background {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+.divselect-smooth-selector {
+	padding: 4px 2px 2px 4px;
+	height: 18px;
+	border: 1px solid #dcdcdc;
+	border-radius: 4px;
+	overflow: hidden;
+	color: #373737;
+	font-size: 12px;
+	background-image: url("images/smooth-icon-select.png");
+	background-position: 98% -10%;
+	background-repeat: no-repeat;
+	background-color: #ffffff;
+	outline-width: 0;
+}
+.divselect-smooth-selector.divselect-smooth-readonly {
+	color: #aaaaaa;
+}
+.divselect-smooth-selector.divselect-smooth-disabled {
+	background-color: #eeeeee;
+	color: #aaaaaa;
+}
+.divselect-smooth-selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect-smooth-active {
+	background-position: 98% 110%;
+}
+.divselect-smooth-menu {
+	display: block;
+	width: 185px;
+	max-height: 300px;
+	overflow: auto;
+	border: 1px solid #dcdcdc;
+	border-radius: 4px;
+	background-color: #ffffff;
+	position: absolute;
+	z-index: 100;
+}
+.divselect-smooth-group {
+	
+}
+.divselect-smooth-grouptitle {
+	padding: 4px;
+	border-bottom: 1px solid #888888;
+	font-weight: bold;
+}
+.divselect-smooth-item {
+	margin: 1px;
+	padding: 4px 2px 4px 4px;
+	height: 15px;
+	border: 1px solid transparent;
+	color: #000000;
+	font-size: 12px;
+	cursor: pointer;
+}
+.divselect-smooth-item.divselect-smooth-disabled {
+	color: #aaaaaa;
+	cursor: default;
+}
+.divselect-smooth-item span {
+	position: relative;
+	top: -3px;
+}
+.divselect-smooth-group .divselect-smooth-item {
+	padding-left: 14px;
+}
+.divselect-smooth-item:hover {
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+	background-color: #f5f5f5;
+}
+.divselect-smooth-item.divselect-smooth-disabled:hover {
+	border-color: transparent;
+	background-color: transparent;
+}
+.divselect-smooth-preselected {
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+	outline-width: 0;
+	background-color: #e8e8e8;
+	background-image: url("images/smooth-bg-selected.jpg");
+	background-repeat: repeat-x;
+}
+
+/* Filter plugin */
+
+.divselect-smooth-filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 20px;
+}
+.divselect-smooth-filter-input {
+	padding: 2px;
+	width: 140px;
+	height: 16px;
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+	background-color: #ffffff;
+}
+.divselect-smooth-filter-reset {
+	color: #999999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect-smooth-filter-reset:hover {
+	color: #000000;
+}

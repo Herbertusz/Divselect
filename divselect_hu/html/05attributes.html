@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("select").divselect({
+				optionTags : {
+					"1" : '<input type="checkbox" name="lang[]" value="1" /> #',
+					"2" : '<input type="checkbox" name="lang[]" value="2" /> #',
+					"3" : '<input type="checkbox" name="lang[]" value="3" checked="checked" /> #',
+					"4" : '<input type="checkbox" name="lang[]" value="4" /> #',
+					"5" : '<input type="checkbox" name="lang[]" value="5" /> #',
+					"6" : '<input type="checkbox" name="lang[]" value="6" /> #',
+					"7" : '<input type="checkbox" name="lang[]" value="7" /> #',
+					"8" : '<input type="checkbox" name="lang[]" value="8" /> #'
+				}
+			});
+			$("#selectdisable").click(function(){
+				if ($("#example2").divselect("isDisabled")){
+					$("#example2").divselect("unsetDisabled");
+				}
+				else{
+					$("#example2").divselect("setDisabled");
+				}
+			});
+			$("#selectreadonly").click(function(){
+				if ($("#example2").divselect("isReadonly")){
+					$("#example2").divselect("unsetReadonly");
+				}
+				else{
+					$("#example2").divselect("setReadonly");
+				}
+			});
+			$("#optiondisable").click(function(){
+				if ($("#example2").divselect("isDisabled", "3")){
+					$("#example2").divselect("unsetDisabled", "3");
+				}
+				else{
+					$("#example2").divselect("setDisabled", "3");
+				}
+			});
+			$("#optionreadonly").click(function(){
+				if ($("#example2").divselect("isReadonly", "3")){
+					$("#example2").divselect("unsetReadonly", "3");
+				}
+				else{
+					$("#example2").divselect("setReadonly", "3");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Dokumentáció</a></li>
+		<li><a href="01basic.html">Alap</a></li>
+		<li><a href="02animations.html">Animációk</a></li>
+		<li><a href="03styles.html">Stílusok</a></li>
+		<li><a href="04events.html">Események</a></li>
+		<li class="active"><a href="05attributes.html">HTML attribútumok</a></li>
+		<li><a href="06multiselect.html">Multiselect</a></li>
+		<li><a href="07template.html">Template módosítása</a></li>
+		<li><a href="08basefunction.html">Alapműködés felülírása</a></li>
+		<li><a href="09ajax.html">Dinamikus betöltés</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>HTML attribútumok</h1>
+			<p>
+				A readonly és disabled attribútumok hatásait figyelhetjük meg ezeken a példákon.
+			</p>
+			<h2>Előre megadott attribútumok</h2>
+			<select id="example1" name="example1">
+				<option value="1">HTML</option>
+				<option value="2">CSS</option>
+				<option value="3" readonly="readonly">JavaScript</option>
+				<option value="4">PHP</option>
+				<option value="5">SQL</option>
+				<option value="6" disabled="disabled">Python</option>
+				<option value="7" disabled="disabled">Ruby</option>
+				<option value="8">ASP</option>
+			</select>
+			<pre class="brush: html">
+				&lt;select id="example1" name="example1">
+					&lt;option value="1">HTML&lt;/option>
+					&lt;option value="2">CSS&lt;/option>
+					&lt;option value="3" readonly="readonly">JavaScript&lt;/option>
+					&lt;option value="4">PHP&lt;/option>
+					&lt;option value="5">SQL&lt;/option>
+					&lt;option value="6" disabled="disabled">Python&lt;/option>
+					&lt;option value="7" disabled="disabled">Ruby&lt;/option>
+					&lt;option value="8">ASP&lt;/option>
+				&lt;/select></pre>
+			<pre class="brush: js">
+				$("select").divselect({
+					optionTags : {
+					  "1" : '&lt;input type="checkbox" name="lang[]" value="1" /> #',
+					  "2" : '&lt;input type="checkbox" name="lang[]" value="2" /> #',
+					  "3" : '&lt;input type="checkbox" name="lang[]" value="3" checked="checked" /> #',
+					  "4" : '&lt;input type="checkbox" name="lang[]" value="4" /> #',
+					  "5" : '&lt;input type="checkbox" name="lang[]" value="5" /> #',
+					  "6" : '&lt;input type="checkbox" name="lang[]" value="6" /> #',
+					  "7" : '&lt;input type="checkbox" name="lang[]" value="7" /> #',
+					  "8" : '&lt;input type="checkbox" name="lang[]" value="8" /> #'
+					}
+				});</pre>
+			<h2>Readonly és disabled tulajdonságok változtatása</h2>
+			<select id="example2" name="example2">
+				<option value="1">HTML</option>
+				<option value="2">CSS</option>
+				<option value="3">JavaScript</option>
+				<option value="4">PHP</option>
+				<option value="5">SQL</option>
+				<option value="6">Python</option>
+				<option value="7">Ruby</option>
+				<option value="8">ASP</option>
+			</select>
+			<div class="spacer"></div>
+			<p>
+				Az első sorban lévő gombokkal a select tulajdonságát változtathatjuk, a második sorban
+				a harmadik (javascript) option-ét.
+			</p>
+			<div class="spacer"></div>
+			select:
+			<input id="selectdisable" type="button" value="disabled ki-bekapcsolása" />
+			<input id="selectreadonly" type="button" value="readonly ki-bekapcsolása" />
+			<div class="spacer"></div>
+			option:
+			<input id="optiondisable" type="button" value="disabled ki-bekapcsolása" />
+			<input id="optionreadonly" type="button" value="readonly ki-bekapcsolása" />
+			<div class="spacer"></div>
+			<p>
+				Ebben az esetben a HTML és javascript kód megegyezik (kivéve hogy sehol sincs readonly
+				és disabled attribútum). A gombok HTML kódja, és az eseménykezelők:
+			</p>
+			<pre class="brush: html">
+				&lt;input id="selectdisable" type="button" value="disabled ki-bekapcsolása" />
+				&lt;input id="selectreadonly" type="button" value="readonly ki-bekapcsolása" />
+				&lt;input id="optiondisable" type="button" value="disabled ki-bekapcsolása" />
+				&lt;input id="optionreadonly" type="button" value="readonly ki-bekapcsolása" /></pre>
+			<pre class="brush: js">
+				$("#selectdisable").click(function(){
+					if ($("#example2").divselect("isDisabled")){
+						$("#example2").divselect("unsetDisabled");
+					}
+					else{
+						$("#example2").divselect("setDisabled");
+					}
+				});
+				$("#selectreadonly").click(function(){
+					if ($("#example2").divselect("isReadonly")){
+						$("#example2").divselect("unsetReadonly");
+					}
+					else{
+						$("#example2").divselect("setReadonly");
+					}
+				});
+				$("#optiondisable").click(function(){
+					if ($("#example2").divselect("isDisabled", "3")){
+						$("#example2").divselect("unsetdisabled", "3");
+					}
+					else{
+						$("#example2").divselect("setDisabled", "3");
+					}
+				});
+				$("#optionreadonly").click(function(){
+					if ($("#example2").divselect("isReadonly", "3")){
+						$("#example2").divselect("unsetReadonly", "3");
+					}
+					else{
+						$("#example2").divselect("setReadonly", "3");
+					}
+				});</pre>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

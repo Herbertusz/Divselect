@@ -1,0 +1,174 @@
+/*
+    Document   : divselect
+    Created on : 2013.09.05.
+    Author     : Horváth Norbert
+    Description:
+        Divselect facebook stílus
+*/
+
+.divselect-fb {
+	position: relative;
+	width: 187px;
+	outline-width: 0;
+}
+.divselect-fb:focus {
+	outline: 1px dotted #000000;
+}
+
+.divselect-fb__input {
+	display: none;
+}
+
+.divselect-fb__background {
+	display: block;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+
+.divselect-fb__selector {
+	position: relative;
+	padding: 2px 2px 2px 4px;
+	height: 16px;
+	border: 1px solid transparent;
+	overflow: hidden;
+	color: #888888;
+	font-size: 12px;
+	/*background-image: url("images/fb-icon-select.png");
+	background-position: top right;
+	background-repeat: no-repeat;*/
+	background-color: #ffffff;
+	outline-width: 0;
+}
+.divselect-fb__selector:before {
+	content: '';
+	position: absolute;
+	right: 6px;
+	top: 7px;
+	z-index: 1;
+	width: 0;
+	height: 0;
+	border-top: 5px solid #576d9b;
+	border-bottom: 5px solid transparent;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+}
+.divselect-fb__selector--readonly {
+	color: #777777;
+}
+.divselect-fb__selector--disabled {
+	border-color: transparent;
+	background-color: #eeeeee;
+	color: #777777;
+}
+.divselect-fb__selector:hover {
+	border-color: #888888;
+	color: #000000;
+	background-color: #f2f2f2;
+}
+.divselect-fb__selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect-fb__selector--active {
+	color: #ffffff;
+	background-position: bottom right;
+	background-color: #6d84b4;
+	border-color: #3b5998;
+}
+.divselect-fb__selector--active:before {
+	border-top-color: #ffffff;
+}
+
+.divselect-fb__menu {
+	display: block;
+	padding: 4px 0;
+	width: 185px;
+	max-height: 250px;
+	overflow: auto;
+	border: 1px solid #777777;
+	background-color: #ffffff;
+	position: absolute;
+	z-index: 100;
+}
+.divselect-fb__group {
+
+}
+.divselect-fb__group__title {
+	margin: 4px;
+	border-bottom: 1px solid #dddddd;
+	color: #777777;
+	font-weight: bold;
+}
+
+.divselect-fb__item {
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	padding: 2px 2px 0 4px;
+	color: #000000;
+	font-size: 12px;
+}
+.divselect-fb__item--readonly {
+
+}
+.divselect-fb__item--disabled {
+	color: #777777;
+}
+.divselect-fb__item span {
+	position: relative;
+	top: -3px;
+}
+.divselect-fb__group .divselect-fb__item {
+	padding-left: 14px;
+}
+.divselect-fb__item:hover {
+	border-top-color: #3b5998;
+	border-bottom-color: #3b5998;
+	color: #ffffff;
+	background-color: #6d84b4;
+}
+.divselect-fb__item--disabled:hover {
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	color: #777777;
+	background-color: #ffffff;
+}
+.divselect-fb__item--preselected {
+	border-top-color: #3b5998;
+	border-bottom-color: #3b5998;
+	color: #ffffff;
+	background-color: #6d84b4;
+	outline-width: 0;
+}
+
+/* Filter plugin */
+
+.divselect-fb__filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 16px;
+}
+.divselect-fb__filter__input {
+	padding: 2px;
+	width: 140px;
+	height: 14px;
+	border: 1px solid #777777;
+	background-color: #ffffff;
+}
+.divselect-fb__filter__reset {
+	color: #999999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect-fb__filter__reset:hover {
+	color: #000000;
+}

@@ -1,0 +1,179 @@
+/*
+    Document   : divselect
+    Created on : 2012.03.31.
+    Author     : Horváth Norbert
+    Description:
+        Divselect dark stílus
+*/
+
+.divselect-dark {
+	position: relative;
+	width: 187px;
+	outline-width: 0;
+}
+.divselect-dark:focus {
+	outline: 1px dotted #aaaaaa;
+}
+
+.divselect-dark__input {
+	display: none;
+}
+
+.divselect-dark__background {
+	display: block;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	z-index: 99;
+}
+
+.divselect-dark__selector {
+	position: relative;
+	padding: 4px 2px 2px 4px;
+	height: 18px;
+	border: 1px solid #555555;
+	border-radius: 4px;
+	overflow: hidden;
+	color: #ffffff;
+	font-size: 12px;
+	background-color: #888888;
+	outline-width: 0;
+}
+.divselect-dark__selector:before {
+	content: '';
+	position: absolute;
+	right: 7px;
+	top: 8px;
+	width: 0;
+	height: 0;
+	border-top: 9px solid #d4d4d4;
+	border-bottom: 9px solid transparent;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+}
+.divselect-dark__selector:after {
+	content: '';
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #d4d4d4;
+	border-radius: 10px;
+}
+.divselect-dark__selector--readonly {
+	color: #dddddd;
+}
+.divselect-dark__selector--disabled {
+	color: #dddddd;
+}
+.divselect-dark__selector span {
+	position: relative;
+	top: -3px;
+}
+.divselect-dark__selector--active {
+	background-position: 98% 110%;
+}
+.divselect-dark__selector--active:before {
+	border-top-color: transparent;
+	border-bottom-color: #d4d4d4;
+	top: -2px;
+}
+
+.divselect-dark__menu {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	max-height: 300px;
+	overflow: auto;
+	border: 1px solid #555555;
+	border-radius: 4px;
+	background-color: #000000;
+	position: absolute;
+	z-index: 100;
+}
+
+.divselect-dark__group {
+
+}
+.divselect-dark__group__title {
+	padding: 4px;
+	border-top: 1px solid #888888;
+	border-bottom: 1px solid #888888;
+	background-color: #555555;
+	color: #dddddd;
+	font-weight: bold;
+}
+
+.divselect-dark__item {
+	margin: 1px;
+	padding: 4px 2px 4px 4px;
+	height: 15px;
+	border: 1px solid transparent;
+	color: #ffffff;
+	font-size: 12px;
+	cursor: pointer;
+}
+.divselect-dark__item--readonly {
+
+}
+.divselect-dark__item--disabled {
+	color: #888888;
+	cursor: default;
+}
+.divselect-dark__item span {
+	position: relative;
+	top: -3px;
+}
+.divselect-dark__group .divselect-dark__item {
+	padding-left: 14px;
+}
+.divselect-dark__item:hover {
+	border: 1px solid #555555;
+	border-radius: 4px;
+	background-color: #666666;
+}
+.divselect-dark__item--disabled:hover {
+	border-color: transparent;
+	background-color: transparent;
+}
+.divselect-dark__item--preselected {
+	border: 1px solid #555555;
+	border-radius: 4px;
+	outline-width: 0;
+	background-color: #aaaaaa;
+	background-image: url("images/dark-bg-selected.jpg");
+	background-repeat: repeat-x;
+}
+
+/* Filter plugin */
+
+.divselect-dark__filter {
+	margin-bottom: 3px;
+	padding: 3px;
+	width: 160px;
+	height: 20px;
+}
+.divselect-dark__filter__input {
+	padding: 2px;
+	width: 140px;
+	height: 16px;
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+	background-color: #dddddd;
+}
+.divselect-dark__filter__reset {
+	color: #bbbbbb;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.divselect-dark__filter__reset:hover {
+	color: #ffffff;
+}

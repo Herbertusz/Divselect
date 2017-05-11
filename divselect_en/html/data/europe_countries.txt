@@ -1,0 +1,62 @@
+<img alt="" src="../images/lang/1.png" /> Abkhazia
+<img alt="" src="../images/lang/2.png" /> Akrotiri and Dhekelia
+<img alt="" src="../images/lang/3.png" /> Albania
+<img alt="" src="../images/lang/4.png" /> Andorra
+<img alt="" src="../images/lang/49.png" /> Armenia
+<img alt="" src="../images/lang/5.png" /> Austria
+<img alt="" src="../images/lang/6.png" /> Azerbaijan
+<img alt="" src="../images/lang/18.png" /> Belarus
+<img alt="" src="../images/lang/7.png" /> Belgium
+<img alt="" src="../images/lang/8.png" /> Bosnia-Herzegovina
+<img alt="" src="../images/lang/9.png" /> Bulgaria
+<img alt="" src="../images/lang/28.png" /> Croatia
+<img alt="" src="../images/lang/10.png" /> Cyprus
+<img alt="" src="../images/lang/11.png" /> Czech Republic
+<img alt="" src="../images/lang/12.png" /> Denmark
+<img alt="" src="../images/lang/17.png" /> Estonia
+<img alt="" src="../images/lang/19.png" /> Faroe Islands
+<img alt="" src="../images/lang/20.png" /> Finland
+<img alt="" src="../images/lang/21.png" /> France
+<img alt="" src="../images/lang/24.png" /> Georgia
+<img alt="" src="../images/lang/46.png" /> Germany
+<img alt="" src="../images/lang/22.png" /> Gibraltar
+<img alt="" src="../images/lang/23.png" /> Greece
+<img alt="" src="../images/lang/25.png" /> Guernsey
+<img alt="" src="../images/lang/40.png" /> Hungary
+<img alt="" src="../images/lang/29.png" /> Ireland
+<img alt="" src="../images/lang/30.png" /> Iceland
+<img alt="" src="../images/lang/48.png" /> Italy
+<img alt="" src="../images/lang/31.png" /> Jersey
+<img alt="" src="../images/lang/32.png" /> Kazakhstan
+<img alt="" src="../images/lang/33.png" /> Kosovo
+<img alt="" src="../images/lang/35.png" /> Latvia
+<img alt="" src="../images/lang/36.png" /> Liechtenstein
+<img alt="" src="../images/lang/37.png" /> Lithuania
+<img alt="" src="../images/lang/38.png" /> Luxembourg
+<img alt="" src="../images/lang/39.png" /> Macedonia
+<img alt="" src="../images/lang/41.png" /> Malta
+<img alt="" src="../images/lang/43.png" /> Moldova 
+<img alt="" src="../images/lang/44.png" /> Monaco
+<img alt="" src="../images/lang/45.png" /> Montenegro
+<img alt="" src="../images/lang/26.png" /> Nagorno-Karabakh
+<img alt="" src="../images/lang/16.png" /> Northern Cyprus
+<img alt="" src="../images/lang/47.png" /> Norway
+<img alt="" src="../images/lang/34.png" /> Poland
+<img alt="" src="../images/lang/51.png" /> Portugal
+<img alt="" src="../images/lang/52.png" /> Romania
+<img alt="" src="../images/lang/50.png" /> Russia
+<img alt="" src="../images/lang/53.png" /> San Marino
+<img alt="" src="../images/lang/57.png" /> Serbia
+<img alt="" src="../images/lang/58.png" /> Slovakia
+<img alt="" src="../images/lang/59.png" /> Slovenia
+<img alt="" src="../images/lang/13.png" /> South Ossetia
+<img alt="" src="../images/lang/54.png" /> Spain
+<img alt="" src="../images/lang/55.png" /> Sweden
+<img alt="" src="../images/lang/56.png" /> Switzerland
+<img alt="" src="../images/lang/42.png" /> The knights of Malta
+<img alt="" src="../images/lang/27.png" /> The Netherlands
+<img alt="" src="../images/lang/14.png" /> Transdnistria Republic.
+<img alt="" src="../images/lang/60.png" /> Turkey
+<img alt="" src="../images/lang/15.png" /> United Kingdom
+<img alt="" src="../images/lang/61.png" /> Ukraine
+<img alt="" src="../images/lang/62.png" /> Vatican City

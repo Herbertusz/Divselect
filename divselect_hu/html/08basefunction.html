@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Divselect</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shCore.css" />
+	<link rel="stylesheet" media="all" href="../css/syntaxhighlighter/shThemeDefault.css" />
+	<script src="../js/syntaxhighlighter/shCore.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="../js/syntaxhighlighter/shBrushCss.js"></script>
+	<script>
+		SyntaxHighlighter.defaults["toolbar"] = false;
+		SyntaxHighlighter.all();
+	</script>
+
+	<!-- divselectet működtető rész -->
+	<link rel="stylesheet" href="../css/divselect.css" />
+	<style>
+		.divselect a {
+			display: block;
+			padding: 2px 2px 4px 4px;
+			color: #006cd9;
+			text-decoration: none;
+		}
+		.divselect a:hover {
+			color: #000000;
+		}
+		.divselect__background {
+			display: none !important;
+		}
+		.divselect__selector:before {
+			display: none;
+		}
+		.divselect__selector:after {
+			display: none;
+		}
+		.divselect__item {
+			padding: 0px;
+		}
+	</style>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.divselect-1.0.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#example1").divselect({
+				optionTags : {
+					"1" : '<a href="\\#" target="_blank">#</a>',
+					"2" : '<a href="\\#" target="_blank">#</a>',
+					"3" : '<a href="\\#" target="_blank">#</a>',
+					"4" : '<a href="\\#" target="_blank">#</a>',
+					"5" : '<a href="\\#" target="_blank">#</a>'
+				},
+				disableDropdown : true,
+				disableClose : true,
+				disableSelect : true
+			});
+			$("#example1").divselect("removeOption", "0");
+			$("#example1").hover(function(){
+				$(this).divselect("open");
+			},function(){
+				$(this).divselect("close");
+			});
+			/*
+			$("#example1 .divselect__item").click(function(){
+				var val = $("#example1").divselect("getValueByElement", this);
+				$("#example1").trigger("select.divselect", [val]);
+			});
+			*/
+		});
+	</script>
+</head>
+<body>
+
+<div id="container">
+	<ul class="menu">
+		<li><a href="doc.html">Dokumentáció</a></li>
+		<li><a href="01basic.html">Alap</a></li>
+		<li><a href="02animations.html">Animációk</a></li>
+		<li><a href="03styles.html">Stílusok</a></li>
+		<li><a href="04events.html">Események</a></li>
+		<li><a href="05attributes.html">HTML attribútumok</a></li>
+		<li><a href="06multiselect.html">Multiselect</a></li>
+		<li><a href="07template.html">Template módosítása</a></li>
+		<li class="active"><a href="08basefunction.html">Alapműködés felülírása</a></li>
+		<li><a href="09ajax.html">Dinamikus betöltés</a></li>
+	</ul>
+	<div id="rightcol">
+		<div id="content">
+
+			<h1>Alapműködés felülírása</h1>
+			<p>
+				Az alapműködés abból áll, hogy a template-ben definiált <em>selector</em>, <em>item</em> és
+				<em>background</em> elemeken (ezek a data-element attribútum értékei) lefutó click
+				esemény egy speciális eseménykezelőt futtat le. Például a <em>selector</em>-on
+				ha kattintunk, lenyílik a lista. Ezeket az eseménykezelőket lehet letiltani a
+				<em>disableDropdown</em>, <em>disableClose</em> és <em>disableSelect</em> paraméterek
+				true-ra állításával. Mivel ezekben az eseménykezelőkben vannak lefuttatva a beépített
+				eseményekhez csatolt függvények (a create kivételével), így a letiltásukkal ezeknek
+				a lefutását is letiltjuk. Azonban az <em>open()</em>, <em>close()</em> és <em>select()</em>
+				metódusok ezeket az eseménykezelőket lefuttatják, így ha ezeket használjuk az általunk
+				írt eseménykezelőkben, továbbra is lefutnak a beépített eseménykehez csatolt függvények.
+				<br /><br />
+				<em><strong>Megjegyzés:</strong> az itt bemutatott példa csak a plugin rugalmasságát és
+				néhány extra funkcióját szemlélteti, egy lenyíló menüt a gyakorlatban általában nem
+				érdemes a divselect-tel megvalósítani, mert többletmunkával járhat.</em>
+			</p>
+			<h2>Lenyíló menü</h2>
+			<p>
+				Ha például azt szeretnénk elérni, hogy a lista mouseover eseményre nyíljon és mouseout
+				eseményre csukódjon, akkor először le kell tiltanunk az ezeket vezérlő eseménykezelőket
+				(<em>disableDropdown</em> és <em>disableClose</em> paramétereket kell true-ra állítani),
+				majd a megfelelő elemekre nekünk kell csatolni eseménykezelőket, amiben a divselect
+				<em>open()</em> és <em>close()</em> metódusait futtatjuk le. Itt egy lenyíló menüre
+				láthatunk példát:
+			</p>
+			<div  class="spacer"></div>
+			<div id="example1-container">
+				<select id="example1">
+					<option value="0" selected="selected">Nyelvek</option>
+					<option value="1">HTML</option>
+					<option value="2">CSS</option>
+					<option value="3">JavaScript</option>
+					<option value="4">PHP</option>
+					<option value="5">SQL</option>
+				</select>
+			</div>
+			<div  class="spacer"></div>
+			<p>
+				A HTML kód:
+			</p>
+			<pre class="brush: html">
+				&lt;select id="example1">
+					&lt;option value="0" selected="selected">Nyelvek&lt;/option>
+					&lt;option value="1">HTML&lt;/option>
+					&lt;option value="2">CSS&lt;/option>
+					&lt;option value="3">JavaScript&lt;/option>
+					&lt;option value="4">PHP&lt;/option>
+					&lt;option value="5">SQL&lt;/option>
+				&lt;/select></pre>
+			<p>
+				A javascript kód:
+			</p>
+			<pre class="brush: js">
+				$("#example1").divselect({
+					optionTags : {
+						"1" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"2" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"3" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"4" : '&lt;a href="\\#" target="_blank">#&lt;/a>',
+						"5" : '&lt;a href="\\#" target="_blank">#&lt;/a>'
+					},
+					disableDropdown : true,
+					disableClose : true,
+					disableSelect : true
+				});
+				$("#example1").divselect("removeOption", "0");
+				$("#example1").hover(function(){
+					$(this).divselect("open");
+				},function(){
+					$(this).divselect("close");
+				});</pre>
+			<p>
+				A CSS kód:
+			</p>
+			<pre class="brush: css">
+				.divselect a {
+					display: block;
+					padding: 2px 2px 4px 4px;
+					color: #006cd9;
+					text-decoration: none;
+				}
+				.divselect a:hover {
+					color: #000000;
+				}
+				.divselect__background {
+					display: none !important;
+				}
+				.divselect__selector:before {
+					display: none;
+				}
+				.divselect__selector:after {
+					display: none;
+				}
+				.divselect__item {
+					padding: 0px;
+				}</pre>
+			<p>
+				Általában érdemes külön CSS fájlt készíteni, ebben az esetben az alap divselect.css
+				lett behúzva, és pár tulajdonság felülírva. A background elem (a háttérben
+				lévő overlay) azért lett eltüntetve, hogy a divselect elemre lehessen alkalmazni a
+				hover() eseménykezelőt, különben a divselect nyitott állapotban lefedi az egész
+				ablakot.
+			</p>
+			<p>
+				A <em>disableSelect</em> paramétert is true-ra állítottuk, ellenkező esetben egy linkre
+				kattintva a főmenüpont neve helyére bekerülne az almenü neve, amire kattintottunk.
+				A JS kód 13. sorában a <em>removeOption()</em> metódus azért lett meghívva, hogy a főmenü
+				neve ne jelenjen meg a listában.<br />
+				Ezután, a 14-19. sorokban csatoljuk az új eseménykezelőket. Mivel a <em>disableSelect</em>-et
+				true-ra állítottuk, és eseménykezelőt nem csatoltunk egy elemre történő kattintáshoz,
+				a beépített <em>select</em> és <em>change</em> események nem fognak lefutni. Ha például
+				a <em>select</em> eseményt szeretnénk lefuttatni, de a <em>select()</em> metódus hívása
+				nélkül, akkor ezzel kell bővítenünk a javascript kódot:
+			</p>
+			<pre class="brush: js">
+				$("#example1 .divselect__item").click(function(){
+					$("#example1").trigger("select.divselect");
+				});</pre>
+			<p>
+				Itt egy listaelemen történő kattintás le fogja futtatni a beépített <em>select</em>
+				eseményhez csatolt függvényt, paraméterek nélkül. Ha a megfelelő paramétereket is át
+				szeretnénk adni, akkor így kell meghívnunk:
+			</p>
+			<pre class="brush: js">
+				$("#example1 .divselect__item").click(function(){
+					var val = $("#example1").divselect("getValueByElement", this);
+					$("#example1").trigger("select.divselect", [val]);
+				});</pre>
+			<p>
+				A value érték lekérdezéséhez a <em>getValueByElement()</em> segédfüggvényt használhatjuk.
+				Így a <em>select</em> eseményhez csatolt függvény megkapja paraméterként a value
+				attribútum értéket (amelyikre kattintottunk).
+			</p>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
